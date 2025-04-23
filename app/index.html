@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Wonderful Tree</title>
   <link rel="SHORTCUT ICON" href="./favicon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css"> <!-- Shared CSS file -->
 
    <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
   <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.js"
@@ -28,34 +29,140 @@
     </div>
   </nav>
   <br>
-  <h5 class="card-header text-center">Vanilla JavaScript SPA calling MS Graph API with MSAL.js</h5>
-  <br>
-  <div class="row" style="margin:auto">
-    <div id="card-div" class="col-md-3" style="display:none">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title" id="WelcomeMessage">Please sign-in to see your profile and read your mails</h5>
-          <div id="profile-div"></div>
-          <br>
-          <br>
-          <button class="btn btn-primary" id="seeProfile" onclick="seeProfile()">See Profile</button>
-          <br>
-          <br>
-          <button class="btn btn-primary" id="readMail" onclick="readMail()">Read Mails</button>
+ 
+  <!-- Custom Code Section Start Here-->
+  <header>
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">Newsletter Hub</div>
+            <nav>
+                <ul>
+                    <li><a href="popular.html">Popular</a></li>
+                    <li><a href="#new.html">New</a></li>
+                    <li><a href="subscriptions.html">My Subscriptions</a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <span>Hi, User</span>
+                <img src="images/user.png" alt="User Profile">
+            </div>
         </div>
-      </div>
     </div>
-    <br>
-    <br>
-    <div class="col-md-4">
-      <div class="list-group" id="list-tab" role="tablist">
-      </div>
+</header>
+
+  <main class="container">
+    <section class="welcome-section">
+        <h1>Discover Amazing Newsletters</h1>
+        <p>Subscribe to your favorite topics and get curated content delivered straight to your inbox.</p>
+    </section>
+    
+    <section class="categories">
+        <h2>Browse by Category</h2>
+        <div class="category-links">
+            <a href="#" class="category-link">Technology</a>
+            <a href="#" class="category-link">Business</a>
+            <a href="#" class="category-link">Health</a>
+            <a href="#" class="category-link">Science</a>
+            <a href="#" class="category-link">Arts</a>
+            <a href="#" class="category-link">Sports</a>
+            <a href="#" class="category-link">Food</a>
+            <a href="#" class="category-link">Travel</a>
+        </div>
+    </section>
+    
+    <h2>Featured Newsletters</h2>
+    <div class="newsletter-grid">
+        <div class="newsletter-card">
+            <div class="newsletter-image">
+                <img src="images/techno.png" alt="Tech Trends Newsletter">
+            </div>
+            <div class="newsletter-info">
+                <h3>Tech Trends</h3>
+                <p>Weekly digest of the latest in technology and innovation.</p>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+        </div>
+        
+        <div class="newsletter-card">
+            <div class="newsletter-image">
+                <img src="https://via.placeholder.com/400x200?text=Design+Digest" alt="Design Digest Newsletter">
+            </div>
+            <div class="newsletter-info">
+                <h3>Design Digest</h3>
+                <p>Monthly collection of design inspiration and resources.</p>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+        </div>
+        
+        <div class="newsletter-card">
+            <div class="newsletter-image">
+                <img src="https://via.placeholder.com/400x200?text=Health+Tips" alt="Health Tips Newsletter">
+            </div>
+            <div class="newsletter-info">
+                <h3>Health Tips</h3>
+                <p>Daily health and wellness advice from experts.</p>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+        </div>
+        
+        <div class="newsletter-card">
+            <div class="newsletter-image">
+                <img src="https://via.placeholder.com/400x200?text=Business+Insights" alt="Business Insights Newsletter">
+            </div>
+            <div class="newsletter-info">
+                <h3>Business Insights</h3>
+                <p>Bi-weekly analysis of market trends and strategies.</p>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+        </div>
+        
+        <div class="newsletter-card">
+            <div class="newsletter-image">
+                <img src="https://via.placeholder.com/400x200?text=Cooking+Corner" alt="Cooking Corner Newsletter">
+            </div>
+            <div class="newsletter-info">
+                <h3>Cooking Corner</h3>
+                <p>Weekly recipes and cooking techniques from top chefs.</p>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+        </div>
+        
+        <div class="newsletter-card">
+            <div class="newsletter-image">
+                <img src="https://via.placeholder.com/400x200?text=Travel+Stories" alt="Travel Stories Newsletter">
+            </div>
+            <div class="newsletter-info">
+                <h3>Travel Stories</h3>
+                <p>Monthly travel guides and destination highlights.</p>
+                <a href="#" class="subscribe-btn">Subscribe</a>
+            </div>
+        </div>
     </div>
-    <div class="col-md-5">
-      <div class="tab-content" id="nav-tabContent">
-      </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">FAQ</a>
+        </div>
+        
+        <div class="social-links">
+            <a href="#"><img src="https://via.placeholder.com/30x30?text=FB" alt="Facebook"></a>
+            <a href="#"><img src="https://via.placeholder.com/30x30?text=TW" alt="Twitter"></a>
+            <a href="#"><img src="https://via.placeholder.com/30x30?text=IG" alt="Instagram"></a>
+            <a href="#"><img src="https://via.placeholder.com/30x30?text=LI" alt="LinkedIn"></a>
+        </div>
+        
+        <p>&copy; 2023 Newsletter Hub. All rights reserved.</p>
     </div>
-  </div>
+</footer>
+
+
+   <!-- Custom Code Section End Here-->
   <br>
   <br>
 
