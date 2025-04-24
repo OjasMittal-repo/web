@@ -5,146 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Subscriptions | Newsletter Hub</title>
     <style>
-        .subscription-card {
-            display: flex;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .subscription-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-        }
-        .subscription-details {
-            padding: 20px;
-            flex-grow: 1;
-        }
-        .subscription-actions {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-        }
-        .unsubscribe-btn {
-            background: #ff4d4d;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* Add these styles to your existing styles.css */
+        /* subscriptions.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header styles */
+header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-profile img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* Main content */
+main h1 {
+  font-size: 2rem;
+  margin-top: 30px;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 20px;
+}
+
 .subscriptions-list {
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .subscription-card {
-    display: flex;
-    background: white;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: transform 0.3s;
-}
-
-.subscription-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  gap: 20px;
 }
 
 .subscription-image {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 .subscription-details {
-    padding: 20px;
-    flex-grow: 1;
+  flex: 1;
 }
 
 .subscription-details h3 {
-    margin: 0 0 10px 0;
-    color: #333;
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .subscription-details p {
-    margin: 5px 0;
-    color: #666;
-    font-size: 14px;
+  margin: 4px 0;
+  color: #555;
 }
 
 .subscription-actions {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-left: 1px solid #eee;
+  display: flex;
+  align-items: center;
 }
 
 .unsubscribe-btn {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #ff4d4f;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .unsubscribe-btn:hover {
-    background: #e60000;
+  background-color: #e03e3e;
 }
 
-.empty-state {
-    text-align: center;
-    padding: 50px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
+/* Empty state */
 .empty-state h3 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.empty-state p {
-    color: #666;
+  font-size: 1.4rem;
+  color: #666;
 }
 
 .empty-state a {
-    color: #4a6bff;
-    text-decoration: none;
+  color: #007bff;
+  text-decoration: none;
 }
 
 .empty-state a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-    .subscription-card {
-        flex-direction: column;
-    }
-    
-    .subscription-image {
-        width: 100%;
-        height: 150px;
-    }
-    
-    .subscription-actions {
-        border-left: none;
-        border-top: 1px solid #eee;
-        justify-content: center;
-    }
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .subscription-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .subscription-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .unsubscribe-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
+
     </style>
+ 
 </head>
 <body>
     <header>
-        <!-- Same header with "My Subscriptions" active -->
+        <!-- Same header as popular.html with "New" active -->
         <div class="container">
             <div class="header-content">
                 <div class="logo">Newsletter Hub</div>
@@ -152,7 +204,7 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="popular.html" class="active">Popular</a></li>
-                        <li><a href="subscriptions.html">My Subscriptions</a></li>
+                        <li><a href="new.html">New</a></li>
                     </ul>
                 </nav>
                 <div class="user-profile">
@@ -170,7 +222,7 @@
         <div class="subscriptions-list">
             <!-- Subscription 1 -->
             <div class="subscription-card">
-                <img src="images/techno.png" class="subscription-image">
+                <img src="https://via.placeholder.com/120x120?text=Tech+Weekly" class="subscription-image">
                 <div class="subscription-details">
                     <h3>Tech Weekly</h3>
                     <p>Next issue: Tomorrow at 9:00 AM</p>
@@ -183,7 +235,7 @@
             
             <!-- Subscription 2 -->
             <div class="subscription-card">
-                <img src="images/Design Digest.png" class="subscription-image">
+                <img src="https://via.placeholder.com/120x120?text=Design+Digest" class="subscription-image">
                 <div class="subscription-details">
                     <h3>Design Digest</h3>
                     <p>Next issue: Friday at 11:00 AM</p>
