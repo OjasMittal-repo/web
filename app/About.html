@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Newsletter Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* About Page Specific Styles */
+        .hero {
+            background: linear-gradient(135deg, #4a6bff 0%, #3a5bef 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .mission-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .mission-text {
+            flex: 1;
+        }
+        
+        .mission-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .team-section {
+            margin: 80px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        .team-info h3 {
+            margin: 10px 0 5px;
+            color: #333;
+        }
+        
+        .team-info p {
+            color: #666;
+            font-size: 14px;
+            margin: 0;
+        }
+        
+        .stats-section {
+            background: #f5f7fa;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item h2 {
+            font-size: 42px;
+            color: #4a6bff;
+            margin: 0 0 10px;
+        }
+        
+        .stat-item p {
+            color: #666;
+            font-size: 16px;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .mission-section {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Newsletter Hub</div>
+                <nav>
+                    <ul>
+                        <li><a href="main.html">Home</a></li>
+                        <li><a href="popular.html">Popular</a></li>
+                        <li><a href="new.html">New</a></li>
+                        <li><a href="subscriptions.html">My Subscriptions</a></li>
+                        <li><a href="about.html" class="active">About Us</a></li>
+                    </ul>
+                </nav>
+                <div class="user-profile">
+                    <span>Hi, User</span>
+                    <img src="https://via.placeholder.com/40x40?text=U" alt="User Profile">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Connecting Readers With Amazing Content</h1>
+            <p>Discover the story behind Newsletter Hub and our mission to revolutionize how you consume newsletters</p>
+        </section>
+
+        <section class="mission-section">
+            <div class="mission-text">
+                <h2>Our Mission</h2>
+                <p>At Newsletter Hub, we believe in the power of curated content delivered straight to your inbox. Founded in 2023, our platform was created to solve one simple problem: there's too much content online, but not enough quality.</p>
+                <p>We've built the most comprehensive directory of newsletters across every category imaginable, with rigorous quality standards to ensure you only discover the best content.</p>
+            </div>
+            <div class="mission-image">
+                <img src="https://via.placeholder.com/600x400?text=Our+Team" alt="Our team working">
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px;">By The Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h2>1,200+</h2>
+                        <p>Quality Newsletters</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2>85K+</h2>
+                        <p>Active Readers</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2>50+</h2>
+                        <p>Categories</p>
+                    </div>
+                    <div class="stat-item">
+                        <h2>24/7</h2>
+                        <p>Content Curation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <h2>Meet The Team</h2>
+            <p class="subtitle">The passionate people behind Newsletter Hub</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://via.placeholder.com/300x200?text=Alex+Johnson" alt="Alex Johnson">
+                    <div class="team-info">
+                        <h3>Alex Johnson</h3>
+                        <p>Founder & CEO</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://via.placeholder.com/300x200?text=Sarah+Lee" alt="Sarah Lee">
+                    <div class="team-info">
+                        <h3>Sarah Lee</h3>
+                        <p>Head of Curation</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://via.placeholder.com/300x200?text=Michael+Chen" alt="Michael Chen">
+                    <div class="team-info">
+                        <h3>Michael Chen</h3>
+                        <p>Lead Developer</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://via.placeholder.com/300x200?text=Emma+Wilson" alt="Emma Wilson">
+                    <div class="team-info">
+                        <h3>Emma Wilson</h3>
+                        <p>Community Manager</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">FAQ</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><img src="https://via.placeholder.com/30x30?text=FB" alt="Facebook"></a>
+                <a href="#"><img src="https://via.placeholder.com/30x30?text=TW" alt="Twitter"></a>
+                <a href="#"><img src="https://via.placeholder.com/30x30?text=IG" alt="Instagram"></a>
+                <a href="#"><img src="https://via.placeholder.com/30x30?text=LI" alt="LinkedIn"></a>
+            </div>
+            
+            <p>&copy; 2023 Newsletter Hub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
