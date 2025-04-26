@@ -4,285 +4,533 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Subscriptions | Newsletter Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* subscriptions.css */
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  background-color: #f9f9f9;
-  color: #333;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Header styles */
-header {
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  padding: 20px 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #555;
-  font-weight: 500;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-  color: #007bff;
-  border-bottom-color: #007bff;
-}
-
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-profile img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-}
-
-/* Main content */
-main h1 {
-  font-size: 2rem;
-  margin-top: 30px;
-}
-
-.subtitle {
-  color: #777;
-  margin-bottom: 20px;
-}
-
-.subscriptions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.subscription-card {
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  gap: 20px;
-}
-
-.subscription-image {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.subscription-details {
-  flex: 1;
-}
-
-.subscription-details h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #333;
-}
-
-.subscription-details p {
-  margin: 4px 0;
-  color: #555;
-}
-
-.subscription-actions {
-  display: flex;
-  align-items: center;
-}
-
-.unsubscribe-btn {
-  background-color: #ff4d4f;
-  color: white;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.unsubscribe-btn:hover {
-  background-color: #e03e3e;
-}
-
-/* Empty state */
-.empty-state h3 {
-  font-size: 1.4rem;
-  color: #666;
-}
-
-.empty-state a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.empty-state a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .subscription-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .subscription-image {
-    width: 100%;
-    height: auto;
-  }
-
-  .unsubscribe-btn {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
+        :root {
+            --primary: #4a6bff;
+            --primary-dark: #3a5bef;
+            --danger: #ff4d4d;
+            --danger-dark: #e60000;
+            --success: #4CAF50;
+            --gray: #f5f5f5;
+            --dark-gray: #e0e0e0;
+            --text: #333;
+            --text-light: #666;
+            --text-lighter: #888;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* App Header */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .header-icon {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Subscription Tabs */
+        .subscription-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid var(--dark-gray);
+            padding: 0 20px;
+        }
+        
+        .tab {
+            padding: 15px 0;
+            margin-right: 25px;
+            position: relative;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        /* Subscription List */
+        .subscription-list {
+            padding: 15px;
+        }
+        
+        .subscription-group {
+            margin-bottom: 25px;
+        }
+        
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+        
+        .group-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        
+        .group-count {
+            background: var(--dark-gray);
+            color: var(--text-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        .subscription-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .subscription-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .subscription-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .subscription-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .subscription-info {
+            flex-grow: 1;
+            min-width: 0;
+        }
+        
+        .subscription-name {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .subscription-category {
+            font-size: 12px;
+            color: var(--text-lighter);
+            margin-top: 2px;
+        }
+        
+        .subscription-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--text-lighter);
+        }
+        
+        .subscription-status {
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            margin-right: 5px;
+        }
+        
+        .subscription-actions {
+            display: flex;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: #f0f4ff;
+        }
+        
+        .btn-danger {
+            background: #ffebee;
+            color: var(--danger);
+            border: 1px solid #ffcdd2;
+        }
+        
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 50px;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+        }
+        
+        .empty-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .empty-text {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
     </style>
- 
 </head>
 <body>
-    <header>
-        <!-- Same header as popular.html with "New" active -->
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">Newsletter Hub</div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="popular.html" class="active">Popular</a></li>
-                        <li><a href="new.html">New</a></li>
-                    </ul>
-                </nav>
-                <div class="user-profile">
-                    <span>Hi, User</span>
-                    <img src="images/user.png" alt="User Profile">
-                </div>
-            </div>
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <button class="back-button">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <h1 class="header-title">My Subscriptions</h1>
+        </div>
+        <div class="header-actions">
+            <button class="header-icon">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="header-icon">
+                <i class="fas fa-bell"></i>
+                <span class="badge">3</span>
+            </button>
         </div>
     </header>
 
-    <main class="container">
-        <h1>My Subscriptions</h1>
-        <p class="subtitle">Manage your newsletter subscriptions</p>
-        
-        <div class="subscriptions-list">
-            <!-- Subscription 1 -->
+    <!-- Subscription Tabs -->
+    <div class="subscription-tabs">
+        <div class="tab active">Active</div>
+        <div class="tab">Paused</div>
+        <div class="tab">Expired</div>
+    </div>
+
+    <!-- Subscription List -->
+    <div class="subscription-list">
+        <div class="subscription-group">
+            <div class="group-header">
+                <div class="group-title">Daily Newsletters</div>
+                <div class="group-count">3</div>
+            </div>
+            
+            <!-- Subscription Card 1 -->
             <div class="subscription-card">
-                <img src="images/techno.png" class="subscription-image">
+                <div class="subscription-header">
+                    <div class="subscription-icon" style="background: linear-gradient(135deg, #4a6bff 0%, #3a5bef 100%);">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="subscription-info">
+                        <div class="subscription-name">Morning Tech Brief</div>
+                        <div class="subscription-category">Technology • Daily</div>
+                    </div>
+                </div>
                 <div class="subscription-details">
-                    <h3>Tech Weekly</h3>
-                    <p>Next issue: Tomorrow at 9:00 AM</p>
-                    <p>Last read: 2 days ago</p>
+                    <div class="subscription-status">
+                        <div class="status-indicator"></div>
+                        <span>Delivered at 7:00 AM</span>
+                    </div>
+                    <div>⭐ 4.8</div>
                 </div>
                 <div class="subscription-actions">
-                    <button class="unsubscribe-btn">Unsubscribe</button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-cog"></i> Manage
+                    </button>
+                    <button class="btn btn-danger unsubscribe-btn">
+                        <i class="fas fa-ban"></i> Unsubscribe
+                    </button>
                 </div>
             </div>
             
-            <!-- Subscription 2 -->
+            <!-- Subscription Card 2 -->
             <div class="subscription-card">
-                <img src="images/Design Digest.png" class="subscription-image">
+                <div class="subscription-header">
+                    <div class="subscription-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #f44336 100%);">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="subscription-info">
+                        <div class="subscription-name">Health Daily</div>
+                        <div class="subscription-category">Health • Daily</div>
+                    </div>
+                </div>
                 <div class="subscription-details">
-                    <h3>Design Digest</h3>
-                    <p>Next issue: Friday at 11:00 AM</p>
-                    <p>Last read: 1 week ago</p>
+                    <div class="subscription-status">
+                        <div class="status-indicator"></div>
+                        <span>Delivered at 6:30 AM</span>
+                    </div>
+                    <div>⭐ 4.5</div>
                 </div>
                 <div class="subscription-actions">
-                    <button class="unsubscribe-btn">Unsubscribe</button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-cog"></i> Manage
+                    </button>
+                    <button class="btn btn-danger unsubscribe-btn">
+                        <i class="fas fa-ban"></i> Unsubscribe
+                    </button>
                 </div>
-            </div>
-            
-            <!-- Empty state -->
-            <div class="empty-state" style="display: none; text-align: center; padding: 50px;">
-                <h3>You haven't subscribed to any newsletters yet</h3>
-                <p>Discover amazing newsletters on our <a href="main.html">home page</a></p>
             </div>
         </div>
-    </main>
-
-    <footer>
-        <!-- Same footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-links">
-                  <a href="About.html">About Us</a>
-                  <a href="contact.html">Contact</a>
-                  <a href="privacy.html">Privacy Policy</a>
-                  <a href="terms-of-service.html">Terms of Service</a>
-                  <a href="faq.html">FAQ</a>
-                </div>
-                
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=61575497137432"><img src="images/Facebook logo.png" alt="Facebook"></a>
-                    <a href="https://x.com/NewsLetter_Hub_"><img src="images/Twitter Logo.png" alt="Twitter"></a>
-                    <a href="https://www.instagram.com/newsletter_hub/"><img src="images/Instagram.png" alt="Instagram"></a>
-                    <a href="https://www.linkedin.com/in/ojas-mittal-00417335b/"><img src="images/LinkedIn.png" alt="LinkedIn"></a>
-                </div>
-                
-                <p>&copy; 2025 Newsletter Hub. All rights reserved.</p>
+        
+        <div class="subscription-group">
+            <div class="group-header">
+                <div class="group-title">Weekly Newsletters</div>
+                <div class="group-count">2</div>
             </div>
-        </footer>
-    </footer>
+            
+            <!-- Subscription Card 3 -->
+            <div class="subscription-card">
+                <div class="subscription-header">
+                    <div class="subscription-icon" style="background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="subscription-info">
+                        <div class="subscription-name">Green Living</div>
+                        <div class="subscription-category">Environment • Weekly</div>
+                    </div>
+                </div>
+                <div class="subscription-details">
+                    <div class="subscription-status">
+                        <div class="status-indicator"></div>
+                        <span>Next: Friday 9:00 AM</span>
+                    </div>
+                    <div>⭐ 4.7</div>
+                </div>
+                <div class="subscription-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-cog"></i> Manage
+                    </button>
+                    <button class="btn btn-danger unsubscribe-btn">
+                        <i class="fas fa-ban"></i> Unsubscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Empty State Example (hidden by default) -->
+        <!-- <div class="empty-state">
+            <div class="empty-icon">
+                <i class="far fa-newspaper"></i>
+            </div>
+            <h3 class="empty-title">No Active Subscriptions</h3>
+            <p class="empty-text">You haven't subscribed to any newsletters yet. Discover amazing content from our collection.</p>
+            <button class="btn btn-primary">
+                Browse Newsletters
+            </button>
+        </div> -->
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="new.html" class="nav-item">
+            <i class="fas fa-compass"></i>
+            <span>Discover</span>
+        </a>
+        <a href="subscriptions.html" class="nav-item active">
+            <i class="fas fa-envelope"></i>
+            <span>Subscriptions</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
 
     <script>
-        // Show empty state if no subscriptions
-        if (document.querySelectorAll('.subscription-card').length === 0) {
-            document.querySelector('.empty-state').style.display = 'block';
-        }
+        // Unsubscribe functionality
+        document.querySelectorAll('.unsubscribe-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.subscription-card');
+                const name = card.querySelector('.subscription-name').textContent;
+                
+                if (confirm(`Are you sure you want to unsubscribe from ${name}?`)) {
+                    card.style.opacity = '0.6';
+                    card.style.pointerEvents = 'none';
+                    this.innerHTML = '<i class="fas fa-check"></i> Unsubscribed';
+                    this.style.background = '#e0e0e0';
+                    this.style.color = '#9e9e9e';
+                    this.style.borderColor = '#e0e0e0';
+                    this.disabled = true;
+                    
+                    // In a real app, you would send an API request here
+                    console.log(`Unsubscribed from ${name}`);
+                }
+            });
+        });
+        
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelector('.tab.active').classList.remove('active');
+                this.classList.add('active');
+                
+                // In a real app, you would filter subscriptions here
+                console.log(`Switched to ${this.textContent} tab`);
+            });
+        });
+        
+        // Back button
+        document.querySelector('.back-button').addEventListener('click', () => {
+            // In a real app, this would go back to previous screen
+            window.location.href = 'main.html';
+        });
     </script>
 </body>
 </html>
