@@ -1,0 +1,447 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe to Newsletters</title>
+    <style>
+/* Subscribe Button States */
+.subscribe-btn {
+  background: #4a6bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.subscribe-btn:hover {
+  background: #3a5bef;
+  transform: translateY(-2px);
+}
+
+.subscribe-btn.subscribed {
+  background: #4CAF50;
+}
+
+.subscribe-btn.loading {
+  background: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* Subscription Modal */
+.subscription-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.frequency-selector, 
+.format-selector, 
+.email-notifications {
+  margin-bottom: 20px;
+}
+
+.frequency-selector select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.format-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 8px;
+}
+
+.format-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.confirm-subscription {
+  background: #4a6bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.confirm-subscription:hover {
+  background: #3a5bef;
+}
+
+/* Loading spinner */
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Card Selected State */
+.newsletter-card {
+  position: relative;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.newsletter-card.selected {
+  border-color: #4a6bff;
+  box-shadow: 0 5px 20px rgba(74, 107, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.newsletter-card.selected::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 50px 50px 0;
+  border-color: transparent #4a6bff transparent transparent;
+}
+
+.selected-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #4a6bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.newsletter-card.selected .selected-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced Button States */
+.subscribe-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.subscribe-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255,255,255,0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.subscribe-btn:focus:not(:active)::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* Confirmation Animation */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
+
+.newsletter-card.selected {
+  animation: bounce 0.8s ease;
+}
+    </style>
+    <body>
+      <div class="newsletter-card" data-newsletter-id="tech-weekly">
+        <!-- Card content... -->
+        <button class="subscribe-btn">
+          <span class="btn-text">Subscribe</span>
+          <span class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></span>
+          <span class="success-check"><i class="fas fa-check"></i></span>
+        </button>
+        
+        <!-- Selected State Badge -->
+        <div class="selected-badge">
+          <i class="fas fa-check-circle"></i>
+          <span>Subscribed</span>
+        </div>
+      </div>
+      
+      <!-- Subscription Modal (hidden by default) -->
+      <div class="subscription-modal" id="subscriptionModal">
+        <div class="modal-content">
+          <button class="close-modal">&times;</button>
+          <h3>Customize Your Subscription</h3>
+          
+          <div class="frequency-selector">
+            <label>Delivery Frequency:</label>
+            <select id="deliveryFrequency">
+              <option value="daily">Daily</option>
+              <option value="weekly" selected>Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+          
+          <div class="format-selector">
+            <label>Preferred Format:</label>
+            <div class="format-options">
+              <label>
+                <input type="radio" name="format" value="html" checked> 
+                <span>Rich Text</span>
+              </label>
+              <label>
+                <input type="radio" name="format" value="plain"> 
+                <span>Plain Text</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="email-notifications">
+            <label>
+              <input type="checkbox" id="breakingNews" checked>
+              <span>Receive breaking news alerts</span>
+            </label>
+          </div>
+          
+          <button class="confirm-subscription">Confirm Subscription</button>
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // Subscribe button click handler
+          document.querySelectorAll('.subscribe-btn').forEach(button => {
+            button.addEventListener('click', function() {
+              const newsletterId = this.getAttribute('data-newsletter-id');
+              const btnText = this.querySelector('.btn-text');
+              const spinner = this.querySelector('.loading-spinner');
+              const successCheck = this.querySelector('.success-check');
+              
+              if (!this.classList.contains('subscribed')) {
+                showSubscriptionModal(newsletterId, this);
+              } else {
+                if (confirm(`Unsubscribe from ${newsletterId}?`)) {
+                  unsubscribe(newsletterId, this);
+                }
+              }
+            });
+          });
+        
+          // Show subscription modal
+          function showSubscriptionModal(newsletterId, button) {
+            const modal = document.getElementById('subscriptionModal');
+            modal.style.display = 'flex';
+            
+            modal.querySelector('.close-modal').addEventListener('click', () => {
+              modal.style.display = 'none';
+            });
+            
+            modal.addEventListener('click', (e) => {
+              if (e.target === modal) {
+                modal.style.display = 'none';
+              }
+            });
+            
+            modal.querySelector('.confirm-subscription').addEventListener('click', () => {
+              const frequency = document.getElementById('deliveryFrequency').value;
+              const format = document.querySelector('input[name="format"]:checked').value;
+              const breakingNews = document.getElementById('breakingNews').checked;
+              
+              modal.style.display = 'none';
+              subscribe(newsletterId, frequency, format, breakingNews, button);
+            });
+          }
+        
+          // Subscribe function with redirect
+          function subscribe(newsletterId, frequency, format, breakingNews, button) {
+            const btnText = button.querySelector('.btn-text');
+            const spinner = button.querySelector('.loading-spinner');
+            const successCheck = button.querySelector('.success-check');
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            button.classList.add('loading');
+            
+            // Simulate API call
+            setTimeout(() => {
+              // On success:
+              spinner.style.display = 'none';
+              successCheck.style.display = 'inline-block';
+              button.classList.remove('loading');
+              button.classList.add('subscribed');
+              btnText.textContent = 'Subscribed';
+              btnText.style.display = 'inline-block';
+              
+              // Show confirmation message
+              const confirmation = document.createElement('div');
+              confirmation.className = 'subscription-confirmation';
+              confirmation.innerHTML = `
+                <div class="confirmation-content">
+                  <i class="fas fa-check-circle"></i>
+                  <p>Successfully subscribed to ${newsletterId}!</p>
+                  <p>Redirecting to home page...</p>
+                </div>
+              `;
+              document.body.appendChild(confirmation);
+              
+              // Redirect after 3 seconds
+              setTimeout(() => {
+                window.location.href = 'index.html';
+              }, 3000);
+              
+            }, 1500);
+          }
+        
+          // Unsubscribe function remains the same
+          function unsubscribe(newsletterId, button) {
+            const btnText = button.querySelector('.btn-text');
+            const spinner = button.querySelector('.loading-spinner');
+            
+            btnText.textContent = 'Unsubscribing...';
+            spinner.style.display = 'inline-block';
+            button.classList.add('loading');
+            
+            setTimeout(() => {
+              spinner.style.display = 'none';
+              button.classList.remove('loading', 'subscribed');
+              btnText.textContent = 'Subscribe';
+            }, 1500);
+          }
+        });
+        function subscribe(newsletterId, frequency, format, breakingNews, button) {
+  const card = button.closest('.newsletter-card');
+  const btnText = button.querySelector('.btn-text');
+  const spinner = button.querySelector('.loading-spinner');
+  const successCheck = button.querySelector('.success-check');
+  
+  // Show loading state
+  btnText.style.display = 'none';
+  spinner.style.display = 'inline-block';
+  button.disabled = true;
+  
+  // Simulate API call
+  setTimeout(() => {
+    // On success:
+    spinner.style.display = 'none';
+    successCheck.style.display = 'inline-block';
+    btnText.textContent = 'Subscribed';
+    btnText.style.display = 'inline-block';
+    button.disabled = false;
+    
+    // Highlight card
+    card.classList.add('selected');
+    
+    // Create and show confirmation
+    const confirmation = document.createElement('div');
+    confirmation.className = 'subscription-confirmation';
+    confirmation.innerHTML = `
+      <div class="confirmation-content">
+        <i class="fas fa-check-circle"></i>
+        <h3>Subscription Added!</h3>
+        <p>You'll receive ${newsletterId} ${frequency} in ${format} format</p>
+        <div class="countdown">Redirecting in <span>3</span> seconds...</div>
+      </div>
+    `;
+    document.body.appendChild(confirmation);
+    
+    // Countdown timer
+    let seconds = 3;
+    const countdownElement = confirmation.querySelector('.countdown span');
+    const countdownInterval = setInterval(() => {
+      seconds--;
+      countdownElement.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(countdownInterval);
+        window.location.href = 'index.html';
+      }
+    }, 1000);
+    
+  }, 1500);
+          // Unsubscribe functionality
+          document.querySelectorAll('.unsubscribe-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.subscription-card');
+                const name = card.querySelector('.subscription-name').textContent;
+                
+                if (confirm(`Are you sure you want to subscribe to ${name}?`)) {
+                    card.style.opacity = '0.6';
+                    card.style.pointerEvents = 'none';
+                    this.innerHTML = '<i class="fas fa-check"></i> Unsubscribed';
+                    this.style.background = '#e0e0e0';
+                    this.style.color = '#9e9e9e';
+                    this.style.borderColor = '#e0e0e0';
+                    this.disabled = true;
+                    
+                    // In a real app, you would send an API request here
+                    console.log(`subscribed to ${name}`);
+                }
+            });
+        });
+}
+        </script>
+    </body>
+</html>
