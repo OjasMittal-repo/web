@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscribe to Newsletters</title>
+    
     <style>
 /* Subscribe Button States */
 .subscribe-btn {
@@ -219,8 +220,94 @@
   transition: all 0.3s ease;
   border: 2px solid transparent;
 }
+/* Header Styles */
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header .logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+header .nav-link {
+    font-size: 1rem;
+    color: #333;
+    padding: 0.5rem 1rem;
+}
+
+header .nav-link:hover {
+    color: #007bff;
+}
+
+header .navbar {
+    margin-top: 10px;
+}
+
+header .navbar-light .navbar-nav .nav-link {
+    color: #333;
+}
+
+header .navbar-light .navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+header img.rounded-circle {
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+header #SignIn {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    header .d-flex.align-items-center span {
+        display: none;
+    }
+}
+
+  
+  
     </style>
     <body>
+      <header>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="logo">
+                    <a href="index.html" class="text-decoration-none text-dark font-weight-bold">Newsletter Hub</a>
+                </div>
+                <nav class="d-none d-md-block">
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link text-dark" href="popular.html">Popular</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="new.html">New</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="subscriptions.html">My Subscriptions</a></li>
+                    </ul>
+                </nav>
+                <div class="d-flex align-items-center">
+                    <span class="mr-3 d-none d-md-block">Hi, User</span>
+                    <img src="images/user.png" alt="User Profile" class="rounded-circle" style="width: 40px; height: 40px;">
+                    <button type="button" id="SignIn" class="btn btn-primary ml-3" onclick="signIn()">Sign In</button>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-md navbar-light bg-light d-md-none">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="popular.html">Popular</a></li>
+                        <li class="nav-item"><a class="nav-link" href="new.html">New</a></li>
+                        <li class="nav-item"><a class="nav-link" href="subscriptions.html">My Subscriptions</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
       <div class="newsletter-grid">
         <div class="newsletter-card">
             <div class="newsletter-image">
