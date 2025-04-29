@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Newsletter | Newsletter Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, #4a6bff, #00d1b2);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .header-logo:hover {
+            color: #f0f4ff;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #f0f4ff;
+            transform: scale(1.1);
+        }
+
+        /* Business section header */
+        .business-header {
+            text-align: center;
+            margin-top: 60px;
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Newsletter Cards Section */
+        .newsletter-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            max-width: 1200px;
+            width: 100%;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            border-radius: 15px;
+            padding: 30px;
+            width: 300px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #4a6bff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 25px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .card a:hover {
+            background-color: #4a6bff;
+            color: #fff;
+        }
+
+        /* Animation for the content */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .newsletter-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-logo">Newsletter Hub</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="technology.html">Go Back</a>
+            <a href="subscriptions.html">Subscriptions</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Business Section Title -->
+    <div class="business-header">
+        Business Newsletter
+    </div>
+
+    <!-- Newsletter Cards -->
+    <div class="newsletter-cards">
+        <!-- Card 1 -->
+        <div class="card">
+            <h3>Trends in Digital Marketing</h3>
+            <p>Discover how digital marketing strategies are evolving with AI, data analytics, and personalized content to engage customers like never before.</p>
+            <a href="Trends.html">Read More</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+            <h3>Investment Strategies for 2025</h3>
+            <p>Gain insights into the best investment opportunities and strategies for the upcoming year. From tech stocks to sustainable funds, we cover it all.</p>
+            <a href="investment strategies.html">Read More</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+            <h3>Remote Work Revolution</h3>
+            <p>Explore the growth of remote work and its impact on businesses worldwide. Learn about tools, strategies, and trends driving this shift.</p>
+            <a href="remote work revolution.html">Read More</a>
+        </div>
+    </div>
+
+</body>
+</html>

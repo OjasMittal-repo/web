@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Investment Strategies 2025 | Business Newsletter</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(145deg, #121212, #1a1a1a);
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      animation: slideTop 1s ease-out;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #f3c623;
+      text-shadow: 0 0 5px #f3c623;
+    }
+
+    nav a {
+      margin-left: 25px;
+      color: #ddd;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      width: 0%;
+      height: 2px;
+      background: #f3c623;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: #f3c623;
+    }
+
+    .content {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .content h2 {
+      font-size: 42px;
+      color: #f3c623;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #f3c623;
+    }
+
+    .content img {
+      width: 100%;
+      max-width: 800px;
+      border-radius: 15px;
+      margin: 30px 0;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      animation: zoomIn 1s ease-out;
+    }
+
+    .content p {
+      font-size: 18px;
+      color: #ccc;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .subscribe-btn {
+      display: inline-block;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #121212;
+      background: linear-gradient(135deg, #f3c623, #f0932b);
+      border: none;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(243, 198, 35, 0.5);
+      animation: bounceIn 1.2s ease;
+    }
+
+    .subscribe-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(243, 198, 35, 0.7);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #111;
+      color: #999;
+      font-size: 14px;
+      margin-top: 60px;
+      animation: fadeIn 2s ease-in;
+    }
+
+    footer a {
+      color: #f3c623;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes slideTop {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .content h2 {
+        font-size: 30px;
+      }
+
+      .subscribe-btn {
+        font-size: 16px;
+        padding: 12px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>Newsletter Hub</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="business.html">Business</a>
+      <a href="subscriptions.html">Subscriptions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Investment Strategies 2025</h2>
+    <img src="images/investment strategies.jpg" alt="Investment Strategies" />
+    <p>The world of investing is evolving rapidly. With geopolitical shifts, digital finance trends, and sustainability at the forefront, investors in 2025 must be more strategic than ever. This newsletter delivers weekly insights, data-backed predictions, and expert advice tailored for modern investors.</p>
+    <p>Key strategies include diversification into emerging markets, allocating capital into green investments, and understanding the role of AI in portfolio optimization. Passive investing remains popular, but smart beta and active management are making a comeback in certain niches.</p>
+    <p>As crypto matures and tokenization reshapes asset classes, new avenues for wealth generation are opening. Stay ahead of the curve with deep dives into economic forecasts, inflation hedges, and digital asset regulation trends.</p>
+
+    <a href="payment.html" class="subscribe-btn">Subscribe Now</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Newsletter Hub. All rights reserved.
+    <br />
+    <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Use</a>
+  </footer>
+
+</body>
+</html>
