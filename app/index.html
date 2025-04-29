@@ -306,6 +306,18 @@ width: 100%;
       margin-bottom: 5px;
       font-size: 14px;
     }
+
+    /* Username display style */
+    #usernameDisplay {
+        color: #333;
+        font-size: 0.9rem;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+        margin-left: 10px;
+    }
 </style>
 <body>
  
@@ -328,23 +340,20 @@ width: 100%;
                 </ul>
             </nav>
             <div class="d-flex align-items-center">
-                
-
                 <!-- User Profile Image as Dropdown Trigger -->
                 <div class="dropdown">
                     <!-- Clicking this image will toggle the dropdown menu -->
                     <img src="images/user.png" alt="User Profile" class="rounded-circle" style="width: 40px; height: 40px;" id="profileImage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    
                     <!-- Dropdown Menu -->
                     <div class="dropdown-menu" aria-labelledby="profileImage">
                         <a class="dropdown-item" href="profile.html">Profile</a>
                         <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="#" id="signOutBtn">Sign Out</a>
+                        <a class="dropdown-item" href="signin.html" id="signOutBtn">Sign Out</a>
                     </div>
                 </div>
-                <br>
-                <span class="mr-3 d-none d-md-block">Hi, User</span>
+                <!-- Username display -->
+                <span id="usernameDisplay"></span>
             </div>
         </div>
         <nav class="navbar navbar-expand-md navbar-light bg-light d-md-none">
@@ -530,23 +539,17 @@ width: 100%;
   <script type="text/javascript" src="./graphConfig.js"></script>
   <script type="text/javascript" src="./ui.js"></script>
   
-      <script>
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      document.getElementById('username').innerText = user.name;
-    } else {
-      window.location.href = 'signin.html';
-    }
-  </script>
-
-<!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
-  <!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->
-  <script type="text/javascript" src="./authPopup.js"></script>
-  <script type="text/javascript" src="./graph.js"></script>
   <script>
-    app_location: "/"
-    </script>
-<script>
+    // Display username in header when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('usernameDisplay').textContent = user.name;
+        } else {
+            window.location.href = 'signin.html';
+        }
+    });
+
     // Configuration
     const PAGE_REDIRECTS = {
       'subscribe': 'subscribe.html',
@@ -639,6 +642,10 @@ width: 100%;
 
     // Initialize chatbot when DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
+      // Get user data
+      const user = JSON.parse(localStorage.getItem('user'));
+      const username = user ? user.name : 'there';
+      
       // Get DOM elements
       const chatbotContainer = document.getElementById('chatbotContainer');
       const chatbotToggle = document.getElementById('chatbotToggle');
@@ -655,6 +662,24 @@ width: 100%;
       closeChatbot.addEventListener('click', function() {
         chatbotContainer.classList.remove('visible');
       });
+      
+      // Modify the initial greeting to include username
+      const initialGreeting = document.querySelector('.chatbot-messages .bot-message .message-content');
+      initialGreeting.innerHTML = `
+        <p>Hi ${username}, welcome to Newsletter Hub! I can help you with:</p>
+        <ul class="feature-list">
+          <li>Subscription plans & pricing</li>
+          <li>Newsletter recommendations</li>
+          <li>Account management</li>
+          <li>Content discovery</li>
+          <li>Technical support</li>
+        </ul>
+        <div class="quick-replies">
+          <button class="quick-reply" data-message="Show me subscription plans">View Plans</button>
+          <button class="quick-reply" data-message="Recommend newsletters">Get Recommendations</button>
+          <button class="quick-reply" data-message="How do I contact support?">Support</button>
+        </div>
+      `;
       
       // Send message function
       function sendMessage() {
@@ -732,7 +757,7 @@ width: 100%;
           return PREDEFINED_RESPONSES['features'];
         }
         else if (userMessage.includes('hi') || userMessage.includes('hello')) {
-          return `Hello! Welcome to Newsletter Hub. I can help you with subscription plans, newsletter recommendations, account management, and more. What would you like to know about?`;
+          return `Hello ${username}! Welcome to Newsletter Hub. I can help you with subscription plans, newsletter recommendations, account management, and more. What would you like to know about?`;
         }
         else {
           return PREDEFINED_RESPONSES['default'];
