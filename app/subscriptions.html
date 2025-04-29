@@ -1,536 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Subscriptions | Newsletter Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4a6bff;
-            --primary-dark: #3a5bef;
-            --danger: #ff4d4d;
-            --danger-dark: #e60000;
-            --success: #4CAF50;
-            --gray: #f5f5f5;
-            --dark-gray: #e0e0e0;
-            --text: #333;
-            --text-light: #666;
-            --text-lighter: #888;
-        }
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-        
-        body {
-            background-color: #fafafa;
-            color: var(--text);
-            line-height: 1.6;
-        }
-        
-        /* App Header */
-        .app-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: white;
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .back-button {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: var(--primary);
-            cursor: pointer;
-        }
-        
-        .header-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .header-icon {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: var(--text-light);
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Subscription Tabs */
-        .subscription-tabs {
-            display: flex;
-            background: white;
-            border-bottom: 1px solid var(--dark-gray);
-            padding: 0 20px;
-        }
-        
-        .tab {
-            padding: 15px 0;
-            margin-right: 25px;
-            position: relative;
-            font-weight: 500;
-            color: var(--text-light);
-            cursor: pointer;
-        }
-        
-        .tab.active {
-            color: var(--primary);
-        }
-        
-        .tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px 3px 0 0;
-        }
-        
-        /* Subscription List */
-        .subscription-list {
-            padding: 15px;
-        }
-        
-        .subscription-group {
-            margin-bottom: 25px;
-        }
-        
-        .group-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 0 10px;
-        }
-        
-        .group-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-        
-        .group-count {
-            background: var(--dark-gray);
-            color: var(--text-light);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 12px;
-        }
-        
-        .subscription-card {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .subscription-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .subscription-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .subscription-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-        
-        .subscription-info {
-            flex-grow: 1;
-            min-width: 0;
-        }
-        
-        .subscription-name {
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .subscription-category {
-            font-size: 12px;
-            color: var(--text-lighter);
-            margin-top: 2px;
-        }
-        
-        .subscription-details {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 13px;
-            color: var(--text-lighter);
-        }
-        
-        .subscription-status {
-            display: flex;
-            align-items: center;
-        }
-        
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--success);
-            margin-right: 5px;
-        }
-        
-        .subscription-actions {
-            display: flex;
-            margin-top: 15px;
-            gap: 10px;
-        }
-        
-        .btn {
-            border: none;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            flex: 1;
-            text-align: center;
-            transition: all 0.2s;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-        
-        .btn-outline {
-            background: white;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
-        
-        .btn-outline:hover {
-            background: #f0f4ff;
-        }
-        
-        .btn-danger {
-            background: #ffebee;
-            color: var(--danger);
-            border: 1px solid #ffcdd2;
-        }
-        
-        .btn-danger:hover {
-            background: var(--danger);
-            color: white;
-        }
-        
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 50px 20px;
-        }
-        
-        .empty-icon {
-            font-size: 50px;
-            color: var(--dark-gray);
-            margin-bottom: 20px;
-        }
-        
-        .empty-title {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        
-        .empty-text {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-        
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-            z-index: 100;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 12px;
-        }
-        
-        .nav-item i {
-            font-size: 20px;
-            margin-bottom: 3px;
-        }
-        
-        .nav-item.active {
-            color: var(--primary);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Subscriptions | Newsletter Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4a6bff;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    nav ul li a.active,
+    nav ul li a:hover {
+      color: #4a6bff;
+      border-bottom: 2px solid #4a6bff;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-profile img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .main-content {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .subscriptions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .card {
+      padding: 20px;
+      border-radius: 16px;
+      transition: 0.3s ease;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card .title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #222;
+    }
+
+    .card .info {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .card .actions {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background-color: #4a6bff;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #3a5bef;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #4a6bff;
+      color: #4a6bff;
+    }
+
+    .btn-outline:hover {
+      background-color: #e0eaff;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- App Header -->
-    <header class="app-header">
-        <div class="header-left">
-            <button class="back-button">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <h1 class="header-title">My Subscriptions</h1>
-        </div>
-        <div class="header-actions">
-            <button class="header-icon">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="header-icon">
-                <i class="fas fa-bell"></i>
-                <span class="badge">3</span>
-            </button>
-        </div>
-    </header>
 
-    <!-- Subscription Tabs -->
-    <div class="subscription-tabs">
-        <div class="tab active">Active</div>
-        <div class="tab">Paused</div>
-        <div class="tab">Expired</div>
-    </div>
-
-    <!-- Subscription List -->
-    <div class="subscription-list">
-        <div class="subscription-group">
-            <div class="group-header">
-                <div class="group-title">Daily Newsletters</div>
-                <div class="group-count">3</div>
-            </div>
-            
-            <!-- Subscription Card 1 -->
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div class="subscription-icon" style="background: linear-gradient(135deg, #4a6bff 0%, #3a5bef 100%);">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="subscription-info">
-                        <div class="subscription-name">Morning Tech Brief</div>
-                        <div class="subscription-category">Technology • Daily</div>
-                    </div>
-                </div>
-                <div class="subscription-details">
-                    <div class="subscription-status">
-                        <div class="status-indicator"></div>
-                        <span>Delivered at 7:00 AM</span>
-                    </div>
-                    <div>⭐ 4.8</div>
-                </div>
-                <div class="subscription-actions">
-                    <button class="btn btn-outline">
-                        <i class="fas fa-cog"></i> Manage
-                    </button>
-                    <button class="btn btn-danger unsubscribe-btn">
-                        <i class="fas fa-ban"></i> Unsubscribe
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Subscription Card 2 -->
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div class="subscription-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #f44336 100%);">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <div class="subscription-info">
-                        <div class="subscription-name">Health Daily</div>
-                        <div class="subscription-category">Health • Daily</div>
-                    </div>
-                </div>
-                <div class="subscription-details">
-                    <div class="subscription-status">
-                        <div class="status-indicator"></div>
-                        <span>Delivered at 6:30 AM</span>
-                    </div>
-                    <div>⭐ 4.5</div>
-                </div>
-                <div class="subscription-actions">
-                    <button class="btn btn-outline">
-                        <i class="fas fa-cog"></i> Manage
-                    </button>
-                    <button class="btn btn-danger unsubscribe-btn">
-                        <i class="fas fa-ban"></i> Unsubscribe
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <div class="subscription-group">
-            <div class="group-header">
-                <div class="group-title">Weekly Newsletters</div>
-                <div class="group-count">2</div>
-            </div>
-            
-            <!-- Subscription Card 3 -->
-            <div class="subscription-card">
-                <div class="subscription-header">
-                    <div class="subscription-icon" style="background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="subscription-info">
-                        <div class="subscription-name">Green Living</div>
-                        <div class="subscription-category">Environment • Weekly</div>
-                    </div>
-                </div>
-                <div class="subscription-details">
-                    <div class="subscription-status">
-                        <div class="status-indicator"></div>
-                        <span>Next: Friday 9:00 AM</span>
-                    </div>
-                    <div>⭐ 4.7</div>
-                </div>
-                <div class="subscription-actions">
-                    <button class="btn btn-outline">
-                        <i class="fas fa-cog"></i> Manage
-                    </button>
-                    <button class="btn btn-danger unsubscribe-btn">
-                        <i class="fas fa-ban"></i> Unsubscribe
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Empty State Example (hidden by default) -->
-        <!-- <div class="empty-state">
-            <div class="empty-icon">
-                <i class="far fa-newspaper"></i>
-            </div>
-            <h3 class="empty-title">No Active Subscriptions</h3>
-            <p class="empty-text">You haven't subscribed to any newsletters yet. Discover amazing content from our collection.</p>
-            <button class="btn btn-primary">
-                Browse Newsletters
-            </button>
-        </div> -->
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="new.html" class="nav-item">
-            <i class="fas fa-compass"></i>
-            <span>Discover</span>
-        </a>
-        <a href="subscriptions.html" class="nav-item active">
-            <i class="fas fa-envelope"></i>
-            <span>Subscriptions</span>
-        </a>
-        <a href="profile.html" class="nav-item">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
-        </a>
+  <!-- Header -->
+  <header>
+    <div class="logo">Newsletter Hub</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="popular.html" class="active">Popular</a></li>
+        <li><a href="subscriptions.html">My Subscriptions</a></li>
+      </ul>
     </nav>
+    <div class="user-profile">
+      <span>Hi, User</span>
+      <img src="images/user.png" alt="User">
+    </div>
+  </header>
 
-    <script>
-        // Unsubscribe functionality
-        document.querySelectorAll('.unsubscribe-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const card = this.closest('.subscription-card');
-                const name = card.querySelector('.subscription-name').textContent;
-                
-                if (confirm(`Are you sure you want to unsubscribe from ${name}?`)) {
-                    card.style.opacity = '0.6';
-                    card.style.pointerEvents = 'none';
-                    this.innerHTML = '<i class="fas fa-check"></i> Unsubscribed';
-                    this.style.background = '#e0e0e0';
-                    this.style.color = '#9e9e9e';
-                    this.style.borderColor = '#e0e0e0';
-                    this.disabled = true;
-                    
-                    // In a real app, you would send an API request here
-                    console.log(`Unsubscribed from ${name}`);
-                }
-            });
-        });
-        
-        // Tab switching
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelector('.tab.active').classList.remove('active');
-                this.classList.add('active');
-                
-                // In a real app, you would filter subscriptions here
-                console.log(`Switched to ${this.textContent} tab`);
-            });
-        });
-        
-        // Back button
-        document.querySelector('.back-button').addEventListener('click', () => {
-            // In a real app, this would go back to previous screen
-            window.location.href = 'index.html';
-        });
-    </script>
+  <!-- Main Content -->
+  <section class="main-content">
+    <h2 class="section-title">Your Active Subscriptions</h2>
+    <div class="subscriptions-grid">
+
+      <div class="card glass">
+        <div class="title">Tech Bytes</div>
+        <div class="info">Delivered daily at 7:00 AM</div>
+        <div class="actions">
+          <button class="btn btn-primary">Manage</button>
+          <button class="btn btn-outline">Unsubscribe</button>
+        </div>
+      </div>
+
+      <div class="card glass">
+        <div class="title">Health Pulse</div>
+        <div class="info">Delivered daily at 6:30 AM</div>
+        <div class="actions">
+          <button class="btn btn-primary">Manage</button>
+          <button class="btn btn-outline">Unsubscribe</button>
+        </div>
+      </div>
+
+      <div class="card glass">
+        <div class="title">Green Living</div>
+        <div class="info">Weekly every Friday</div>
+        <div class="actions">
+          <button class="btn btn-primary">Manage</button>
+          <button class="btn btn-outline">Unsubscribe</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Newsletter Hub. All rights reserved.
+  </footer>
+
 </body>
 </html>
