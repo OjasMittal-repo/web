@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Newsletters</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #d9f3f0, #e1f7e7);
+      color: #222;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #0e8e6f;
+    }
+
+    p.subhead {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 50px;
+      color: #4a4a4a;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      width: 300px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    .card i {
+      font-size: 40px;
+      color: #0e8e6f;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #0c5f49;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .view-more {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #0e8e6f, #56d9a0);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .view-more:hover {
+      background: linear-gradient(135deg, #56d9a0, #0e8e6f);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Health & Wellness</h1>
+  <p class="subhead">Stay informed on wellness, nutrition, and mental clarity</p>
+
+  <div class="cards-container">
+
+    <!-- Card 1 -->
+    <div class="card">
+      <i class="fas fa-apple-alt"></i>
+      <h3>Nutrition Tips</h3>
+      <p>Discover science-backed eating habits to improve your energy, immunity, and lifestyle.</p>
+      <a href="nutrition-tips.html" class="view-more">View More</a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <i class="fas fa-heartbeat"></i>
+      <h3>Mental Wellness</h3>
+      <p>Explore techniques to manage stress, enhance focus, and promote emotional health.</p>
+      <a href="mental-wellness.html" class="view-more">View More</a>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <i class="fas fa-dumbbell"></i>
+      <h3>Fitness & Movement</h3>
+      <p>Learn about effective workouts, mobility routines, and daily activity guides.</p>
+      <a href="fitness-movement.html" class="view-more">View More</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
