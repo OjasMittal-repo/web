@@ -337,23 +337,23 @@
         <div class="letter" style="top: 75%; left: 30%; animation-delay: 10s;">✉️</div>
     </div>
 
-    <div class="login-container">
+    <div class="login-container" >
         <div class="logo">
             <h1>Newsletter Hub</h1>
             <p>Curated knowledge delivered to your inbox</p>
         </div>
 
-        <form accept="/login" method="POST">
+        <form id="signInForm" method="POST" action="#">
             <div class="input-group">
-                <input type="email" id="email" placeholder=" " required>
-                <label for="email">Email Address</label>
+                <input type="email" id="signInEmail" placeholder=" " required>
+                <label for="signInEmail">Email Address</label>
             </div>
-
+        
             <div class="input-group">
-                <input type="password" id="password" placeholder=" " required>
-                <label for="password">Password</label>
+                <input type="password" id="signInPassword" placeholder=" " required>
+                <label for="signInPassword">Password</label>
             </div>
-
+        
             <div class="options">
                 <div class="remember-me">
                     <input type="checkbox" id="remember">
@@ -363,13 +363,14 @@
                     <a href="forgot-password.html">Forgot password?</a>
                 </div>
             </div>
-
+        
             <button type="submit" class="login-btn">Sign In</button>
-
+            <p id="errorMessage" style="display:none; color:red; text-align:center; margin-top:10px;">Incorrect email or password.</p>
+        
             <div class="signup-link">
                 New to Newsletter Hub? <a href="create-account.html">Create an account</a>
             </div>
-
+        
             <div class="social-login">
                 <p>Or sign in with</p>
                 <div class="social-icons">
@@ -379,74 +380,24 @@
                 </div>
             </div>
         </form>
-    </div>
-
-    
-          <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData.entries());
-      const res = await fetch('/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
-      if (result.success) {
-        localStorage.setItem('user', JSON.stringify(result.user));
-        window.location.href = 'home.html';
-      } else {
-        alert('Incorrect email or password.');
-      }
-    });
-        // Add floating letters dynamically
-        document.addEventListener('DOMContentLoaded', function() {
-            const floatingLetters = document.querySelector('.floating-letters');
-            const letters = ['N', 'E', 'W', 'S', '✉️', 'L', 'T', 'R', 'H', 'U', 'B'];
-            
-            // Clear existing letters
-            floatingLetters.innerHTML = '';
-            
-            // Add random letters
-            for (let i = 0; i < 15; i++) {
-                const letter = document.createElement('div');
-                letter.className = 'letter';
-                letter.textContent = letters[Math.floor(Math.random() * letters.length)];
-                
-                // Random position and animation
-                letter.style.left = `${Math.random() * 100}%`;
-                letter.style.top = `${Math.random() * 100}%`;
-                letter.style.animationDelay = `${Math.random() * 10}s`;
-                letter.style.animationDuration = `${10 + Math.random() * 20}s`;
-                letter.style.fontSize = `${1 + Math.random() * 3}rem`;
-                letter.style.opacity = `${0.03 + Math.random() * 0.07}`;
-                
-                floatingLetters.appendChild(letter);
+        
+        <script>
+          document.getElementById('signInForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const email = document.getElementById('signInEmail').value.trim();
+            const password = document.getElementById('signInPassword').value;
+        
+            const storedUser = JSON.parse(localStorage.getItem('user'));
+        
+            if (storedUser && storedUser.email === email && storedUser.password === password) {
+              alert('Sign In Successful!');
+              window.location.href = 'index.html'; // Redirect to homepage
+            } else {
+              document.getElementById('errorMessage').style.display = 'block';
             }
-            
-            // Form submission
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                
-                // Here you would typically handle the login logic
-                console.log('Login attempted with:', email, password);
-                
-                // Simulate loading
-                const btn = document.querySelector('.login-btn');
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                btn.disabled = true;
-                
-                setTimeout(() => {
-                    btn.innerHTML = 'Sign In';
-                    btn.disabled = false;
-                    alert('Login functionality would connect to your backend here');
-                }, 1500);
-            });
-        });
-    </script>
+          });
+        </script>
+        
 </body>
 </html>

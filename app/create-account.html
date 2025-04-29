@@ -43,7 +43,7 @@
       color: #ccc;
     }
 
-    button {
+    .submit-btn {
       width: 100%;
       padding: 12px;
       border: none;
@@ -54,10 +54,9 @@
       cursor: pointer;
       margin-top: 1rem;
       transition: background 0.3s ease;
-    
     }
 
-    submit-btn:hover {
+    .submit-btn:hover {
       background: #0072ff;
     }
 
@@ -75,37 +74,56 @@
     a:hover {
       text-decoration: underline;
     }
+
+    .error {
+      text-align: center;
+      color: #ff6b6b;
+      display: none;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>Create Your Account</h2>
-    <form action="/register" method="POST">
-      <input type="text" placeholder="Full Name" required />
-      <input type="email" placeholder="Email Address" required />
-      <input type="password" placeholder="Password" required />
-      <input type="password" placeholder="Confirm Password" required />
-      <a href="signin.html"><button type="submit" class="submit-btn">Sign Up</button></a>
+    <form id="createAccountForm">
+      <input type="text" id="username" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+      <button type="submit" class="submit-btn">Sign Up</button>
     </form>
+    <p class="error" id="errorMessage">Please fill all fields correctly.</p>
     <div class="bottom-text">
       Already have an account? <a href="signin.html">Login</a>
     </div>
   </div>
+
   <script>
-    document.getElementById('signupForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData.entries());
-      const res = await fetch('/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
-      if (result.success) {
+    document.getElementById('createAccountForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (username && email && password && confirmPassword && password === confirmPassword) {
+        const userData = {
+          username: username,
+          email: email,
+          password: password
+        };
+
+        // Save to localStorage
+        localStorage.setItem('user', JSON.stringify(userData));
+        errorMessage.style.display = 'none';
+        alert('Account Created Successfully!');
         window.location.href = 'signin.html';
       } else {
-        alert(result.message);
+        errorMessage.textContent = password !== confirmPassword ? "Passwords do not match!" : "Please fill all fields correctly.";
+        errorMessage.style.display = 'block';
       }
     });
   </script>
