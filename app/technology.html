@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 20px;
+      color: #ccc;
+    }
+
+    .tech-icon {
+      font-size: 100px;
+      color: #4a6bff;
+      animation: pulse 2s infinite;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      width: 300px;
+      padding: 25px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #4a90e2;
+    }
+
+    .card p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #eee;
+    }
+
+    .card .icon {
+      font-size: 40px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* View More Button Styles */
+    .card a {
+      display: inline-block;
+      padding: 12px 30px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .card a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #feb47b, #ff7e5f);
+    }
+
+    .card a:active {
+      transform: scale(1);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="tech-icon"><i class="fas fa-laptop-code"></i></div>
+    <h1>Technology</h1>
+    <p>Innovations shaping the future</p>
+  </header>
+
+  <section class="cards">
+    <div class="card">
+      <div class="icon"><i class="fas fa-robot"></i></div>
+      <h3>AI Breakthroughs</h3>
+      <p>Discover how artificial intelligence is transforming industries through automation, prediction, and personalization.</p>
+      <a href="AI Breakthroughs.html">View More</a>
+    </div>
+
+    <div class="card">
+      <div class="icon"><i class="fas fa-vr-cardboard"></i></div>
+      <h3>Future of XR</h3>
+      <p>Step into immersive experiences with Virtual and Augmented Reality shaping education, games, and remote work.</p>
+      <a href="XR Future.html">View More</a>
+    </div>
+
+    <div class="card">
+      <div class="icon"><i class="fas fa-cloud"></i></div>
+      <h3>Cloud Computing</h3>
+      <p>Explore how cloud tech scales businesses with flexibility, security, and on-demand services like never before.</p>
+      <a href="Cloud Computing.html">View More</a>
+    </div>
+  </section>
+
+</body>
+</html>

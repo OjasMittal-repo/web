@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XR Future</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 20px;
+      color: #ccc;
+    }
+
+    /* Sticky header with navigation */
+    header {
+      background: linear-gradient(135deg, #4a6bff, #00d1b2);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-logo {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .header-logo:hover {
+      color: #f0f4ff;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff7e5f;
+    }
+
+    .tech-icon {
+      font-size: 100px;
+      color: #4a6bff;
+      animation: pulse 2s infinite;
+      margin-bottom: 20px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin-top: 60px;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    .content img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .content .description {
+      max-width: 500px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      margin-left: 40px;
+    }
+
+    .content .description h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #4a90e2;
+    }
+
+    .content .description p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #eee;
+    }
+
+    .subscribe-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .subscribe-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #feb47b, #ff7e5f);
+    }
+
+    .subscribe-btn:active {
+      transform: scale(1);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .content .description {
+        margin-left: 0;
+        margin-top: 20px;
+      }
+
+      .content img {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="header-logo">Newsletter Hub</div>
+    <nav>
+      
+      <a href="technology.html">Go back</a>
+      <a href="index.html">Home</a>
+      <a href="subscriptions.html">Subscriptions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <header>
+    <div class="tech-icon"><i class="fas fa-vr-cardboard"></i></div>
+    <h1>Future of XR</h1>
+    <p>Step into immersive experiences with Virtual and Augmented Reality shaping education, games, and remote work.</p>
+  </header>
+
+  <section class="content">
+    <img src="images/XR Future.png" alt="XR Future Image">
+    <div class="description">
+      <h2>Exploring the World of XR</h2>
+      <p>
+        Virtual Reality (VR) and Augmented Reality (AR) are revolutionizing the way we experience digital content. With applications in entertainment, education, and professional work environments, XR technologies are offering unprecedented ways to interact with information, environments, and even other people.
+      </p>
+      <p>
+        As VR and AR continue to evolve, we will witness advancements that create hyper-realistic and immersive worlds, blurring the lines between the physical and virtual realms. The future of XR promises to change how we work, learn, play, and connect with each other.
+      </p>
+      <a href="payment.html" class="subscribe-btn">Subscribe Now</a>
+    </div>
+  </section>
+
+</body>
+</html>
