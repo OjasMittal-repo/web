@@ -343,7 +343,7 @@
             <p>Curated knowledge delivered to your inbox</p>
         </div>
 
-        <form>
+        <form accept="/login" method="POST">
             <div class="input-group">
                 <input type="email" id="email" placeholder=" " required>
                 <label for="email">Email Address</label>
@@ -360,14 +360,14 @@
                     <label for="remember">Remember me</label>
                 </div>
                 <div class="forgot-password">
-                    <a href="#">Forgot password?</a>
+                    <a href="forgot-password.html">Forgot password?</a>
                 </div>
             </div>
 
             <button type="submit" class="login-btn">Sign In</button>
 
             <div class="signup-link">
-                New to Newsletter Hub? <a href="#">Create an account</a>
+                New to Newsletter Hub? <a href="create-account.html">Create an account</a>
             </div>
 
             <div class="social-login">
@@ -381,7 +381,25 @@
         </form>
     </div>
 
-    <script>
+    
+          <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+      const res = await fetch('/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.success) {
+        localStorage.setItem('user', JSON.stringify(result.user));
+        window.location.href = 'home.html';
+      } else {
+        alert('Incorrect email or password.');
+      }
+    });
         // Add floating letters dynamically
         document.addEventListener('DOMContentLoaded', function() {
             const floatingLetters = document.querySelector('.floating-letters');
