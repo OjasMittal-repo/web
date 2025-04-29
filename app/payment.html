@@ -2,421 +2,490 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Payment | Newsletter Hub</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Select Plan</title>
   <style>
-    /* Base styles (same as before) */
-    :root {
-      --primary-color: #4f46e5;
-      --primary-hover: #4338ca;
-      --text-dark: #333;
-      --text-light: #666;
-      --border-color: #ddd;
-      --background-color: #f9f9f9;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--background-color);
-      margin: 0;
-      padding: 20px;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #3a3a3a, #1a1a1a);
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: white;
+      padding: 0 10px;
     }
 
-    .container {
+    /* Header Styles */
+    header {
+      background-color: #333;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    header.payment-header {
-      text-align: center;
-      margin-bottom: 30px;
+    .logo {
+      color: #ff5c8e;
+      font-size: 1.8em;
+      font-weight: bold;
     }
 
-    header.payment-header h1 {
-      margin-bottom: 10px;
-      font-size: 32px;
-      color: var(--primary-color);
-    }
-
-    .payment-container {
+    nav ul {
       display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      list-style: none;
     }
 
-    .payment-form, .payment-summary {
-      flex: 1 1 400px;
+    nav ul li {
+      margin: 0 15px;
     }
 
-    h2 {
-      margin-bottom: 15px;
-      color: var(--text-dark);
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: color 0.3s ease;
     }
 
-    .form-group {
-      margin-bottom: 20px;
+    nav ul li a:hover {
+      color: #ff5c8e;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: var(--text-dark);
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 1.1em;
     }
 
-    .form-control {
+    .user-profile img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    /* Taskbar Styling */
+    .taskbar {
+      position: fixed;
+      top: 0;
+      right: 0;
       width: 100%;
-      padding: 10px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 16px;
-      background: #fff;
+      background-color: #1a1a1a;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      z-index: 100;
     }
 
-    .form-row {
+    .taskbar .icons {
       display: flex;
       gap: 20px;
     }
 
-    .form-row .form-group {
-      flex: 1;
-    }
-
-    .payment-button {
-      background: var(--primary-color);
-      color: #fff;
-      padding: 15px;
-      width: 100%;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
+    .taskbar .icons i {
+      color: white;
+      font-size: 1.6em;
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      transition: background 0.3s;
+      transition: color 0.3s ease;
     }
 
-    .payment-button:hover {
-      background: var(--primary-hover);
+    .taskbar .icons i:hover {
+      color: #ff5c8e;
     }
 
-    .loading-spinner {
-      display: none;
-      font-size: 18px;
+    /* Plan Cards and Other Content */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      width: 80%;
+      max-width: 1000px;
+      text-align: center;
+      margin-top: 120px; /* Adjusted to account for fixed header */
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
     }
 
     .plan-card {
-      background: #f1f5f9;
-      padding: 20px;
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 30px;
       margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .plan-name {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 10px;
+    .plan-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
     }
 
-    .plan-price {
-      font-size: 24px;
-      color: var(--primary-color);
+    .plan-card h3 {
+      font-size: 2em;
       margin-bottom: 15px;
     }
 
-    .plan-features {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .plan-features li {
-      margin-bottom: 10px;
-      color: var(--text-light);
-    }
-
-    .plan-features li i {
-      color: var(--primary-color);
-      margin-right: 8px;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border-color);
-      margin: 20px 0;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .summary-total {
-      font-weight: bold;
-    }
-
-    .currency-switcher, .voucher-input {
-      margin: 20px 0;
-    }
-
-    /* Success Modal */
-    .success-modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      display: none;
-    }
-
-    .success-content {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .success-content img {
-      width: 120px;
+    .plan-card p {
+      font-size: 1.2em;
       margin-bottom: 20px;
     }
 
-    .success-content h2 {
-      margin-bottom: 10px;
-      color: var(--primary-color);
+    .btn {
+      padding: 15px 30px;
+      background-color: #ff5c8e;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    .success-content p {
-      font-size: 16px;
-      color: var(--text-light);
+    .btn:hover {
+      background-color: #ff3366;
+      transform: scale(1.1);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9);}
-      to { opacity: 1; transform: scale(1);}
+    .compare-btn {
+      padding: 15px 30px;
+      background-color: #ff5c8e;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
     }
 
-    @media (max-width: 768px) {
-      .payment-container {
-        flex-direction: column;
-      }
+    .compare-btn:hover {
+      background-color: #ff3366;
+      transform: scale(1.1);
     }
+
+    .compare-options {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .compare-options input {
+      margin-right: 10px;
+    }
+
+    .comparison-table {
+      margin-top: 30px;
+      display: none;
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+    }
+
+    .comparison-table th, .comparison-table td {
+      padding: 10px;
+      border: 1px solid #fff;
+    }
+
+    .comparison-table th {
+      background-color: #333;
+    }
+
+    .comparison-table td {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Feature List Styling */
+    .feature-list {
+      list-style-type: none;
+      margin-top: 20px;
+      text-align: left;
+      font-size: 1.1em;
+    }
+
+    .feature-list li {
+      margin: 10px 0;
+    }
+
+  header {
+    background-color: #333;
+    padding: 20px 0;
+    width: 100%;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .logo {
+    color: #ff5c8e;
+    font-size: 1.8em;
+    font-weight: bold;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+
+  nav ul li {
+    margin: 0 15px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover {
+    color: #ff5c8e;
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 1.1em;
+  }
+
+  .user-profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+</style>
+  
   </style>
-
 </head>
 <body>
 
-<div class="container">
-  <header class="payment-header">
-    <h1>Complete Your Subscription</h1>
-    <p>Choose your plan, apply vouchers, and complete payment securely.</p>
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">Newsletter Hub</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="popular.html" class="active">Popular</a></li>
+          <li><a href="subscriptions.html">My Subscriptions</a></li>
+        </ul>
+      </nav>
+      <div class="user-profile">
+        <span>Hi, User</span>
+        <img src="images/user.png" alt="User">
+      </div>
+    </div>
   </header>
 
-  <div class="payment-container">
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <div class="icons">
+      <i class="fas fa-bell"></i>
+      <i class="fas fa-user-circle"></i>
+    </div>
+  </div>
 
-    <div class="payment-form">
-      <h2>Payment Details</h2>
+  <div class="overlay"></div>
 
-      <div class="form-group">
-        <label for="cardholder-name">Cardholder Name</label>
-        <input type="text" id="cardholder-name" class="form-control" placeholder="John Doe" required>
-      </div>
+  <div class="container">
+    <h1>Select Your Plan</h1>
 
-      <div class="form-group">
-        <label>Card Details</label>
-        <input type="text" class="form-control" placeholder="•••• •••• •••• 4242" required>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label for="card-expiry">Expiry Date</label>
-          <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY" required>
-        </div>
-        <div class="form-group">
-          <label for="card-cvc">CVC</label>
-          <input type="text" id="card-cvc" class="form-control" placeholder="123" required>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="country">Country</label>
-        <select id="country" class="form-control" required>
-          <option value="">Select Country</option>
-          <option value="IN">India</option>
-          <option value="US">United States</option>
-          <option value="UK">United Kingdom</option>
-          <option value="CA">Canada</option>
-          <option value="AU">Australia</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="zip-code">ZIP/Postal Code</label>
-        <input type="text" id="zip-code" class="form-control" placeholder="12345" required>
-      </div>
-
-      <div class="form-group voucher-input">
-        <label for="voucher-code">Voucher Code</label>
-        <input type="text" id="voucher-code" class="form-control" placeholder="Enter Voucher (Optional)">
-      </div>
-
-      <button id="submit-payment" class="payment-button">
-        <span id="button-text">Pay $9.99/month</span>
-        <i class="fas fa-spinner loading-spinner" id="spinner"></i>
-      </button>
-
-      <p style="text-align: center; margin-top: 15px; font-size: 14px; color: var(--text-light);">
-        <i class="fas fa-lock"></i> Your payment is securely encrypted
-      </p>
+    <!-- Plan Options -->
+    <div class="plan-card" id="free-plan-card">
+      <h3>Free Membership</h3>
+      <p>Price: Free</p>
+      <button class="btn" onclick="window.location.href='checkout.html?plan=free'">Select</button>
+      <ul class="feature-list" id="free-features">
+        <li>Access to public newsletters</li>
+        <li>Limited reading features</li>
+      </ul>
     </div>
 
-    <div class="payment-summary">
-      <h2>Order Summary</h2>
-
-      <div class="form-group">
-        <label>Select Plan</label>
-        <select id="plan-select" class="form-control">
-          <option value="premium">Premium - $9.99/month</option>
-          <option value="standard">Standard - $4.99/month</option>
-        </select>
-      </div>
-
-      <div class="currency-switcher">
-        <label>Currency</label>
-        <select id="currency-select" class="form-control">
-          <option value="usd">USD ($)</option>
-          <option value="inr">INR (₹)</option>
-        </select>
-      </div>
-
-      <div class="plan-card" id="plan-details">
-        <div class="plan-name">Premium Membership</div>
-        <div class="plan-price">$9.99<span style="font-size: 16px; color: var(--text-light);">/month</span></div>
-        <ul class="plan-features" id="plan-features">
-          <li><i class="fas fa-check"></i> Unlimited premium newsletters</li>
-          <li><i class="fas fa-check"></i> Ad-free reading experience</li>
-          <li><i class="fas fa-check"></i> Early access to new content</li>
-          <li><i class="fas fa-check"></i> Exclusive member-only newsletters</li>
-        </ul>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="summary-row summary-total">
-        <span>Total:</span>
-        <span id="total-amount">$9.99/month</span>
-      </div>
-
+    <div class="plan-card" id="premium-plan-card">
+      <h3>Premium Membership</h3>
+      <p>Price: $9.99</p>
+      <button class="btn" onclick="window.location.href='checkout.html?plan=premium'">Select</button>
+      <ul class="feature-list" id="premium-features">
+        <li>Unlimited newsletters</li>
+        <li>Ad-free reading</li>
+        <li>Early content access</li>
+        <li>Exclusive member-only content</li>
+      </ul>
     </div>
 
+    <div class="plan-card" id="pro-plan-card">
+      <h3>Pro Membership</h3>
+      <p>Price: $14.99</p>
+      <button class="btn" onclick="window.location.href='checkout.html?plan=pro'">Select</button>
+      <ul class="feature-list" id="pro-features">
+        <li>All Premium features</li>
+        <li>Archive access</li>
+        <li>Reading analytics</li>
+      </ul>
+    </div>
+
+    <!-- Compare Options -->
+    <div class="compare-options">
+      <div>
+        <input type="checkbox" id="free-check" name="free" value="free">
+        <label for="free-check">Free Plan</label>
+      </div>
+      <div>
+        <input type="checkbox" id="premium-check" name="premium" value="premium">
+        <label for="premium-check">Premium Plan</label>
+      </div>
+      <div>
+        <input type="checkbox" id="pro-check" name="pro" value="pro">
+        <label for="pro-check">Pro Plan</label>
+      </div>
+      <button class="compare-btn" onclick="comparePlans()">Compare Plans</button>
+    </div>
+
+    <!-- Comparison Table -->
+    <table class="comparison-table" id="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Free Plan</th>
+          <th>Premium Plan</th>
+          <th>Pro Plan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Access to newsletters</td>
+          <td>Limited</td>
+          <td>Unlimited</td>
+          <td>Unlimited + Archive</td>
+        </tr>
+        <tr>
+          <td>Ad-free reading</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Early content access</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Exclusive content</td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Archive Access</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Reading Analytics</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Yes</td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
-</div>
 
-<!-- Success Modal -->
-<div class="success-modal" id="success-modal">
-  <div class="success-content">
-    <img src="https://i.imgur.com/2x3sDvl.png" alt="Success">
-    <h2>Payment Successful!</h2>
-    <p>Congratulations! Redirecting you to your subscription...</p>
-  </div>
-</div>
+  <script>
+    function comparePlans() {
+      const freeChecked = document.getElementById('free-check').checked;
+      const premiumChecked = document.getElementById('premium-check').checked;
+      const proChecked = document.getElementById('pro-check').checked;
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const planSelect = document.getElementById('plan-select');
-  const currencySelect = document.getElementById('currency-select');
-  const voucherInput = document.getElementById('voucher-code');
-  const planDetails = document.getElementById('plan-details');
-  const planName = planDetails.querySelector('.plan-name');
-  const planPrice = planDetails.querySelector('.plan-price');
-  const planFeatures = document.getElementById('plan-features');
-  const totalAmount = document.getElementById('total-amount');
-  const submitPayment = document.getElementById('submit-payment');
-  const submitButtonText = document.getElementById('button-text');
-  const successModal = document.getElementById('success-modal');
+      const table = document.getElementById('comparison-table');
+      table.style.display = 'none';
 
-  const plans = {
-    premium: {
-      name: 'Premium Membership',
-      priceUSD: 9.99,
-      priceINR: 799,
-      features: [
-        'Unlimited premium newsletters',
-        'Ad-free reading experience',
-        'Early access to new content',
-        'Exclusive member-only newsletters'
-      ]
-    },
-    standard: {
-      name: 'Standard Membership',
-      priceUSD: 4.99,
-      priceINR: 399,
-      features: [
-        'Access to selected newsletters',
-        'Ad-supported reading experience'
-      ]
+      // Reset table cells
+      const cells = table.getElementsByTagName('td');
+      for (let cell of cells) {
+        cell.innerText = '';
+      }
+
+      // Add data to comparison table based on selected checkboxes
+      if (freeChecked || premiumChecked || proChecked) {
+        table.style.display = 'block';
+        if (freeChecked) {
+          table.rows[1].cells[1].innerText = 'Limited';
+          table.rows[2].cells[1].innerText = 'No';
+          table.rows[3].cells[1].innerText = 'No';
+          table.rows[4].cells[1].innerText = 'No';
+          table.rows[5].cells[1].innerText = 'No';
+        }
+        if (premiumChecked) {
+          table.rows[1].cells[2].innerText = 'Unlimited';
+          table.rows[2].cells[2].innerText = 'Yes';
+          table.rows[3].cells[2].innerText = 'Yes';
+          table.rows[4].cells[2].innerText = 'No';
+          table.rows[5].cells[2].innerText = 'No';
+        }
+        if (proChecked) {
+          table.rows[1].cells[3].innerText = 'Unlimited + Archive';
+          table.rows[2].cells[3].innerText = 'Yes';
+          table.rows[3].cells[3].innerText = 'Yes';
+          table.rows[4].cells[3].innerText = 'Yes';
+          table.rows[5].cells[3].innerText = 'Yes';
+        }
+      }
     }
-  };
-
-  function updateSummary() {
-    const selectedPlan = planSelect.value;
-    const selectedCurrency = currencySelect.value;
-    const voucherCode = voucherInput.value.trim().toUpperCase();
-    const plan = plans[selectedPlan];
-
-    planName.textContent = plan.name;
-    planFeatures.innerHTML = plan.features.map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('');
-
-    let price = selectedCurrency === 'usd' ? plan.priceUSD : plan.priceINR;
-    let currencySymbol = selectedCurrency === 'usd' ? '$' : '₹';
-
-    if (voucherCode === 'SAVE10') {
-      price = (price * 0.9).toFixed(2); // 10% off
-    }
-
-    planPrice.innerHTML = `${currencySymbol}${price}<span style="font-size: 16px; color: var(--text-light);">/month</span>`;
-    totalAmount.innerHTML = `${currencySymbol}${price}/month`;
-    submitButtonText.textContent = `Pay ${currencySymbol}${price}/month`;
-  }
-
-  planSelect.addEventListener('change', updateSummary);
-  currencySelect.addEventListener('change', updateSummary);
-  voucherInput.addEventListener('input', updateSummary);
-
-  submitPayment.addEventListener('click', function(e) {
-    e.preventDefault();
-    submitButtonText.textContent = "Processing...";
-    setTimeout(() => {
-      successModal.style.display = 'flex';
-      setTimeout(() => {
-        window.location.href = 'subscriptions.html';
-      }, 3000);
-    }, 2000); // Simulate payment delay
-  });
-
-  updateSummary(); // Initialize
-  
-});
-</script>
-
-<!-- FontAwesome Icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </script>
 
 </body>
 </html>

@@ -3,10 +3,418 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popular Newsletters | Newsletter Hub</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Shared CSS file -->
+    <title>Legendary Newsletters | Newsletter Hub</title>
+    
+    <!-- FontAwesome & Google Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --text-dark: #111827;
+            --text-light: #6b7280;
+            --bg: #f3f4f6;
+            --glass: rgba(255, 255, 255, 0.85);
+            --gold: #fbbf24;
+            --featured-glow: 0 0 15px rgba(251, 191, 36, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "✉️";
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .user-profile img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .user-profile:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        main {
+            padding: 60px 0 100px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        /* Newsletter Grid */
+        .newsletter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .newsletter-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .newsletter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .newsletter-card.featured {
+            border: 2px solid var(--gold);
+            box-shadow: var(--featured-glow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.5); }
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(to right, #f59e0b, #fbbf24);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 2;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .newsletter-image {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .newsletter-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .newsletter-card:hover .newsletter-image img {
+            transform: scale(1.05);
+        }
+
+        .newsletter-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+        }
+
+        .newsletter-info {
+            padding: 20px;
+        }
+
+        .newsletter-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .stats {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .stats span {
+            display: flex;
+            align-items: center;
+        }
+
+        .newsletter-info p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .subscribe-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        footer p {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Legendary Elements */
+        .legendary-badge {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: linear-gradient(45deg, #f59e0b, #fbbf24, #f59e0b);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 12px;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite, float 4s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .newsletter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Background Animation -->
+    <div id="particles-js"></div>
+
     <header>
         <div class="container">
             <div class="header-content">
@@ -19,7 +427,7 @@
                     </ul>
                 </nav>
                 <div class="user-profile">
-                    <span>Hi, User</span>
+                    <span>Hi, Legend</span>
                     <img src="images/user.png" alt="User Profile">
                 </div>
             </div>
@@ -27,8 +435,8 @@
     </header>
 
     <main class="container">
-        <h1>Most Popular Newsletter</h1>
-        <p class="subtitle">Trending newsletters our community loves</p>
+        <h1>Most Popular Newsletters</h1>
+        <p class="subtitle">Trending legendary newsletters our community loves</p>
         
         <div class="newsletter-grid">
             <!-- Newsletter 1 -->
@@ -36,14 +444,15 @@
                 <div class="popular-badge">🔥 #1 Trending</div>
                 <div class="newsletter-image">
                     <img src="images/techno.png" alt="Tech Weekly">
+                    <div class="legendary-badge">Legendary</div>
                 </div>
                 <div class="newsletter-info">
                     <h3>Tech Weekly</h3>
                     <div class="stats">
                         <span>⭐ 4.9 (2.4K subscribers)</span>
                     </div>
-                    <p>The most comprehensive tech newsletter covering AI, startups and gadgets.</p>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <p>The most comprehensive tech newsletter covering AI, startups and cutting-edge gadgets. Get exclusive insights before they go mainstream.</p>
+                    <a href="subscribe.html" class="subscribe-btn">Subscribe Now</a>
                 </div>
             </div>
             
@@ -57,33 +466,113 @@
                     <div class="stats">
                         <span>⭐ 4.8 (1.8K subscribers)</span>
                     </div>
-                    <p>Weekly design inspiration from top creatives around the world.</p>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <p>Weekly design inspiration from top creatives around the world. Case studies, trends and exclusive interviews.</p>
+                    <a href="subscribe.html" class="subscribe-btn">Subscribe Now</a>
                 </div>
+            </div>
+            
+            <!-- Newsletter 3 -->
+            <div class="newsletter-card">
+                <div class="newsletter-image">
+                    <img src="images/Business insights.png" alt="Business Insights">
+                </div>
+                <div class="newsletter-info">
+                    <h3>Business Insights</h3>
+                    <div class="stats">
+                        <span>⭐ 4.7 (1.5K subscribers)</span>
+                    </div>
+                    <p>Actionable business strategies and market analysis from industry leaders and successful entrepreneurs.</p>
+                    <a href="subscribe.html" class="subscribe-btn">Subscribe Now</a>
+                </div>
+            </div>
+            
+            <!-- Newsletter 4 -->
+            <div class="newsletter-card">
+                <div class="newsletter-image">
+                    <img src="images/science frontier.png" alt="Science Frontier">
+                </div>
+                <div class="newsletter-info">
+                    <h3>Science Frontier</h3>
+                    <div class="stats">
+                        <span>⭐ 4.9 (1.2K subscribers)</span>
+                    </div>
+                    <p>Breakthrough discoveries and research explained in simple terms. Stay ahead of scientific advancements.</p>
+                    <a href="subscribe.html" class="subscribe-btn">Subscribe Now</a>
+                </div>
+            </div>
+            
+            <!-- Newsletter 5 -->
+            <div class="newsletter-card">
+                <div class="newsletter-image">
+                    <img src="images/creative minds.png" alt="Creative Minds">
+                </div>
+                <div class="newsletter-info">
+                    <h3>Creative Minds</h3>
+                    <div class="stats">
+                        <span>⭐ 4.8 (1.1K subscribers)</span>
+                    </div>
+                    <p>Inspiration and techniques from the world's most innovative artists, writers, and creative professionals.</p>
+                    <a href="subscribe.html" class="subscribe-btn">Subscribe Now</a>
+                </div>
+            </div>
+            
+            <!-- Newsletter 6 -->
+            <div class="newsletter-card">
+                <div class="newsletter-image">
+                    <img src="images/health tips.png" alt="Health Tips">
+                </div>
+                <div class="newsletter-info">
+                    <h3>Health Tips</h3>
+                    <div class="stats">
+                        <span>⭐ 4.9 (2.1K subscribers)</span>
+                    </div>
+                    <p>Evidence-based health advice, longevity research, and wellness strategies from top medical experts.</p>
+                    <a href="subscribe.html" class="subscribe-btn">Subscribe Now</a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <!-- Same footer as main.html -->
-        <footer>
-            <div class="container">
-                <div class="footer-links">
-                    <a href="About.html">About Us</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms-of-service.html">Terms of Service</a>
-                    <a href="faq.html">FAQ</a>
-                </div>
-                
-                <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=61575497137432"><img src="images/Facebook logo.png" alt="Facebook"></a>
-                    <a href="https://x.com/NewsLetter_Hub_"><img src="images/Twitter Logo.png" alt="Twitter"></a>
-                    <a href="https://www.instagram.com/newsletter_hub/"><img src="images/Instagram.png" alt="Instagram"></a>
-                    <a href="https://www.linkedin.com/in/ojas-mittal-00417335b/"><img src="images/LinkedIn.png" alt="LinkedIn"></a>
-                </div>
-                
-                <p>&copy; 2025 Newsletter Hub. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-links">
+                <a href="About.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="faq.html">FAQ</a>
             </div>
-        </footer>
+            
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=61575497137432"><img src="images/Facebook logo.png" alt="Facebook"></a>
+                <a href="https://x.com/NewsLetter_Hub_"><img src="images/Twitter logo.png" alt="Twitter"></a>
+                <a href="https://www.instagram.com/newsletter_hub/"><img src="images/Instagram.png" alt="Instagram"></a>
+                <a href="https://www.linkedin.com/in/ojas-mittal-00417335b/"><img src="images/LinkedIn.png" alt="LinkedIn"></a>
+            </div>
+            
+            <p>&copy; 2025 Newsletter Hub. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- Particles.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <!-- Init Particles -->
+    <script>
+    particlesJS("particles-js", {
+        particles: {
+            number: { value: 60 },
+            size: { value: 3 },
+            color: { value: "#6366f1" },
+            move: { speed: 1.5 },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: "#a5b4fc",
+                opacity: 0.4
+            }
+        }
+    });
+    </script>
 </body>
 </html>

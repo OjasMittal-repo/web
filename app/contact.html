@@ -1,29 +1,227 @@
-<html>
-    <head>
-        <title>
-            Contact Us | Newsletter Hub
-        </title>
-    </head>
-    <body>
-        <section id="contact" class="contact-section" style="padding: 60px 0; background: #f5f7fa;">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 40px;">Contact Us</h2>
-                <div style="display: flex; justify-content: center; gap: 50px; flex-wrap: wrap;">
-                    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); width: 300px;">
-                        <h3 style="color: #4a6bff; margin-top: 0;">Customer Support</h3>
-                        <p><strong>Email:</strong> ojasmittal08@gmail.com</p>
-                        <p><strong>Phone:</strong> +91 7406999973</p>
-                        <p><strong>Hours:</strong> Mon-Fri, 9AM-5PM IST</p>
-                    </div>
-                    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); width: 300px;">
-                        <h3 style="color: #4a6bff; margin-top: 0;">Business Inquiries</h3>
-                        <p><strong>Email:</strong> ojasmittal08@gmail.com</p>
-                        <p><strong>Phone:</strong> +91 7406999973</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | Newsletter Hub</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap');
 
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0c1b;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
 
-    </body>
+    /* Glowing Stars */
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .stars span {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      animation: twinkle 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.1; }
+      to { opacity: 1; }
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 10px;
+      color: #4a6bff;
+      text-shadow: 0 0 10px #4a6bff, 0 0 30px #4a6bff;
+      animation: glitch 2.5s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 100% { text-shadow: 0 0 10px #4a6bff, 0 0 30px #4a6bff; }
+      20% { text-shadow: 2px 0 red, -2px 0 cyan; }
+      40% { text-shadow: -2px 0 #0ff, 2px 0 #f0f; }
+      60% { text-shadow: 0 0 30px #4a6bff; }
+    }
+
+    .typing {
+      text-align: center;
+      font-size: 18px;
+      color: #ccc;
+      margin-bottom: 60px;
+      height: 24px;
+    }
+
+    .contact-section {
+      padding: 100px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 320px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      animation: fadeInUp 1s ease forwards;
+      box-shadow: 0 0 20px rgba(74, 107, 255, 0.2);
+      transition: transform 0.4s, box-shadow 0.4s;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      z-index: -1;
+      background: linear-gradient(45deg, #4a6bff, #ff6be9, #4a6bff);
+      border-radius: 22px;
+      animation: borderRotate 4s linear infinite;
+    }
+
+    @keyframes borderRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 50px rgba(74, 107, 255, 0.5);
+    }
+
+    .card h3 {
+      color: #fff;
+      font-size: 22px;
+      margin-top: 0;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+      margin: 10px 0;
+    }
+
+    .card strong {
+      color: #fff;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .orb {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #4a6bff 0%, transparent 70%);
+      animation: floatOrb 10s ease-in-out infinite alternate;
+      opacity: 0.08;
+      z-index: 1;
+    }
+
+    .orb:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+    .orb:nth-child(2) { top: 50%; right: 5%; animation-delay: 2s; }
+    .orb:nth-child(3) { bottom: 10%; left: 20%; animation-delay: 4s; }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-30px) scale(1.2); }
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated background stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Floating glowing orbs -->
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+
+  <section class="contact-section">
+    <h2>Contact Us</h2>
+    <div class="typing" id="typed"></div>
+
+    <div class="contact-container">
+      <div class="card">
+        <h3>Customer Support</h3>
+        <p><strong>Email:</strong> ojasmittal08@gmail.com</p>
+        <p><strong>Phone:</strong> +91 7406999973</p>
+        <p><strong>Hours:</strong> Mon–Fri, 9AM–5PM IST</p>
+      </div>
+
+      <div class="card">
+        <h3>Business Inquiries</h3>
+        <p><strong>Email:</strong> ojasmittal08@gmail.com</p>
+        <p><strong>Phone:</strong> +91 7406999973</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Stars generator
+    const stars = document.getElementById("stars");
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement("span");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDuration = Math.random() * 2 + 1 + "s";
+      stars.appendChild(star);
+    }
+
+    // Typing effect
+    const text = "We're here for your questions, feedback, and collaboration ideas.";
+    let index = 0;
+    function type() {
+      if (index < text.length) {
+        document.getElementById("typed").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(type, 40);
+      }
+    }
+    window.onload = type;
+  </script>
+
+</body>
 </html>

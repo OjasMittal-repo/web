@@ -4,99 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ | Newsletter Hub</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* FAQ Specific Styles */
-        .faq-hero {
-            background: linear-gradient(135deg, #4a6bff 0%, #3a5bef 100%);
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #111;
             color: white;
-            padding: 80px 0;
+            position: relative;
+            min-height: 100vh;
+            overflow-y: auto; /* Allow scrolling */
+        }
+
+        /* Background Particle Effect */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: #4a6bff;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-10px); opacity: 0.7; }
+            100% { transform: translateY(0); opacity: 0.5; }
+        }
+
+        /* FAQ Hero Section */
+        .faq-hero {
+            background: linear-gradient(135deg, #4a6bff, #ff6be9);
+            color: white;
+            padding: 120px 0;
             text-align: center;
-            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .faq-hero h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
+            font-size: 50px;
+            text-shadow: 0 0 20px #4a6bff, 0 0 30px #ff6be9;
+            animation: glow 1.5s infinite alternate;
         }
-        
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #4a6bff, 0 0 15px #ff6be9;
+            }
+            to {
+                text-shadow: 0 0 20px #ff6be9, 0 0 30px #4a6bff;
+            }
+        }
+
         .faq-hero p {
-            font-size: 18px;
-            max-width: 700px;
+            font-size: 20px;
+            max-width: 800px;
             margin: 0 auto;
             opacity: 0.9;
+            line-height: 1.5;
+            letter-spacing: 1px;
         }
-        
+
+        /* FAQ container */
         .faq-container {
-            max-width: 800px;
-            margin: 0 auto 60px;
+            max-width: 900px;
+            margin: 50px auto;
+            z-index: 2;
+            position: relative;
         }
-        
+
+        /* Category Styling */
         .faq-category {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
-        
+
         .faq-category h2 {
-            color: #4a6bff;
-            border-bottom: 2px solid #eee;
+            font-size: 32px;
+            color: #ff6be9;
+            border-bottom: 2px solid #444;
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px #4a6bff;
         }
-        
+
+        /* FAQ Items */
         .faq-item {
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            position: relative;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
         }
-        
+
+        .faq-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .faq-question {
             padding: 20px;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 500;
-            transition: background 0.2s;
+            font-weight: 600;
+            cursor: pointer;
+            background: transparent;
+            transition: background 0.3s ease, color 0.3s ease;
+            position: relative;
         }
-        
+
         .faq-question:hover {
-            background: #f9f9f9;
+            background: #4a6bff;
+            color: white;
         }
-        
+
         .faq-question::after {
             content: '+';
-            font-size: 24px;
+            font-size: 30px;
             color: #4a6bff;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
-        
+
         .faq-item.active .faq-question::after {
             transform: rotate(45deg);
         }
-        
+
         .faq-answer {
             padding: 0 20px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #222;
+            color: #bbb;
         }
-        
+
         .faq-item.active .faq-answer {
-            padding: 0 20px 20px;
-            max-height: 500px;
+            padding: 20px;
+            max-height: 1000px;
+            opacity: 1;
         }
-        
-        .contact-promo {
-            text-align: center;
-            padding: 40px;
-            background: #f5f7fa;
-            border-radius: 8px;
-            margin: 40px auto;
-            max-width: 600px;
+
+        /* Glowing button */
+        .subscribe-btn {
+            display: inline-block;
+            background: #4a6bff;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px #4a6bff;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
+        .subscribe-btn:hover {
+            background: #ff6be9;
+            box-shadow: 0 0 25px #ff6be9;
+        }
+
+        /* 3D Question Icon */
+        .faq-question:before {
+            content: "❓";
+            font-size: 24px;
+            margin-right: 10px;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .faq-question:hover:before {
+            transform: scale(1.2);
+        }
+
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .faq-question {
                 padding: 15px;
@@ -105,103 +200,99 @@
     </style>
 </head>
 <body>
-   
+
+    <!-- Particles Background Effect -->
+    <div class="particles"></div>
 
     <main>
         <section class="faq-hero">
-            <div class="container">
-                <h1>Frequently Asked Questions</h1>
-                <p>Find quick answers to common questions about Newsletter Hub</p>
-            </div>
+            <h1>Frequently Asked Questions</h1>
+            <p>Get answers to your burning questions about Newsletter Hub. We’ve got everything covered!</p>
         </section>
 
-        <div class="container">
-            <div class="faq-container">
-                <div class="faq-category">
-                    <h2>Account & Subscription</h2>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">How do I create an account?</div>
-                        <div class="faq-answer">
-                            <p>Click the "Sign Up" button in the top right corner of any page. You can register using your email address or through social media accounts like Google or Facebook. No credit card is required for free accounts.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Can I change my email preferences?</div>
-                        <div class="faq-answer">
-                            <p>Yes! Go to your Account Settings > Email Preferences. You can choose how often you receive notifications and which types of newsletters we recommend.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">How do I cancel my premium subscription?</div>
-                        <div class="faq-answer">
-                            <p>Visit your Account Settings > Subscriptions. Click "Manage" next to your premium subscription and follow the prompts to cancel. You'll continue to have access until the end of your current billing period.</p>
-                        </div>
+        <div class="faq-container">
+            <div class="faq-category">
+                <h2>Account & Subscription</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do I create an account?</div>
+                    <div class="faq-answer">
+                        <p>Click the "Sign Up" button in the top right corner of any page. You can register using your email address or through social media accounts like Google or Facebook. No credit card is required for free accounts.</p>
                     </div>
                 </div>
-
-                <div class="faq-category">
-                    <h2>Newsletters</h2>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">How do I subscribe to newsletters?</div>
-                        <div class="faq-answer">
-                            <p>Browse our categories or use the search function. When you find a newsletter you like, click the "Subscribe" button. You can manage all subscriptions from your dashboard.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Why am I not receiving my newsletters?</div>
-                        <div class="faq-answer">
-                            <p>First check your spam/junk folder. If the newsletter isn't there, try these steps:<br>
-                            1. Verify your email in Account Settings<br>
-                            2. Ensure you haven't unsubscribed<br>
-                            3. Whitelist @newsletterhub.com in your email client</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">Can I suggest a newsletter to be added?</div>
-                        <div class="faq-answer">
-                            <p>Absolutely! We welcome suggestions. Email us at ojasmittal08@gmail.com with the newsletter details. Our curation team reviews all submissions weekly.</p>
-                        </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I change my email preferences?</div>
+                    <div class="faq-answer">
+                        <p>Yes! Go to your Account Settings > Email Preferences. You can choose how often you receive notifications and which types of newsletters we recommend.</p>
                     </div>
                 </div>
-
-                <div class="faq-category">
-                    <h2>Technical Issues</h2>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">The website isn't loading properly</div>
-                        <div class="faq-answer">
-                            <p>Try these troubleshooting steps:<br>
-                            1. Clear your browser cache<br>
-                            2. Update your browser to the latest version<br>
-                            3. Try accessing from a different browser or device<br>
-                            If issues persist, contact our support team.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="faq-item">
-                        <div class="faq-question">How do I reset my password?</div>
-                        <div class="faq-answer">
-                            <p>Go to the login page and click "Forgot Password." Enter your email address and we'll send you a secure link to reset your password. The link expires in 24 hours for security.</p>
-                        </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do I cancel my premium subscription?</div>
+                    <div class="faq-answer">
+                        <p>Visit your Account Settings > Subscriptions. Click "Manage" next to your premium subscription and follow the prompts to cancel. You'll continue to have access until the end of your current billing period.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="contact-promo">
-                <h3>Still have questions?</h3>
-                <p>Our support team is ready to help you 24/7</p>
-                <a href="contact.html" class="subscribe-btn" style="display: inline-block; margin-top: 15px;">Contact Support</a>
+            <div class="faq-category">
+                <h2>Newsletters</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do I subscribe to newsletters?</div>
+                    <div class="faq-answer">
+                        <p>Browse our categories or use the search function. When you find a newsletter you like, click the "Subscribe" button. You can manage all subscriptions from your dashboard.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Why am I not receiving my newsletters?</div>
+                    <div class="faq-answer">
+                        <p>First check your spam/junk folder. If the newsletter isn't there, try these steps:<br>
+                        1. Verify your email in Account Settings<br>
+                        2. Ensure you haven't unsubscribed<br>
+                        3. Whitelist @newsletterhub.com in your email client</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Can I suggest a newsletter to be added?</div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We welcome suggestions. Email us at ojasmittal08@gmail.com with the newsletter details. Our curation team reviews all submissions weekly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-category">
+                <h2>Technical Issues</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">The website isn't loading properly</div>
+                    <div class="faq-answer">
+                        <p>Try these troubleshooting steps:<br>
+                        1. Clear your browser cache<br>
+                        2. Update your browser to the latest version<br>
+                        3. Try accessing from a different browser or device<br>
+                        If issues persist, contact our support team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">How do I reset my password?</div>
+                    <div class="faq-answer">
+                        <p>Go to the login page and click "Forgot Password." Enter your email address and we'll send you a secure link to reset your password. The link expires in 24 hours for security.</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="contact-promo">
+            <h3>Still have questions?</h3>
+            <p>Our support team is ready to help you 24/7</p>
+            <a href="contact.html" class="subscribe-btn">Contact Support</a>
+        </div>
     </main>
-
-
 
     <script>
         // FAQ Accordion Functionality
@@ -218,6 +309,15 @@
                 });
             });
         });
+
+        // Smooth reveal animation for each FAQ item
+        setTimeout(() => {
+            document.querySelectorAll('.faq-item').forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('active');
+                }, index * 200); // Stagger animation
+            });
+        }, 500);
     </script>
 </body>
 </html>
