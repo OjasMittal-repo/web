@@ -17,6 +17,7 @@
       background: #f0f8f1;
       color: #333;
       padding: 50px 20px;
+      animation: fadeIn 1.5s ease-out;
     }
 
     header {
@@ -30,6 +31,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      animation: slideInFromTop 1.5s ease-out;
     }
 
     .header-logo {
@@ -37,6 +39,7 @@
       font-weight: bold;
       letter-spacing: 1px;
       text-transform: uppercase;
+      animation: fadeInUp 2s ease-out;
     }
 
     .header-logo:hover {
@@ -49,18 +52,21 @@
       display: flex;
       flex-direction: column;
       gap: 40px;
+      animation: fadeInUp 2s ease-out 0.5s forwards;
     }
 
     .content-container img {
       width: 100%;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      animation: scaleUp 2s ease-out 0.8s forwards;
     }
 
     .content-container h2 {
       font-size: 36px;
       color: #0e8e6f;
       margin-bottom: 20px;
+      animation: fadeInUp 2s ease-out 1.2s forwards;
     }
 
     .content-container p {
@@ -68,6 +74,7 @@
       line-height: 1.8;
       margin-bottom: 30px;
       color: #444;
+      animation: fadeInUp 2s ease-out 1.4s forwards;
     }
 
     .subscribe-btn {
@@ -80,6 +87,7 @@
       border-radius: 30px;
       display: inline-block;
       transition: all 0.3s ease;
+      animation: bounceIn 1.5s ease-out 1.6s forwards;
     }
 
     .subscribe-btn:hover {
@@ -89,6 +97,66 @@
 
     .subscribe-btn:active {
       transform: scale(1);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInFromTop {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
   </style>

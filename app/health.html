@@ -17,6 +17,7 @@
       background: linear-gradient(135deg, #d9f3f0, #e1f7e7);
       color: #222;
       padding: 50px 20px;
+      animation: fadeIn 1.5s ease-out;
     }
 
     h1 {
@@ -24,6 +25,7 @@
       font-size: 42px;
       margin-bottom: 10px;
       color: #0e8e6f;
+      animation: fadeIn 2s ease-out 0.5s forwards;
     }
 
     p.subhead {
@@ -31,6 +33,7 @@
       font-size: 18px;
       margin-bottom: 50px;
       color: #4a4a4a;
+      animation: fadeIn 2s ease-out 1s forwards;
     }
 
     .cards-container {
@@ -38,6 +41,7 @@
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
+      animation: fadeInUp 1.5s ease-out 1.5s forwards;
     }
 
     .card {
@@ -49,6 +53,7 @@
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       position: relative;
       overflow: hidden;
+      animation: bounceIn 0.8s ease-out 1.7s forwards;
     }
 
     .card:hover {
@@ -60,12 +65,14 @@
       font-size: 40px;
       color: #0e8e6f;
       margin-bottom: 15px;
+      animation: fadeIn 2s ease-out 2s forwards;
     }
 
     .card h3 {
       font-size: 22px;
       margin-bottom: 10px;
       color: #0c5f49;
+      animation: fadeIn 2s ease-out 2.2s forwards;
     }
 
     .card p {
@@ -73,6 +80,7 @@
       color: #555;
       line-height: 1.5;
       margin-bottom: 15px;
+      animation: fadeIn 2s ease-out 2.4s forwards;
     }
 
     .view-more {
@@ -98,6 +106,44 @@
         align-items: center;
       }
     }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
   </style>
 </head>
 <body>

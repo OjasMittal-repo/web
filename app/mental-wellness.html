@@ -17,6 +17,7 @@
       background: #e4f7f3;
       color: #333;
       padding: 50px 20px;
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
@@ -43,24 +44,34 @@
       color: #f0f4ff;
     }
 
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
     .content-container {
       max-width: 900px;
       margin: 50px auto;
       display: flex;
       flex-direction: column;
       gap: 40px;
+      transition: background 0.3s, color 0.3s;
     }
 
     .content-container img {
       width: 100%;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 2s ease-in-out;
     }
 
     .content-container h2 {
       font-size: 36px;
       color: #0e8e6f;
       margin-bottom: 20px;
+      animation: slideIn 1s ease;
     }
 
     .content-container p {
@@ -68,6 +79,7 @@
       line-height: 1.8;
       margin-bottom: 30px;
       color: #444;
+      animation: fadeIn 2s ease-in;
     }
 
     .subscribe-btn {
@@ -91,6 +103,53 @@
       transform: scale(1);
     }
 
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      background-color: #0e8e6f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .controls button:hover {
+      background-color: #56d9a0;
+    }
+
+    /* Dark Mode */
+    .dark-mode {
+      background-color: #111;
+      color: white;
+    }
+
+    .dark-mode .content-container {
+      color: white;
+    }
+
+    .dark-mode .content-container h2 {
+      color: #56d9a0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
   </style>
 </head>
 <body>
@@ -98,22 +157,44 @@
   <header>
     <div class="header-logo">Health Newsletter</div>
     <nav>
-      <a href="index.html" style="color: white; text-decoration: none;">Home</a>
-      <a href="health.html" style="color: white; text-decoration: none; margin-left: 20px;">Back to Health</a>
+      <a href="index.html">Home</a>
+      <a href="health.html">Back to Health</a>
     </nav>
   </header>
 
-  <div class="content-container">
+  <div class="content-container" id="readerContent">
     <img src="images/mental-wellness.jpg" alt="Mental Wellness Image">
     <h2>Boost Your Mental Wellness</h2>
     <p>
-      Mental health is just as important as physical health. In this article, we explore various techniques and lifestyle changes to improve mental wellness. From mindfulness practices to stress management techniques, taking care of your mental health is essential for overall well-being. Learn how setting boundaries, seeking professional support, and practicing self-care can lead to a clearer mind and better emotional balance.
+      Mental health is just as important as physical health. In this article, we explore various techniques and lifestyle changes to improve mental wellness. From mindfulness practices to stress management techniques, taking care of your mental health is essential for overall well-being.
     </p>
     <p>
-      Don’t forget that mental wellness is a continuous journey. Small steps taken regularly can lead to long-term mental clarity and happiness. Start integrating these tips into your life today.
+      Learn how setting boundaries, seeking professional support, and practicing self-care can lead to a clearer mind and better emotional balance. Don’t forget that mental wellness is a continuous journey. Small steps taken regularly can lead to long-term mental clarity and happiness.
     </p>
     <a href="payment.html" class="subscribe-btn">Subscribe Now</a>
+
+    <div class="controls">
+      <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+      <button onclick="readAloud()">🔊 Read Aloud</button>
+    </div>
   </div>
+
+  <script>
+    // Toggle dark mode
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    // Text to Speech
+    function readAloud() {
+      const content = document.getElementById("readerContent").innerText;
+      const speech = new SpeechSynthesisUtterance(content);
+      speech.lang = "en-US";
+      speech.rate = 1;
+      speech.pitch = 1;
+      window.speechSynthesis.speak(speech);
+    }
+  </script>
 
 </body>
 </html>
