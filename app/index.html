@@ -679,6 +679,13 @@
         right: 20px;
       }
     }
+
+    #google_translate_element {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999;
+  }
     
     /* Animations */
     @keyframes fadeIn {
@@ -917,7 +924,8 @@
       </button>
     
 </main>
-
+    <!-- Google Translate -->
+    <div id="google_translate_element"></div>
 <footer>
     <div class="container">
         <div class="footer-links">
@@ -960,9 +968,16 @@
   <script type="text/javascript" src="./graphConfig.js"></script>
   <script type="text/javascript" src="./ui.js"></script>
 
-
-  <!-- importing bootstrap.js and supporting js libraries -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+<!-- Google Translate -->
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+  }
+</script>
+<script
+  type="text/javascript"
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+></script>
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -986,8 +1001,42 @@
         } else {
             window.location.href = 'signin.html';
         }
+        
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+      'google_translate_element'
+      );
+    }
+
     });
 
+    // Sign out function
+    document.getElementById('signOutBtn').addEventListener('click', function() {
+        localStorage.removeItem('user');
+        window.location.href = 'signin.html';
+    });
+
+    // Chatbot toggle functionality
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const closeChatbot = document.getElementById('closeChatbot');
+
+    chatbotToggle.addEventListener('click', function() {
+      chatbotContainer.classList.toggle('visible');
+      chatbotToggle.style.display = 'none';
+    });
+
+    closeChatbot.addEventListener('click', function() {
+      chatbotContainer.classList.remove('visible');
+      chatbotToggle.style.display = 'flex';
+    });
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  
+<script>
     // Configuration
     const PAGE_REDIRECTS = {
       'subscribe': 'subscribe.html',
@@ -1251,6 +1300,18 @@
       // Initialize interactive elements
       addInteractiveElements();
     });
+    </script>
+    <!-- jQuery (required for Bootstrap 4) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</script>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Popper.js (for dropdowns, tooltips, etc.) -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   </script>
  
 </body>
