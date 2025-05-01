@@ -1,12 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore the latest developments and breakthroughs in Quantum Technology with Quantum Horizon." />
+  <meta name="keywords" content="Quantum Technology, Quantum Computing, Quantum Horizon, Latest Tech, Future Innovations" />
+  <title>Quantum Horizon - A Glimpse into the Future of Technology</title>
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
 
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(45deg, #4e73df, #1cc88a);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: #333;
+    }
 
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 0;
+      color: white;
+    }
 
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 15px;
+    }
 
+    header a:hover {
+      color: #1cc88a;
+    }
 
+    #google_translate_element {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      z-index: 1000;
+    }
 
+    .container {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
 
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
 
+    .section-content {
+      font-size: 1.15rem;
+      color: #ddd;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
 
-    <!-- Google Translate -->
-    <div id="google_translate_element"></div>
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .feature-list li {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      font-size: 1.1rem;
+      transition: transform 0.3s ease-in-out, background-color 0.3s;
+      opacity: 0;
+      animation: slideInUp 1.5s ease-out forwards;
+    }
+
+    .feature-list li:hover {
+      transform: translateY(-10px);
+      background-color: #1cc88a;
+    }
+
+    .feature-list i {
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+
+    .cta-btn {
+      background-color: #1cc88a;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      display: inline-block;
+      margin-top: 20px;
+      opacity: 0;
+      animation: bounceIn 2s ease-out forwards;
+      transition: background-color 0.3s;
+    }
+
+    .cta-btn:hover {
+      background-color: #28a745;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    footer a {
+      color: #bbb;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    footer a:hover {
+      color: #1cc88a;
+    }
+
+    .scroll-to-top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #1cc88a;
+      color: white;
+      border-radius: 50%;
+      padding: 12px;
+      font-size: 24px;
+      display: none;
+      z-index: 1000;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .scroll-to-top-btn:hover {
+      background-color: #28a745;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      0% {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Google Translate -->
+  <div id="google_translate_element"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container text-center">
+      <a href="science.html">Science</a>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Introduction -->
+    <section>
+      <h2 class="section-title">Welcome to Quantum Horizon</h2>
+      <p class="section-content">Quantum Horizon brings you closer to the cutting-edge of quantum technology...</p>
+    </section>
+
+    <!-- Key Features -->
+    <section>
+      <h2 class="section-title">Key Features of Quantum Horizon</h2>
+      <p class="section-content">Our platform covers the most exciting developments in the quantum world...</p>
+      <ul class="feature-list">
+        <li><i class="fas fa-bolt"></i> Real-time updates on quantum research breakthroughs</li>
+        <li><i class="fas fa-cogs"></i> In-depth articles on quantum computing and its applications</li>
+        <li><i class="fas fa-users"></i> Expert interviews and thought leadership in the quantum space</li>
+        <li><i class="fas fa-globe"></i> Global perspectives on how quantum technology will shape industries</li>
+        <li><i class="fas fa-clock"></i> Historical milestones and the evolution of quantum science</li>
+      </ul>
+    </section>
+
+    <!-- Future Outlook -->
+    <section>
+      <h2 class="section-title">The Future of Quantum Technology</h2>
+      <p class="section-content">As we venture into the quantum age, the impact on technology, economy, and society will be profound...</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="text-center">
+      <h2 class="section-title">Stay Ahead with Quantum Horizon</h2>
+      <p class="section-content">Sign up for our newsletter to receive the latest articles, research, and insights directly in your inbox.</p>
+      <a href="payment.html" class="cta-btn">Subscribe Now</a>
+    </section>
+  </div>
+
+  <!-- Scroll-to-Top -->
+  <button class="scroll-to-top-btn" id="scrollToTopBtn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Quantum Horizon. All rights reserved.</p>
+      <p>
+        <a href="about.html">About Us</a> |
+        <a href="contact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="terms-of-service.html">Terms of Service</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Scroll Button Logic -->
+  <script>
+    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+    window.onscroll = function () {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        scrollToTopBtn.style.display = "block";
+      } else {
+        scrollToTopBtn.style.display = "none";
+      }
+    };
+
+    scrollToTopBtn.onclick = function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>
+</body>
+</html>

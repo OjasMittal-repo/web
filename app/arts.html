@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Newsletter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3a0ca3;
+      --secondary: #7209b7;
+      --accent: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --text: #2b2d42;
+      --gold: #ffd700;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #f8f9fa;
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(58, 12, 163, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(247, 37, 133, 0.05) 0%, transparent 20%);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes paintStroke {
+      0% { background-size: 0% 100%; }
+      100% { background-size: 100% 100%; }
+    }
+
+    @keyframes colorPulse {
+      0% { box-shadow: 0 0 0 0 rgba(247, 37, 133, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(247, 37, 133, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(247, 37, 133, 0); }
+    }
+
+    .newsletter-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      background-size: 0% 100%;
+      animation: paintStroke 1.5s ease-out forwards;
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      color: var(--text);
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .article-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+      animation-fill-mode: backwards;
+    }
+
+    .article-card:nth-child(1) { animation-delay: 0.1s; }
+    .article-card:nth-child(2) { animation-delay: 0.2s; }
+    .article-card:nth-child(3) { animation-delay: 0.3s; }
+    .article-card:nth-child(4) { animation-delay: 0.4s; }
+    .article-card:nth-child(5) { animation-delay: 0.5s; }
+    .article-card:nth-child(6) { animation-delay: 0.6s; }
+
+    .article-card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .article-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .article-image {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease, filter 0.5s ease;
+    }
+
+    .article-card:hover .article-image img {
+      transform: scale(1.1) rotate(1deg);
+      filter: brightness(1.05);
+    }
+
+    .article-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .article-card:hover .article-image::after {
+      opacity: 1;
+    }
+
+    .article-content {
+      padding: 1.8rem;
+      position: relative;
+    }
+
+    .article-category {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--accent), var(--secondary));
+      color: white;
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .article-card:hover .article-category {
+      animation: colorPulse 1s;
+    }
+
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      line-height: 1.4;
+      transition: color 0.3s ease;
+    }
+
+    .article-card:hover .article-title {
+      color: var(--secondary);
+    }
+
+    .article-excerpt {
+      color: var(--text);
+      margin-bottom: 1.8rem;
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--text);
+      border-top: 1px dashed rgba(0,0,0,0.1);
+      padding-top: 1.2rem;
+    }
+
+    .article-author {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 0.8rem;
+      border: 2px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .article-card:hover .author-avatar {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px var(--accent);
+    }
+
+    .article-date {
+      opacity: 0.7;
+      font-style: italic;
+    }
+
+    .view-all {
+      text-align: center;
+      margin-top: 4rem;
+      animation: fadeIn 1s ease-out 0.7s both;
+    }
+
+    .view-all a {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      transition: all 0.5s ease;
+      box-shadow: 0 10px 20px rgba(58, 12, 163, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .view-all a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .view-all a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(58, 12, 163, 0.3);
+    }
+
+    .view-all a:hover::before {
+      left: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .section-header h2 {
+        font-size: 2.5rem;
+      }
+
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Decorative elements */
+    .brush-stroke {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="none"><path d="M20,100 Q100,20 180,100 T20,100" fill="none" stroke="%23f72585" stroke-width="10" stroke-linecap="round"/></svg>');
+      background-repeat: no-repeat;
+      opacity: 0.1;
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .brush-stroke-1 {
+      top: 10%;
+      left: 5%;
+      transform: rotate(45deg);
+    }
+
+    .brush-stroke-2 {
+      bottom: 10%;
+      right: 5%;
+      transform: rotate(-20deg);
+      animation-delay: 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <div class="brush-stroke brush-stroke-1"></div>
+  <div class="brush-stroke brush-stroke-2"></div>
+
+  <div class="newsletter-container">
+    <div class="section-header">
+      <h2>Art World Insights</h2>
+      <p>Discover the latest exhibitions, artist interviews, and trends shaping the contemporary art scene.</p>
+    </div>
+
+    <div class="articles-grid">
+      <!-- Article 1 -->
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Abstract Art">
+        </div>
+        <div class="article-content">
+          <span class="article-category">Exhibition</span>
+          <h3 class="article-title">The New Wave of Abstract Expressionism</h3>
+          <p class="article-excerpt">How young artists are reinventing abstract art with digital mediums and unconventional materials.</p>
+          <div class="article-meta">
+            <div class="article-author">
+              <img src="https://i.pravatar.cc/40?img=12" alt="Author" class="author-avatar">
+              <span>Claire Dubois</span>
+            </div>
+            <span class="article-date">June 2, 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1578926375605-eaf7559b1458?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Street Art">
+        </div>
+        <div class="article-content">
+          <span class="article-category">Street Art</span>
+          <h3 class="article-title">Urban Canvases: The Politics of Street Art</h3>
+          <p class="article-excerpt">Exploring how street artists are using public spaces to comment on social issues worldwide.</p>
+          <div class="article-meta">
+            <div class="article-author">
+              <img src="https://i.pravatar.cc/40?img=23" alt="Author" class="author-avatar">
+              <span>Marcus Wong</span>
+            </div>
+            <span class="article-date">May 28, 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Sculpture">
+        </div>
+        <div class="article-content">
+          <span class="article-category">Sculpture</span>
+          <h3 class="article-title">Eco-Sculpture: Art Meets Sustainability</h3>
+          <p class="article-excerpt">Artists creating stunning installations from recycled materials challenge our view of waste.</p>
+          <div class="article-meta">
+            <div class="article-author">
+              <img src="https://i.pravatar.cc/40?img=32" alt="Author" class="author-avatar">
+              <span>Elena Petrova</span>
+            </div>
+            <span class="article-date">May 22, 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 4 -->
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Digital Art">
+        </div>
+        <div class="article-content">
+          <span class="article-category">Digital</span>
+          <h3 class="article-title">The NFT Revolution in Contemporary Art</h3>
+          <p class="article-excerpt">How blockchain technology is creating new opportunities and challenges for digital artists.</p>
+          <div class="article-meta">
+            <div class="article-author">
+              <img src="https://i.pravatar.cc/40?img=45" alt="Author" class="author-avatar">
+              <span>Jamal Carter</span>
+            </div>
+            <span class="article-date">May 18, 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 5 -->
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Art Market">
+        </div>
+        <div class="article-content">
+          <span class="article-category">Market</span>
+          <h3 class="article-title">Emerging Art Markets to Watch in 2023</h3>
+          <p class="article-excerpt">From Lagos to Seoul, these art scenes are gaining international recognition and value.</p>
+          <div class="article-meta">
+            <div class="article-author">
+              <img src="https://i.pravatar.cc/40?img=51" alt="Author" class="author-avatar">
+              <span>Sophie Laurent</span>
+            </div>
+            <span class="article-date">May 12, 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article 6 -->
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Art Conservation">
+        </div>
+        <div class="article-content">
+          <span class="article-category">Conservation</span>
+          <h3 class="article-title">Saving Masterpieces: New Techniques in Art Restoration</h3>
+          <p class="article-excerpt">Cutting-edge technologies helping conservators preserve artworks for future generations.</p>
+          <div class="article-meta">
+            <div class="article-author">
+              <img src="https://i.pravatar.cc/40?img=60" alt="Author" class="author-avatar">
+              <span>Dr. Giovanni Rossi</span>
+            </div>
+            <span class="article-date">May 5, 2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-all">
+      <a href="#">View All Art Articles</a>
+    </div>
+  </div>
+</body>
+</html>
