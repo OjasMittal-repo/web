@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Profile | NewsLegend</title>
   <style>
     * {
@@ -135,33 +135,36 @@
   <h1>NewsLegend</h1>
   <nav>
     <a href="index.html">Home</a>
-    <a href="#">Settings</a>
+    <a href="edit-profile.html">Edit Profile</a>
   </nav>
 </header>
 
 <main>
   <div class="profile-card">
     <div class="profile-img">
-      <img src="https://i.pravatar.cc/300?img=5" alt="User Profile Picture">
+      <img id="profile-image" src="https://i.pravatar.cc/300?img=5" alt="User Profile Picture">
     </div>
     <div class="profile-info">
-      <h2>John Doe</h2>
-      <p>Senior Journalist | Tech & Politics Enthusiast | Storyteller at heart</p>
+      <h2 id="profile-name">John Doe</h2>
+      <p id="profile-bio">Senior Journalist | Tech & Politics Enthusiast | Storyteller at heart</p>
+<!-- Replace the info-grid section in profile.html -->
+<div class="info-grid">
+  <div class="info-box">
+    <label>Email</label>
+    <div id="profile-email">john.doe@example.com</div>
+  </div>
+<!-- HTML -->
+<div class="info-box">
+  <label>Joined</label>
+  <div id="profile-joined">Loading...</div>
+</div>
 
-      <div class="info-grid">
-        <div class="info-box">
-          <label>Email</label>
-          <div>john.doe@example.com</div>
-        </div>
-        <div class="info-box">
-          <label>Joined</label>
-          <div>March 2020</div>
-        </div>
-        <div class="info-box">
-          <label>Followers</label>
-          <div>4.2k</div>
-        </div>
-      </div>
+  <div class="info-box">
+    <label>Country</label>
+    <div id="profile-country">United States</div>
+  </div>
+</div>
+
     </div>
   </div>
 </main>
@@ -169,6 +172,18 @@
 <footer>
   <p>© 2025 NewsLegend. Crafted with passion for storytellers and readers worldwide.</p>
 </footer>
+<!-- Add this to your profile.html's script section -->
+<script>
+  const profile = JSON.parse(localStorage.getItem('profileData')) || {};
+
+  if (profile.name) document.getElementById('profile-name').textContent = profile.name;
+  if (profile.bio) document.getElementById('profile-bio').textContent = profile.bio;
+  if (profile.email) document.getElementById('profile-email').textContent = profile.email;
+  if (profile.country) document.getElementById('profile-country').textContent = profile.country;
+  if (profile.image) document.getElementById('profile-image').src = profile.image;
+  if (profile.joined) document.getElementById('profile-joined').textContent = profile.joined;
+</script>
+
 
 </body>
 </html>

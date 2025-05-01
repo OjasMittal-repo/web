@@ -531,6 +531,122 @@
                 max-height: 60vh;
             }
         }
+        
+/* Read More Button Styles */
+.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 25px;
+    background: transparent;
+    color: white;
+    border: 2px solid var(--neon-blue);
+    border-radius: 8px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+}
+
+.read-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.2), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.read-more-btn:hover {
+    background: rgba(0, 242, 254, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.3);
+}
+
+.read-more-btn:hover::before {
+    left: 100%;
+}
+
+.read-more-btn i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+}
+
+.read-more-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* Card-specific button colors */
+.quantum-card .read-more-btn {
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+}
+
+.neural-card .read-more-btn {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+}
+
+.astro-card .read-more-btn {
+    border-color: var(--neon-purple);
+    color: var(--neon-purple);
+    box-shadow: 0 0 15px rgba(157, 80, 255, 0.1);
+}
+
+.genetic-card .read-more-btn {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 0, 170, 0.1);
+}
+
+.ai-card .read-more-btn {
+    border-color: var(--neon-orange);
+    color: var(--neon-orange);
+    box-shadow: 0 0 15px rgba(255, 123, 0, 0.1);
+}
+
+.physics-card .read-more-btn {
+    border-color: var(--neon-yellow);
+    color: var(--neon-yellow);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.1);
+}
+
+/* Hover states with matching colors */
+.quantum-card .read-more-btn:hover {
+    background: rgba(0, 242, 254, 0.1);
+}
+
+.neural-card .read-more-btn:hover {
+    background: rgba(0, 255, 157, 0.1);
+}
+
+.astro-card .read-more-btn:hover {
+    background: rgba(157, 80, 255, 0.1);
+}
+
+.genetic-card .read-more-btn:hover {
+    background: rgba(255, 0, 170, 0.1);
+}
+
+.ai-card .read-more-btn:hover {
+    background: rgba(255, 123, 0, 0.1);
+}
+
+.physics-card .read-more-btn:hover {
+    background: rgba(255, 204, 0, 0.1);
+}
+
     </style>
 </head>
 <body>
@@ -565,7 +681,7 @@
         <!-- 1. Quantum Newsletter -->
         <div class="card quantum-card">
             <div class="card-image">
-                <img src="https://i.imgur.com/JqYeZ0L.jpg" alt="Quantum computing lab">
+                <img src="images/qauntum insights.webp" alt="Quantum computing lab">
                 <div class="card-badge">BREAKTHROUGH</div>
             </div>
             <div class="card-content">
@@ -583,7 +699,7 @@
                             data-content="Quantum Horizons delivers weekly updates on the most exciting developments in quantum computing. Our team of physicists and computer scientists analyze recent papers from leading labs like Google Quantum AI and IBM Quantum, explaining complex concepts in accessible terms. This week we cover the new 127-qubit processor breakthrough and its implications for cryptography.">
                         IMMERSIVE VIEW
                     </button>
-                    <button class="read-more-btn">READ MORE</button>
+                    <a href="qauntum horizon.html"><button class="read-more-btn">READ MORE</button></a>
                 </div>
             </div>
         </div>
@@ -591,7 +707,7 @@
         <!-- 2. Neural Newsletter -->
         <div class="card neural-card">
             <div class="card-image">
-                <img src="https://i.imgur.com/vX3Jb9Q.jpg" alt="Brain scan visualization">
+                <img src="images/neural frontiers.png" alt="Brain scan visualization">
                 <div class="card-badge">NEUROSCIENCE</div>
             </div>
             <div class="card-content">
@@ -609,7 +725,7 @@
                             data-content="Neural Frontiers bridges the gap between neuroscience and artificial intelligence. Each edition features interviews with leading researchers, analysis of recent studies, and tutorials on implementing brain-inspired algorithms. Our current issue explores how the hippocampus's memory system is inspiring new approaches to few-shot learning in AI systems.">
                         IMMERSIVE VIEW
                     </button>
-                    <button class="read-more-btn">READ MORE</button>
+                    <a href="neural frontiers.html"><button class="read-more-btn">READ MORE</button></a>
                 </div>
             </div>
         </div>
@@ -617,7 +733,7 @@
         <!-- 3. Astro Newsletter -->
         <div class="card astro-card">
             <div class="card-image">
-                <img src="https://i.imgur.com/pWjZx8N.jpg" alt="Galaxy and telescope">
+                <img src="images/cosmic discoveries.webp" alt="Galaxy and telescope">
                 <div class="card-badge">COSMIC</div>
             </div>
             <div class="card-content">
@@ -643,7 +759,7 @@
         <!-- 4. Genetic Newsletter -->
         <div class="card genetic-card">
             <div class="card-image">
-                <img src="https://i.imgur.com/7QcVYzW.jpg" alt="DNA strand visualization">
+                <img src="images/Genomics.jpg" alt="DNA strand visualization">
                 <div class="card-badge">GENOMICS</div>
             </div>
             <div class="card-content">
@@ -669,7 +785,7 @@
         <!-- 5. AI Newsletter -->
         <div class="card ai-card">
             <div class="card-image">
-                <img src="https://i.imgur.com/5zJkY9T.jpg" alt="Neural network visualization">
+                <img src="images/AI research.jpg" alt="Neural network visualization">
                 <div class="card-badge">AI RESEARCH</div>
             </div>
             <div class="card-content">
@@ -695,7 +811,7 @@
         <!-- 6. Physics Newsletter -->
         <div class="card physics-card">
             <div class="card-image">
-                <img src="https://i.imgur.com/9YQ7bTj.jpg" alt="Particle collision visualization">
+                <img src="images/physics unbound.jpg" alt="Particle collision visualization">
                 <div class="card-badge">PHYSICS</div>
             </div>
             <div class="card-content">

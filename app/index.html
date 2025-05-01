@@ -11,10 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
-  <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.js"
-    integrity="sha384-o4ufwq3oKqc7IoCcR08YtZXmgOljhTggRwxP2CLbSqeXGtitAxwYaUln/05nJjit"
-    crossorigin="anonymous"></script>
-  
+  <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.js"></script>
+    
   <!-- adding Bootstrap 4 for UI components  -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -762,7 +760,7 @@
                     </div>
                 </div>
                 <!-- Username display -->
-                <span id="usernameDisplay"></span>
+                <span><h2 id="home-name"></h2></span>
             </div>
         </div>
         <nav class="navbar navbar-expand-md navbar-light bg-light d-md-none">
@@ -794,8 +792,8 @@
             <a href="technology.html" class="category-link"><i class="fas fa-laptop-code mr-2"></i>Technology</a>
             <a href="business.html" class="category-link"><i class="fas fa-chart-line mr-2"></i>Business</a>
             <a href="health.html" class="category-link"><i class="fas fa-heartbeat mr-2"></i>Health</a>
-            <a href="#" class="category-link"><i class="fas fa-atom mr-2"></i>Science</a>
-            <a href="#" class="category-link"><i class="fas fa-palette mr-2"></i>Arts</a>
+            <a href="science.html" class="category-link"><i class="fas fa-atom mr-2"></i>Science</a>
+            <a href="arts.html" class="category-link"><i class="fas fa-palette mr-2"></i>Arts</a>
             <a href="#" class="category-link"><i class="fas fa-running mr-2"></i>Sports</a>
             <a href="#" class="category-link"><i class="fas fa-utensils mr-2"></i>Food</a>
             <a href="#" class="category-link"><i class="fas fa-plane mr-2"></i>Travel</a>
@@ -953,6 +951,22 @@
   <br>
 
   <!-- importing bootstrap.js and supporting js libraries -->
+   
+    <script>
+  const profileData = JSON.parse(localStorage.getItem('profileData'));
+  if (profileData) {
+    document.getElementById('home-name').textContent = profileData.name || '';
+    document.getElementById('home-bio').textContent = profileData.bio || '';
+    document.getElementById('home-email').textContent = profileData.email || '';
+    document.getElementById('home-country').textContent = profileData.country || '';
+    document.getElementById('home-joined').textContent = profileData.joined || '';
+    document.getElementById('home-image').src = profileData.image || '';
+
+    document.getElementById('home-profile').style.display = 'block';
+  }
+</script>
+
+   </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
