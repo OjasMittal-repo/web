@@ -147,24 +147,23 @@
     <div class="profile-info">
       <h2 id="profile-name">John Doe</h2>
       <p id="profile-bio">Senior Journalist | Tech & Politics Enthusiast | Storyteller at heart</p>
-<!-- Replace the info-grid section in profile.html -->
-<div class="info-grid">
-  <div class="info-box">
-    <label>Email</label>
-    <div id="profile-email">john.doe@example.com</div>
-  </div>
-<!-- HTML -->
-<div class="info-box">
-  <label>Joined</label>
-  <div id="profile-joined">Loading...</div>
-</div>
 
-  <div class="info-box">
-    <label>Country</label>
-    <div id="profile-country">United States</div>
-  </div>
-</div>
+      <div class="info-grid">
+        <div class="info-box">
+          <label>Email</label>
+          <div id="profile-email">john.doe@example.com</div>
+        </div>
 
+        <div class="info-box">
+          <label>Joined</label>
+          <div id="profile-joined">Loading...</div>
+        </div>
+
+        <div class="info-box">
+          <label>Country</label>
+          <div id="profile-country">United States</div>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -172,7 +171,8 @@
 <footer>
   <p>© 2025 NewsLegend. Crafted with passion for storytellers and readers worldwide.</p>
 </footer>
-<!-- Add this to your profile.html's script section -->
+
+<!-- Load profile data from localStorage -->
 <script>
   const profile = JSON.parse(localStorage.getItem('profileData')) || {};
 
@@ -184,6 +184,6 @@
   if (profile.joined) document.getElementById('profile-joined').textContent = profile.joined;
 </script>
 
-
 </body>
 </html>
+

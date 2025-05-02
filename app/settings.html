@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - Newsletter Hub</title>
+  <link rel="stylesheet" href="settings.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.settings-container {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.3);
+  animation: slideIn 1.2s ease-out;
+}
+
+.animated-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00ffe7;
+  margin-bottom: 30px;
+  animation: glow 2s infinite alternate;
+}
+
+.settings-form .form-group {
+  margin-bottom: 25px;
+}
+
+.settings-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #00ffe7;
+}
+
+.settings-form input,
+.settings-form select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #222;
+  color: #fff;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.settings-form input:focus,
+.settings-form select:focus {
+  box-shadow: 0 0 10px #00ffe7;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.save-btn,
+.reset-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+.save-btn {
+  background: #00ffe7;
+  color: #000;
+}
+
+.save-btn:hover {
+  background: #00c7b5;
+  box-shadow: 0 0 15px #00ffe7;
+}
+
+.reset-btn {
+  background: transparent;
+  border: 2px solid #00ffe7;
+  color: #00ffe7;
+}
+
+.reset-btn:hover {
+  background: #00ffe7;
+  color: #000;
+  box-shadow: 0 0 15px #00ffe7;
+}
+
+/* Animations */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #00ffe7, 0 0 20px #00ffe7;
+  }
+  100% {
+    text-shadow: 0 0 20px #00ffe7, 0 0 30px #00ffe7;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+      <div class="settings-container">
+        <h1 class="animated-heading">⚙️ Settings</h1>
+        <form id="settings-form" class="settings-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username"/>
+          </div>
+    
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email"/>
+          </div>
+    
+          <div class="form-group">
+            <label for="theme">Theme</label>
+            <select id="theme">
+              <option>Light</option>
+              <option>Dark</option>
+              <option>Neon</option>
+            </select>
+          </div>
+    
+          <div class="form-group">
+            <label for="language">Language</label>
+            <select id="language">
+              <option>English</option>
+              <option>Spanish</option>
+              <option>German</option>
+              <option>Hindi</option>
+            </select>
+          </div>
+    
+          <div class="form-actions">
+            <button type="submit" class="save-btn">Save Settings</button>
+            <button type="button" class="reset-btn" onclick="clearSettings()">Reset</button>
+          </div>
+        </form>
+      </div>
+    
+      <script>
+        // Load settings from localStorage
+        window.onload = () => {
+          const settings = JSON.parse(localStorage.getItem('userSettings'));
+          if (settings) {
+            document.getElementById('username').value = settings.username || '';
+            document.getElementById('email').value = settings.email || '';
+            document.getElementById('theme').value = settings.theme || 'Light';
+            document.getElementById('language').value = settings.language || 'English';
+          }
+        };
+    
+        // Save settings to localStorage
+        document.getElementById('settings-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const settings = {
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            theme: document.getElementById('theme').value,
+            language: document.getElementById('language').value
+          };
+          localStorage.setItem('userSettings', JSON.stringify(settings));
+          alert('✅ Settings saved!');
+        });
+    
+        // Clear settings from localStorage
+        function clearSettings() {
+          localStorage.removeItem('userSettings');
+          document.getElementById('settings-form').reset();
+          alert('⚠️ Settings cleared!');
+        }
+      </script>
+      <script>
+      const settings = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        theme: document.getElementById('theme').value,
+        language: document.getElementById('language').value
+      };
+      localStorage.setItem('userSettings', JSON.stringify(settings));
+      </script>
+    
+</body>
+</html>

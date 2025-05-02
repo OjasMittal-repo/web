@@ -265,6 +265,15 @@
       window.location.href = 'profile.html';
     }
   });
+  localStorage.setItem('profileData', JSON.stringify({
+  name: 'Alice Writer',
+  bio: 'News Editor | Politics & Science',
+  email: 'alice@example.com',
+  country: 'India',
+  image: 'your-image-url.jpg',
+  joined: 'May 2025'
+}));
+
 </script>
 
 </body>

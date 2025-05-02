@@ -38,17 +38,17 @@
     
     /* Header Styles */
     header {
-  background-color: #11a3e2;
-  padding: 10px 20px; /* reduced from 20px 40px */
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+      background-color: #11a3e2;
+      padding: 10px 20px; /* reduced from 20px 40px */
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-header h1 {
-  font-size: 20px; /* reduced from 26px */
-}
+    header h1 {
+      font-size: 20px; /* reduced from 26px */
+    }
 
     
     .logo a {
@@ -685,11 +685,11 @@ header h1 {
     }
 
     #google_translate_element {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 999;
-  }
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+    }
     
     /* Animations */
     @keyframes fadeIn {
@@ -733,88 +733,94 @@ header h1 {
       animation: float 6s ease-in-out infinite 5s;
     }
     .profile-box {
-  display: none;
-  max-width: 800px;
-  margin: 50px auto;
-  padding: 30px;
-  background: linear-gradient(135deg, #fceabb, #f8b500);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  animation: fadeInUp 1s ease-out;
-  color: #2c3e50;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-}
+      display: none;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease-out;
+      color: #2c3e50;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
 
-.profile-header {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
 
-.profile-pic {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  animation: popIn 0.8s ease;
-}
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      animation: popIn 0.8s ease;
+    }
 
-.profile-info h2 {
-  font-size: 28px;
-  margin-bottom: 8px;
-  animation: slideIn 0.6s ease;
-}
+    .profile-info h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      animation: slideIn 0.6s ease;
+    }
 
-.profile-info p {
-  font-size: 16px;
-  margin: 4px 0;
-}
+    .profile-info p {
+      font-size: 16px;
+      margin: 4px 0;
+    }
 
-.profile-meta {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #333;
-}
+    .profile-meta {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+    }
 
-@keyframes fadeInUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+    #greeting {
+      font-size: 1rem;
+      margin-right: 1rem;
+      color: var(--dark-color);
+    }
 
-@keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-@keyframes slideIn {
-  0% { transform: translateX(-50px); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
-}
-.profile-box:hover {
-  box-shadow: 0 0 25px #ffd700, 0 0 40px #ffa500;
-  transform: scale(1.02);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-.view-btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background: #2c3e50;
-  color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
 
-.view-btn:hover {
-  background: #34495e;
-  transform: scale(1.05);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-}
+    @keyframes slideIn {
+      0% { transform: translateX(-50px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    .profile-box:hover {
+      box-shadow: 0 0 25px #ffd700, 0 0 40px #ffa500;
+      transform: scale(1.02);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .view-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #2c3e50;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .view-btn:hover {
+      background: #34495e;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+    }
 
   </style>
 </head>
@@ -838,19 +844,22 @@ header h1 {
                 </ul>
             </nav>
             <div class="d-flex align-items-center">
-                <!-- User Profile Image as Dropdown Trigger -->
-                <div class="dropdown">
-                    <img src="images/user.png" alt="User Profile" class="rounded-circle" style="width: 42px; height: 42px; cursor: pointer;" id="profileImage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileImage">
-                        <a class="dropdown-item" href="profile.html"><i class="fas fa-user mr-2"></i>Profile</a>
-                        <a class="dropdown-item" href="edit-profile.html"><i class="fas fa-edit mr-2"></i>Edit Profile</a>
-                        <a class="dropdown-item" href="settings.html"><i class="fas fa-cog mr-2"></i>Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="signin.html" id="signOutBtn"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>
-                    </div>
+              <!-- User Greeting -->
+              <span id="greeting" class="mr-3 font-weight-bold text-dark">Hi, Guest</span>
+            
+              <!-- User Profile Image as Dropdown Trigger -->
+              <div class="dropdown">
+                <img id="profileImageDisplay" src="images/user.png" alt="User Profile" class="rounded-circle"
+                style="width: 42px; height: 42px; cursor: pointer;"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileImage">
+                  <a class="dropdown-item" href="profile.html"><i class="fas fa-user mr-2"></i>Profile</a>
+                  <a class="dropdown-item" href="edit-profile.html"><i class="fas fa-edit mr-2"></i>Edit Profile</a>
+                  <a class="dropdown-item" href="settings.html"><i class="fas fa-cog mr-2"></i>Settings</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="signin.html" id="signOutBtn"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>
                 </div>
-                <!-- Username display -->
-                <span id="usernameDisplay"></span>
+              </div>
             </div>
             
                     </section>
@@ -1044,6 +1053,31 @@ header h1 {
   <br>
 
   <!-- importing bootstrap.js and supporting js libraries -->
+  <script>
+    try {
+      const profileData = JSON.parse(localStorage.getItem("profileData"));
+  
+      if (profileData && profileData.name) {
+        document.getElementById("greeting").textContent = `Hi, ${profileData.name}`;
+      } else {
+        document.getElementById("greeting").textContent = "Hi, Guest";
+      }
+    } catch (e) {
+      document.getElementById("greeting").textContent = "Hi, Guest";
+    }
+  </script>
+  <script>
+        function loadProfile() {
+      const profileData = JSON.parse(localStorage.getItem("profileData")) || {};
+      if (profileData.name) {
+        document.getElementById("greeting").textContent = `Hi, ${profileData.name}`;
+      }
+      if (profileData.image) {
+        document.getElementById("profileImageDisplay").src = profileData.image;
+      }
+    }
+    loadProfile();
+  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
@@ -1069,78 +1103,53 @@ header h1 {
   type="text/javascript"
   src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
 ></script>
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
 
-  <!-- importing app scripts (load order is important) -->
-  <script type="text/javascript" src="./authConfig.js"></script>
-  <script type="text/javascript" src="./graphConfig.js"></script>
-  <script type="text/javascript" src="./ui.js"></script>
-  
-  <script>
-    // Display username in header when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            document.getElementById('usernameDisplay').textContent = user.name;
-        } else {
-            window.location.href = 'signin.html';
-        }
-        
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      { pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
-      'google_translate_element'
-      );
-    }
-
-    });
-
-    // Sign out function
-    document.getElementById('signOutBtn').addEventListener('click', function() {
-        localStorage.removeItem('user');
-        window.location.href = 'signin.html';
-    });
-
-    // Chatbot toggle functionality
+<!-- Chatbot Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Chatbot elements
     const chatbotContainer = document.getElementById('chatbotContainer');
     const chatbotToggle = document.getElementById('chatbotToggle');
     const closeChatbot = document.getElementById('closeChatbot');
-
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    
+    // Get user name from localStorage
+    const profileData = JSON.parse(localStorage.getItem('profileData'));
+    const userName = profileData?.name || 'there';
+    
+    // Update initial greeting
+    const initialGreeting = document.querySelector('.chatbot-messages .bot-message .message-content');
+    initialGreeting.innerHTML = `
+      <p>Hi ${userName}, welcome to Newsletter Hub! I can help you with:</p>
+      <ul class="feature-list">
+        <li>Subscription plans & pricing</li>
+        <li>Newsletter recommendations</li>
+        <li>Account management</li>
+        <li>Content discovery</li>
+        <li>Technical support</li>
+      </ul>
+      <div class="quick-replies">
+        <button class="quick-reply" data-message="Show me subscription plans">View Plans</button>
+        <button class="quick-reply" data-message="Recommend newsletters">Get Recommendations</button>
+        <button class="quick-reply" data-message="How do I contact support?">Support</button>
+      </div>
+    `;
+    
+    // Toggle chatbot visibility
     chatbotToggle.addEventListener('click', function() {
       chatbotContainer.classList.toggle('visible');
       chatbotToggle.style.display = 'none';
     });
-
+    
     closeChatbot.addEventListener('click', function() {
       chatbotContainer.classList.remove('visible');
       chatbotToggle.style.display = 'flex';
     });
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-  
-<script>
-    // Configuration
-    const PAGE_REDIRECTS = {
-      'subscribe': 'subscribe.html',
-      'profile': 'profile.html',
-      'support': 'contact.html',
-      'tech': 'new.html',
-      'business': 'popular.html',
-      'health': 'subscriptions.html'
-    };
-
-    // Enhanced Predefined Responses
-    const PREDEFINED_RESPONSES = {
-      // Pricing and Plans
+    
+    // Predefined responses
+    const responses = {
       'price': `We offer several subscription plans:
         <table class="price-table">
           <tr><th>Plan</th><th>Price</th><th>Features</th><th></th></tr>
@@ -1148,57 +1157,53 @@ header h1 {
             <td><strong>Basic</strong></td>
             <td>$9.99/month</td>
             <td>Access to 5 newsletters, basic features</td>
-            <td><button class="action-button" data-redirect="subscribe">Subscribe</button></td>
+            <td><button class="action-button" onclick="window.location.href='subscribe.html'">Subscribe</button></td>
           </tr>
           <tr>
             <td><strong>Standard</strong></td>
             <td>$19.99/month</td>
             <td>Access to 15 newsletters, advanced features</td>
-            <td><button class="action-button" data-redirect="subscribe">Subscribe</button></td>
+            <td><button class="action-button" onclick="window.location.href='subscribe.html'">Subscribe</button></td>
           </tr>
           <tr>
             <td><strong>Premium</strong></td>
             <td>$29.99/month</td>
             <td>Unlimited access, all premium features</td>
-            <td><button class="action-button" data-redirect="subscribe">Subscribe</button></td>
+            <td><button class="action-button" onclick="window.location.href='subscribe.html'">Subscribe</button></td>
           </tr>
         </table>
         <p>All plans come with a 14-day free trial. <a href="pricing.html" target="_blank">Learn more</a></p>`,
       
-      // Newsletter Recommendations
       'recommend': `Here are our top newsletter recommendations:
-        <div class="newsletter-suggestion" data-redirect="tech">
+        <div class="newsletter-suggestion" onclick="window.location.href='technology.html'">
           <h4>Tech Trends Weekly</h4>
           <p>Latest in technology and innovation - $9.99/month</p>
         </div>
-        <div class="newsletter-suggestion" data-redirect="business">
+        <div class="newsletter-suggestion" onclick="window.location.href='business.html'">
           <h4>Business Insights</h4>
           <p>Market analysis and strategies - $12.99/month</p>
         </div>
-        <div class="newsletter-suggestion" data-redirect="health">
+        <div class="newsletter-suggestion" onclick="window.location.href='health.html'">
           <h4>Health Digest</h4>
           <p>Wellness tips and medical news - $7.99/month</p>
         </div>
         <p>Would you like recommendations for a specific category?`,
 
-      // Account Management
       'account': `For account management:
         <ul class="feature-list">
-          <li><strong>Update profile:</strong> <button class="action-button" data-redirect="profile">Go to Profile</button></li>
+          <li><strong>Update profile:</strong> <button class="action-button" onclick="window.location.href='profile.html'">Go to Profile</button></li>
           <li><strong>Change password:</strong> Available in your account settings</li>
           <li><strong>Payment methods:</strong> Manage in the billing section</li>
         </ul>`,
 
-      // Support
       'support': `Our support options:
         <ul class="feature-list">
           <li><strong>Help Center:</strong> <a href="faq.html" target="_blank">Browse FAQs</a></li>
           <li><strong>Email:</strong> support@newsletterhub.com (response within 24 hours)</li>
           <li><strong>Live Chat:</strong> Available 9AM-5PM EST</li>
-          <li><button class="action-button" data-redirect="support">Contact Form</button></li>
+          <li><button class="action-button" onclick="window.location.href='contact.html'">Contact Form</button></li>
         </ul>`,
 
-      // Features
       'features': `Newsletter Hub features:
         <ul class="feature-list">
           <li><strong>Personalized recommendations</strong> based on your interests</li>
@@ -1207,9 +1212,8 @@ header h1 {
           <li><strong>Reading analytics</strong> to track your habits</li>
           <li><strong>Mobile apps</strong> for iOS and Android</li>
         </ul>
-        <p>Ready to explore? <button class="action-button" data-redirect="subscribe">Start Free Trial</button></p>`,
+        <p>Ready to explore? <button class="action-button" onclick="window.location.href='subscribe.html'">Start Free Trial</button></p>`,
 
-      // Default fallback
       'default': `I can help with:
         <div class="quick-replies">
           <button class="quick-reply" data-message="Show me subscription plans">Pricing Plans</button>
@@ -1217,194 +1221,159 @@ header h1 {
           <button class="quick-reply" data-message="How do I contact support?">Support</button>
         </div>`
     };
-
-    // Initialize chatbot when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Get user data
-      const user = JSON.parse(localStorage.getItem('user'));
-      const username = user ? user.name : 'there';
+    
+    // Send message function
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (!message) return;
       
-      // Get DOM elements
-      const chatbotContainer = document.getElementById('chatbotContainer');
-      const chatbotToggle = document.getElementById('chatbotToggle');
-      const closeChatbot = document.getElementById('closeChatbot');
-      const chatbotMessages = document.getElementById('chatbotMessages');
-      const chatbotInput = document.getElementById('chatbotInput');
-      const sendMessageBtn = document.getElementById('sendMessageBtn');
-      
-      // Toggle chatbot visibility
-      chatbotToggle.addEventListener('click', function() {
-        chatbotContainer.classList.toggle('visible');
-      });
-      
-      closeChatbot.addEventListener('click', function() {
-        chatbotContainer.classList.remove('visible');
-      });
-      
-      // Modify the initial greeting to include username
-      const initialGreeting = document.querySelector('.chatbot-messages .bot-message .message-content');
-      initialGreeting.innerHTML = `
-        <p>Hi ${username}, welcome to Newsletter Hub! I can help you with:</p>
-        <ul class="feature-list">
-          <li>Subscription plans & pricing</li>
-          <li>Newsletter recommendations</li>
-          <li>Account management</li>
-          <li>Content discovery</li>
-          <li>Technical support</li>
-        </ul>
-        <div class="quick-replies">
-          <button class="quick-reply" data-message="Show me subscription plans">View Plans</button>
-          <button class="quick-reply" data-message="Recommend newsletters">Get Recommendations</button>
-          <button class="quick-reply" data-message="How do I contact support?">Support</button>
-        </div>
-      `;
-      
-      // Send message function
-      function sendMessage() {
-        const message = chatbotInput.value.trim();
-        if (!message) return;
-        
-        // Display user message
-        displayMessage(message, 'user');
-        chatbotInput.value = '';
-        
-        // Show typing indicator
-        showTypingIndicator();
-        
-        // Simulate bot response after delay
-        setTimeout(function() {
-          // Hide typing indicator
-          hideTypingIndicator();
-          
-          // Get bot response
-          const response = getBotResponse(message);
-          
-          // Display bot response
-          displayMessage(response, 'bot');
-          
-          // Add event listeners to any new interactive elements
-          addInteractiveElements();
-        }, 1000);
-      }
-      
-      // Display message in chat
-      function displayMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}-message`;
-        messageDiv.innerHTML = text;
-        chatbotMessages.appendChild(messageDiv);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      }
+      // Display user message
+      displayMessage(message, 'user');
+      chatbotInput.value = '';
       
       // Show typing indicator
-      function showTypingIndicator() {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'typing-indicator';
-        typingDiv.innerHTML = `
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-        `;
-        chatbotMessages.appendChild(typingDiv);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      }
+      showTypingIndicator();
       
-      // Hide typing indicator
-      function hideTypingIndicator() {
-        const typingIndicators = document.querySelectorAll('.typing-indicator');
-        typingIndicators.forEach(indicator => indicator.remove());
-      }
-      
-      // Get bot response
-      function getBotResponse(userMessage) {
-        userMessage = userMessage.toLowerCase();
+      // Simulate bot response after delay
+      setTimeout(function() {
+        // Hide typing indicator
+        hideTypingIndicator();
         
-        if (userMessage.includes('price') || userMessage.includes('plan') || userMessage.includes('cost')) {
-          return PREDEFINED_RESPONSES['price'];
-        }
-        else if (userMessage.includes('recommend') || userMessage.includes('suggest')) {
-          return PREDEFINED_RESPONSES['recommend'];
-        }
-        else if (userMessage.includes('account') || userMessage.includes('profile')) {
-          return PREDEFINED_RESPONSES['account'];
-        }
-        else if (userMessage.includes('support') || userMessage.includes('help') || userMessage.includes('contact')) {
-          return PREDEFINED_RESPONSES['support'];
-        }
-        else if (userMessage.includes('feature') || userMessage.includes('what can') || userMessage.includes('offer')) {
-          return PREDEFINED_RESPONSES['features'];
-        }
-        else if (userMessage.includes('hi') || userMessage.includes('hello')) {
-          return `Hello ${username}! Welcome to Newsletter Hub. I can help you with subscription plans, newsletter recommendations, account management, and more. What would you like to know about?`;
-        }
-        else {
-          return PREDEFINED_RESPONSES['default'];
-        }
-      }
-      
-      // Add event listeners to interactive elements
-      function addInteractiveElements() {
-        // Quick reply buttons
-        document.querySelectorAll('.quick-reply').forEach(button => {
-          button.addEventListener('click', function() {
-            const message = this.getAttribute('data-message');
-            chatbotInput.value = message;
-            sendMessage();
-          });
-        });
+        // Get bot response
+        const response = getBotResponse(message);
         
-        // Action buttons with redirects
-        document.querySelectorAll('[data-redirect]').forEach(button => {
-          button.addEventListener('click', function() {
-            const pageKey = this.getAttribute('data-redirect');
-            redirectToPage(pageKey);
-          });
-        });
+        // Display bot response
+        displayMessage(response, 'bot');
         
-        // Newsletter suggestion cards
-        document.querySelectorAll('.newsletter-suggestion').forEach(card => {
-          card.addEventListener('click', function() {
-            const pageKey = this.getAttribute('data-redirect');
-            redirectToPage(pageKey);
-          });
-        });
+        // Add event listeners to any new interactive elements
+        addInteractiveElements();
+      }, 1000);
+    }
+    
+    // Display message in chat
+    function displayMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      
+      if (typeof text === 'string') {
+        messageDiv.innerHTML = text;
+      } else {
+        messageDiv.appendChild(text);
       }
       
-      // Page redirection function
-      function redirectToPage(pageKey) {
-        const pageUrl = PAGE_REDIRECTS[pageKey];
-        if (pageUrl) {
-          window.location.href = pageUrl;
-        } else {
-          console.error('Unknown page key:', pageKey);
-        }
-      }
+      chatbotMessages.appendChild(messageDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Show typing indicator
+    function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator';
+      typingDiv.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatbotMessages.appendChild(typingDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Hide typing indicator
+    function hideTypingIndicator() {
+      const typingIndicators = document.querySelectorAll('.typing-indicator');
+      typingIndicators.forEach(indicator => indicator.remove());
+    }
+    
+    // Get bot response
+    function getBotResponse(userMessage) {
+      userMessage = userMessage.toLowerCase();
       
-      // Send message on button click or Enter key
-      sendMessageBtn.addEventListener('click', sendMessage);
-      chatbotInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
+      if (userMessage.includes('price') || userMessage.includes('plan') || userMessage.includes('cost')) {
+        return responses['price'];
+      }
+      else if (userMessage.includes('recommend') || userMessage.includes('suggest')) {
+        return responses['recommend'];
+      }
+      else if (userMessage.includes('account') || userMessage.includes('profile')) {
+        return responses['account'];
+      }
+      else if (userMessage.includes('support') || userMessage.includes('help') || userMessage.includes('contact')) {
+        return responses['support'];
+      }
+      else if (userMessage.includes('feature') || userMessage.includes('what can') || userMessage.includes('offer')) {
+        return responses['features'];
+      }
+      else if (userMessage.includes('hi') || userMessage.includes('hello')) {
+        return `Hello ${userName}! Welcome to Newsletter Hub. I can help you with subscription plans, newsletter recommendations, account management, and more. What would you like to know about?`;
+      }
+      else {
+        return responses['default'];
+      }
+    }
+    
+    // Add event listeners to interactive elements
+    function addInteractiveElements() {
+      // Quick reply buttons
+      document.querySelectorAll('.quick-reply').forEach(button => {
+        button.addEventListener('click', function() {
+          const message = this.getAttribute('data-message');
+          chatbotInput.value = message;
           sendMessage();
-        }
+        });
       });
       
-      // Initialize interactive elements
-      addInteractiveElements();
+      // Action buttons
+      document.querySelectorAll('.action-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const action = this.textContent.trim().toLowerCase();
+          if (action === 'subscribe') {
+            window.location.href = 'subscribe.html';
+          } else if (action === 'go to profile') {
+            window.location.href = 'profile.html';
+          } else if (action === 'contact form') {
+            window.location.href = 'contact.html';
+          } else if (action === 'start free trial') {
+            window.location.href = 'subscribe.html';
+          }
+        });
+      });
+      
+      // Newsletter suggestion cards
+      document.querySelectorAll('.newsletter-suggestion').forEach(card => {
+        card.addEventListener('click', function() {
+          const title = this.querySelector('h4').textContent;
+          if (title.includes('Tech')) {
+            window.location.href = 'technology.html';
+          } else if (title.includes('Business')) {
+            window.location.href = 'business.html';
+          } else if (title.includes('Health')) {
+            window.location.href = 'health.html';
+          }
+        });
+      });
+    }
+    
+    // Send message on button click or Enter key
+    sendMessageBtn.addEventListener('click', sendMessage);
+    chatbotInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
     });
-    </script>
-    <!-- jQuery (required for Bootstrap 4) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    // Initialize interactive elements
+    addInteractiveElements();
+    
+    // Quick reply buttons in initial message
+    document.querySelectorAll('.quick-reply').forEach(button => {
+      button.addEventListener('click', function() {
+        const message = this.getAttribute('data-message');
+        chatbotInput.value = message;
+        sendMessage();
+      });
+    });
+  });
 </script>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<!-- Popper.js (for dropdowns, tooltips, etc.) -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  </script>
- 
 </body>
-
 </html>

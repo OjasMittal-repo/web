@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>New Newsletters | Newsletter Hub</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Bootstrap for dropdown -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Translate -->
+  <script src="https://cdn.jsdelivr.net/npm/google-translate-api-browser@1.0.0/dist/index.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap');
 
@@ -11,6 +17,17 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+    
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      z-index: 1000 !important;
+      position: absolute !important;
+      top: 100% !important;
+      right: 0 !important;
     }
 
     body {
@@ -58,6 +75,10 @@
       text-shadow: 0 0 10px #4a6bff;
     }
 
+    .newsletter-card {
+      position: relative;
+    }
+
     nav ul {
       display: flex;
       list-style: none;
@@ -103,6 +124,7 @@
       border-radius: 50%;
       border: 2px solid #4a6bff;
       box-shadow: 0 0 10px #4a6bff;
+      object-fit: cover;
     }
 
     main h1 {
@@ -267,8 +289,364 @@
     .social-links a:hover img {
       transform: scale(1.1);
     }
+    
+    /* Dropdown Styles */
+    .dropdown-menu {
+      border: none;
+      background: rgba(33, 33, 33, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      border: 1px solid #4a6bff;
+    }
+    
+    .dropdown-item {
+      color: #f1f1f1;
+      padding: 0.5rem 1.5rem;
+      transition: all 0.2s;
+    }
+    
+    .dropdown-item:hover {
+      background: rgba(74, 107, 255, 0.2);
+      color: #4a6bff;
+    }
+    
+    .dropdown-divider {
+      border-color: rgba(74, 107, 255, 0.3);
+    }
+    
+    /* Chatbot Styles */
+    .chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 350px;
+      max-height: 500px;
+      background: rgba(33, 33, 33, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      overflow: hidden;
+      border: 1px solid #4a6bff;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .chatbot-container.visible {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .chatbot-header {
+      background: linear-gradient(135deg, #4a6bff, #1e3eff);
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chatbot-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    
+    .chatbot-header h3 i {
+      margin-right: 10px;
+    }
+    
+    .close-chatbot {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .close-chatbot:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .chatbot-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .message {
+      margin-bottom: 12px;
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .user-message {
+      background: #4a6bff;
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 5px;
+    }
+    
+    .bot-message {
+      background: rgba(74, 107, 255, 0.2);
+      color: #f1f1f1;
+      margin-right: auto;
+      border-bottom-left-radius: 5px;
+    }
+    
+    .typing-indicator {
+      display: flex;
+      padding: 10px 14px;
+      background: rgba(74, 107, 255, 0.2);
+      border-radius: 14px;
+      margin-right: auto;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #4a6bff;
+      border-radius: 50%;
+      margin: 0 4px;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+    
+    .chatbot-input {
+      display: flex;
+      padding: 12px;
+      border-top: 1px solid rgba(74, 107, 255, 0.3);
+      background: rgba(33, 33, 33, 0.95);
+    }
+    
+    #chatbotInput {
+      flex: 1;
+      padding: 10px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(74, 107, 255, 0.3);
+      border-radius: 20px;
+      outline: none;
+      color: #f1f1f1;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    
+    #chatbotInput:focus {
+      border-color: #4a6bff;
+      box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.2);
+    }
+    
+    #sendMessageBtn {
+      background: #4a6bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    #sendMessageBtn:hover {
+      background: #3a5bef;
+      transform: scale(1.05);
+    }
+    
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #4a6bff, #1e3eff);
+      color: white;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(74, 107, 255, 0.5);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .chatbot-toggle:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 12px 30px rgba(74, 107, 255, 0.7);
+    }
+    
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    
+    .quick-reply {
+      background: rgba(74, 107, 255, 0.2);
+      color: #4a6bff;
+      border: none;
+      border-radius: 16px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .quick-reply:hover {
+      background: rgba(74, 107, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .feature-list {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    
+    .feature-list li {
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      position: relative;
+    }
+    
+    .feature-list li:before {
+      content: '•';
+      color: #4a6bff;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+      position: absolute;
+      left: 0;
+    }
+    
+    /* Google Translate */
+    .goog-te-combo {
+      background-color: rgba(33, 33, 33, 0.95);
+      color: white;
+      border: 1px solid #4a6bff;
+      border-radius: 4px;
+      padding: 5px;
+      margin-left: 10px;
+    }
+    
+    .goog-te-gadget {
+      color: transparent !important;
+    }
+    
+    .goog-te-gadget .goog-te-combo {
+      margin: 4px 0;
+    }
+    
+    /* Profile Editor */
+    .profile-editor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    
+    .profile-editor-content {
+      background: rgba(33, 33, 33, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      border: 1px solid #4a6bff;
+    }
+    
+    .profile-editor h2 {
+      margin-bottom: 20px;
+      color: #4a6bff;
+    }
+    
+    .profile-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 10px auto;
+      display: block;
+      border: 2px solid #4a6bff;
+    }
+    
+    .profile-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+    
+    @media (max-width: 768px) {
+      .chatbot-container {
+        width: 90%;
+        max-width: 350px;
+        right: 5%;
+        bottom: 80px;
+      }
+      
+      .chatbot-toggle {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .header-content {
+        flex-wrap: wrap;
+      }
+      
+      nav ul {
+        margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -279,14 +657,54 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="popular.html" class="active">Popular</a></li>
         <li><a href="subscriptions.html">My Subscriptions</a></li>
+        <li>
+          <!-- Google Translate -->
+          <div id="google_translate_element"></div>
+        </li>
       </ul>
     </nav>
-    <div class="user-profile">
-      <span>Hi, User</span>
-      <img src="images/user.png" alt="User">
+    <div class="d-flex align-items-center">
+      <!-- User Greeting -->
+      <span id="greeting" class="me-3 fw-bold">Hi, Guest</span>
+    
+      <!-- User Profile Image as Dropdown Trigger -->
+      <div class="dropdown">
+        <img id="profileImageDisplay" src="images/user.png" alt="User Profile" class="rounded-circle"
+             style="width: 42px; height: 42px; cursor: pointer;"
+             data-bs-toggle="dropdown" aria-expanded="false">
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#" id="editProfileBtn"><i class="fas fa-edit me-2"></i>Edit Profile</a></li>
+          <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+          <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="signin.html" id="signOutBtn"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>
+
+<!-- Profile Editor Modal -->
+<div class="profile-editor" id="profileEditor">
+  <div class="profile-editor-content">
+    <h2>Edit Profile</h2>
+    <div class="mb-3">
+      <label for="profileName" class="form-label">Name</label>
+      <input type="text" class="form-control" id="profileName" placeholder="Enter your name">
+    </div>
+    <div class="mb-3">
+      <label for="profileImageInput" class="form-label">Profile Picture</label>
+      <input type="file" class="form-control" id="profileImageInput" accept="image/*">
+    </div>
+    <div>
+      <img id="profilePreview" src="images/user.png" class="profile-preview" alt="Profile Preview">
+    </div>
+    <div class="profile-actions">
+      <button class="btn btn-secondary" id="cancelProfileEdit">Cancel</button>
+      <button class="btn btn-primary" id="saveProfile">Save Changes</button>
+    </div>
+  </div>
+</div>
 
 <main class="container">
   <h1>Recently Added Newsletters</h1>
@@ -331,6 +749,41 @@
   </div>
 </main>
 
+<!-- Chatbot Container -->
+<div class="chatbot-container" id="chatbotContainer">
+  <div class="chatbot-header">
+    <h3><i class="fas fa-robot"></i> Newsletter Assistant</h3>
+    <button class="close-chatbot" id="closeChatbot"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chatbot-messages" id="chatbotMessages">
+    <div class="message bot-message">
+      <div class="message-content">
+        <p>Welcome to Newsletter Hub! I can help you with:</p>
+        <ul class="feature-list">
+          <li>Subscription plans & pricing</li>
+          <li>Newsletter recommendations</li>
+          <li>Account management</li>
+          <li>Content discovery</li>
+          <li>Technical support</li>
+        </ul>
+        <div class="quick-replies">
+          <button class="quick-reply" data-message="Show me subscription plans">View Plans</button>
+          <button class="quick-reply" data-message="Recommend newsletters">Get Recommendations</button>
+          <button class="quick-reply" data-message="How do I contact support?">Support</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbotInput" placeholder="Ask about newsletters..." autocomplete="off">
+    <button id="sendMessageBtn"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<button class="chatbot-toggle" id="chatbotToggle">
+  <i class="fas fa-comments"></i>
+</button>
+
 <footer>
   <div class="container">
     <div class="footer-links">
@@ -352,5 +805,250 @@
   </div>
 </footer>
 
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Google Translate
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,ja,ar,hi',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+
+  // Load Google Translate script
+  function loadGoogleTranslate() {
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script);
+  }
+
+  // Profile management
+  document.addEventListener('DOMContentLoaded', function() {
+    loadGoogleTranslate();
+    
+    // Load profile data
+    function loadProfile() {
+      const profileData = JSON.parse(localStorage.getItem("profileData")) || {};
+      if (profileData.name) {
+        document.getElementById("greeting").textContent = `Hi, ${profileData.name}`;
+      }
+      if (profileData.image) {
+        document.getElementById("profileImageDisplay").src = profileData.image;
+      }
+    }
+    
+    // Initialize profile editor
+    const profileEditor = document.getElementById('profileEditor');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const cancelProfileEdit = document.getElementById('cancelProfileEdit');
+    const saveProfile = document.getElementById('saveProfile');
+    const profileNameInput = document.getElementById('profileName');
+    const profileImageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+    
+    editProfileBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const profileData = JSON.parse(localStorage.getItem("profileData")) || {};
+      profileNameInput.value = profileData.name || '';
+      profilePreview.src = profileData.image || 'images/user.png';
+      profileEditor.style.display = 'flex';
+    });
+    
+    cancelProfileEdit.addEventListener('click', function() {
+      profileEditor.style.display = 'none';
+    });
+    
+    profileImageInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          profilePreview.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    
+    saveProfile.addEventListener('click', function() {
+      const profileData = {
+        name: profileNameInput.value.trim(),
+        image: profilePreview.src
+      };
+      
+      localStorage.setItem("profileData", JSON.stringify(profileData));
+      loadProfile();
+      profileEditor.style.display = 'none';
+    });
+    
+    // Initial profile load
+    loadProfile();
+    
+    // Chatbot functionality
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const closeChatbot = document.getElementById('closeChatbot');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    
+    // Get user name
+    const profileData = JSON.parse(localStorage.getItem('profileData')) || {};
+    const userName = profileData.name || 'there';
+    
+    // Predefined responses
+    const responses = {
+      'price': `We offer several subscription plans:
+        <ul class="feature-list">
+          <li><strong>Basic:</strong> $9.99/month - Access to 5 newsletters</li>
+          <li><strong>Standard:</strong> $19.99/month - Access to 15 newsletters</li>
+          <li><strong>Premium:</strong> $29.99/month - Unlimited access</li>
+        </ul>
+        <p>All plans include a 14-day free trial. <a href="subscribe.html" style="color: #4a6bff; text-decoration: underline;">Start your trial now</a></p>`,
+      
+      'recommend': `Based on your interests, I recommend:
+        <div class="newsletter-suggestion" onclick="window.location.href='subscribe.html'">
+          <h4>Tech Trends Weekly</h4>
+          <p>Latest in technology and innovation</p>
+        </div>
+        <div class="newsletter-suggestion" onclick="window.location.href='subscribe.html'">
+          <h4>Business Insights</h4>
+          <p>Market analysis and strategies</p>
+        </div>
+        <p>Would you like recommendations for a specific category?</p>`,
+      
+      'support': `Our support team is available:
+        <ul class="feature-list">
+          <li><strong>Email:</strong> support@newsletterhub.com</li>
+          <li><strong>Live Chat:</strong> 9AM-5PM EST</li>
+          <li><strong>Help Center:</strong> <a href="faq.html" style="color: #4a6bff; text-decoration: underline;">Browse FAQs</a></li>
+        </ul>`,
+      
+      'default': `I can help with:
+        <div class="quick-replies">
+          <button class="quick-reply" data-message="Show me subscription plans">Pricing Plans</button>
+          <button class="quick-reply" data-message="Recommend newsletters">Get Recommendations</button>
+          <button class="quick-reply" data-message="How do I contact support?">Support</button>
+        </div>`
+    };
+    
+    // Toggle chatbot
+    chatbotToggle.addEventListener('click', function() {
+      chatbotContainer.classList.toggle('visible');
+      chatbotToggle.style.display = 'none';
+    });
+    
+    closeChatbot.addEventListener('click', function() {
+      chatbotContainer.classList.remove('visible');
+      chatbotToggle.style.display = 'flex';
+    });
+    
+    // Send message
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (!message) return;
+      
+      displayMessage(message, 'user');
+      chatbotInput.value = '';
+      
+      showTypingIndicator();
+      
+      setTimeout(function() {
+        hideTypingIndicator();
+        const response = getBotResponse(message);
+        displayMessage(response, 'bot');
+        addInteractiveElements();
+      }, 1000);
+    }
+    
+    // Display message
+    function displayMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      messageDiv.innerHTML = text;
+      chatbotMessages.appendChild(messageDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Typing indicator
+    function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator';
+      typingDiv.innerHTML = `
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      `;
+      chatbotMessages.appendChild(typingDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    function hideTypingIndicator() {
+      const typingIndicators = document.querySelectorAll('.typing-indicator');
+      typingIndicators.forEach(indicator => indicator.remove());
+    }
+    
+    // Get bot response
+    function getBotResponse(userMessage) {
+      userMessage = userMessage.toLowerCase();
+      
+      if (userMessage.includes('price') || userMessage.includes('plan') || userMessage.includes('cost')) {
+        return responses['price'];
+      }
+      else if (userMessage.includes('recommend') || userMessage.includes('suggest')) {
+        return responses['recommend'];
+      }
+      else if (userMessage.includes('support') || userMessage.includes('help') || userMessage.includes('contact')) {
+        return responses['support'];
+      }
+      else if (userMessage.includes('hi') || userMessage.includes('hello')) {
+        return `Hello ${userName}! How can I help you today?`;
+      }
+      else {
+        return responses['default'];
+      }
+    }
+    
+    // Add event listeners to interactive elements
+    function addInteractiveElements() {
+      document.querySelectorAll('.quick-reply').forEach(button => {
+        button.addEventListener('click', function() {
+          const message = this.getAttribute('data-message');
+          chatbotInput.value = message;
+          sendMessage();
+        });
+      });
+      
+      document.querySelectorAll('.newsletter-suggestion').forEach(card => {
+        card.addEventListener('click', function() {
+          window.location.href = 'subscribe.html';
+        });
+      });
+    }
+    
+    // Send message on button click or Enter key
+    sendMessageBtn.addEventListener('click', sendMessage);
+    chatbotInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+    
+    // Initialize interactive elements
+    addInteractiveElements();
+    
+    // Quick reply buttons in initial message
+    document.querySelectorAll('.quick-reply').forEach(button => {
+      button.addEventListener('click', function() {
+        const message = this.getAttribute('data-message');
+        chatbotInput.value = message;
+        sendMessage();
+      });
+    });
+  });
+</script>
 </body>
 </html>
