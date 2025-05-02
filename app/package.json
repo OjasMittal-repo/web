@@ -4,9 +4,10 @@
   "main": "authConfig.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo 'No build step defined' && exit 0", 
+ 
     "build:azure": "echo 'No Azure-specific build step' && exit 0", 
-    "start": "node authConfig.js" 
+    "start": "node authConfig.js" ,    
+  "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -19,3 +20,4 @@
     "multer": "^1.4.5-lts.2"
   }
 }
+
