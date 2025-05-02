@@ -125,14 +125,6 @@
         errorMessage.textContent = password !== confirmPassword ? "Passwords do not match!" : "Please fill all fields correctly.";
         errorMessage.style.display = 'block';
       }
-      const user = {
-  name: document.getElementById('name').value.trim(),
-  email: document.getElementById('email').value.trim(),
-  password: document.getElementById('password').value
-};
-
-localStorage.setItem('user', JSON.stringify(user));
-
     });
   </script>
 </body>
