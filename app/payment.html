@@ -248,18 +248,24 @@
         <ul class="features">
           ${plan.features.map(f => `<li>${f}</li>`).join('')}
         </ul>
-        <button onclick="selectPlan('${newsletter}', '${level}')">Choose</button>
+        <button onclick="redirectToCheckout('${newsletter}', '${level}')">Choose</button>
       `;
       container.appendChild(div);
     }
   }
 
-  function selectPlan(newsletterKey, level) {
-    const newsletter = pricingData[newsletterKey];
-    const plan = newsletter.plans[level];
-    const box = document.getElementById('confirmationBox');
-    box.innerHTML = `✅ You selected <strong>${newsletter.name}</strong> - <em>${level.toUpperCase()}</em> Plan<br>Price: ₹${plan.priceINR} / $${plan.priceUSD}`;
-    box.style.display = 'block';
+  function redirectToCheckout(newsletterKey, level) {
+    // Store the selected plan in localStorage to access on checkout page
+    const selection = {
+      newsletter: pricingData[newsletterKey].name,
+      plan: level,
+      priceINR: pricingData[newsletterKey].plans[level].priceINR,
+      priceUSD: pricingData[newsletterKey].plans[level].priceUSD
+    };
+    localStorage.setItem('selectedPlan', JSON.stringify(selection));
+    
+    // Redirect to checkout page
+    window.location.href = 'checkout.html';
   }
 
   // Load user data from localStorage
@@ -274,6 +280,19 @@
 
   updatePlans('neural');
 </script>
-
+<!-- In your plan selection page, modify the redirectToCheckout function like this: -->
+<script>
+  function redirectToCheckout(newsletterKey, level) {
+    const selection = {
+      newsletter: pricingData[newsletterKey].name,
+      plan: level,
+      priceINR: pricingData[newsletterKey].plans[level].priceINR,
+      priceUSD: pricingData[newsletterKey].plans[level].priceUSD,
+      features: pricingData[newsletterKey].plans[level].features
+    };
+    localStorage.setItem('selectedPlan', JSON.stringify(selection));
+    window.location.href = 'checkout.html';
+  }
+</script>
 </body>
 </html>
