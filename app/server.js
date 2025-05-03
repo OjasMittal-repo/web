@@ -1,81 +1,46 @@
 const express = require('express');
+const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
-const fs = require('fs');
+const path = require('path');
+
 const app = express();
-const port = 3000;
-
-// Middleware to parse JSON and form data
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static('public')); // To serve static files (like images)
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/create-account', (req, res) => {
-  const { name, email, password, profilePic } = req.body;
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ojasmittal08@gmail.com',
+    pass: 'khdr teux jiqi lxji'
+  }
+});
 
-  // Read existing accounts
-  fs.readFile('accounts.json', (err, data) => {
-    if (err) {
-      res.status(500).send('Error reading data.');
-      return;
+app.post('/api/forgot-password', (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ success: false, message: 'Email is required.' });
+  }
+
+  const resetLink = `http://localhost:3000/reset-password?token=dummy-token`;
+
+  const mailOptions = {
+    from: 'ojasmittal08@gmail.com',
+    to: email,
+    subject: 'Reset Your Password',
+    text: `Click here to reset your password: ${resetLink}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      return res.status(500).json({ success: false, message: 'Failed to send reset link. Please try again.' });
     }
 
-    let accounts = JSON.parse(data);
-    
-    // Add the new account
-    accounts.push({ name, email, password, profilePic });
-    
-    // Write back to the file
-    fs.writeFile('accounts.json', JSON.stringify(accounts), (err) => {
-      if (err) {
-        res.status(500).send('Error saving account data.');
-        return;
-      }
-      res.status(200).send('Account created successfully!');
-    });
+    res.json({ success: true, message: 'Reset link sent successfully.' });
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
-const multer = require('multer');
-
-// Set up storage engine
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-// Modify the POST route to handle image uploads
-app.post('/create-account', upload.single('profilePic'), (req, res) => {
-  const { name, email, password } = req.body;
-  const profilePic = req.file ? req.file.filename : '';
-
-  // Read existing accounts
-  fs.readFile('accounts.json', (err, data) => {
-    if (err) {
-      res.status(500).send('Error reading data.');
-      return;
-    }
-
-    let accounts = JSON.parse(data);
-
-    // Add the new account
-    accounts.push({ name, email, password, profilePic });
-
-    // Write back to the file
-    fs.writeFile('accounts.json', JSON.stringify(accounts), (err) => {
-      if (err) {
-        res.status(500).send('Error saving account data.');
-        return;
-      }
-      res.status(200).send('Account created successfully!');
-    });
-  });
+app.listen(3000, () => {
+  console.log('Server is running at http://localhost:3000');
 });

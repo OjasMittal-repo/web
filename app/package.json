@@ -4,21 +4,21 @@
   "main": "authConfig.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
- 
-    "build:azure": "echo 'No Azure-specific build step' && exit 0", 
-    "start": "node authConfig.js" ,    
-  "build": "echo 'No build step' && exit 0",
+    "build:azure": "echo 'No Azure-specific build step' && exit 0",
+    "start": "node authConfig.js",
+    "build": "echo 'No build step' && exit 0",
     "dev": "nodemon authConfig.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
-    "multer": "^1.4.5-lts.2"
-  }
+    "multer": "^1.4.5-lts.2",
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {},
+  "description": ""
 }
-
