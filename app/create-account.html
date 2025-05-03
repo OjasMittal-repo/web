@@ -102,30 +102,42 @@
   <script>
     document.getElementById('createAccountForm').addEventListener('submit', function(event) {
       event.preventDefault();
-
+  
       const username = document.getElementById('username').value.trim();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirmPassword').value;
       const errorMessage = document.getElementById('errorMessage');
-
-      if (username && email && password && confirmPassword && password === confirmPassword) {
-        const userData = {
-          username: username,
-          email: email,
-          password: password
-        };
-
-        // Save to localStorage
-        localStorage.setItem('user', JSON.stringify(userData));
-        errorMessage.style.display = 'none';
-        alert('Account Created Successfully!');
-        window.location.href = 'signin.html';
-      } else {
-        errorMessage.textContent = password !== confirmPassword ? "Passwords do not match!" : "Please fill all fields correctly.";
+  
+      if (!username || !email || !password || !confirmPassword) {
+        errorMessage.textContent = "Please fill all fields correctly.";
         errorMessage.style.display = 'block';
+        return;
       }
+  
+      if (password !== confirmPassword) {
+        errorMessage.textContent = "Passwords do not match!";
+        errorMessage.style.display = 'block';
+        return;
+      }
+  
+      const accounts = JSON.parse(localStorage.getItem('accounts') || '[]');
+      const emailExists = accounts.some(account => account.email === email);
+  
+      if (emailExists) {
+        errorMessage.textContent = "An account with this email already exists.";
+        errorMessage.style.display = 'block';
+        return;
+      }
+  
+      accounts.push({ username, email, password });
+      localStorage.setItem('accounts', JSON.stringify(accounts));
+  
+      errorMessage.style.display = 'none';
+      alert('Account created successfully!');
+      window.location.href = 'signin.html';
     });
   </script>
+  
 </body>
 </html>
