@@ -163,6 +163,13 @@
       font-size: 1.2em;
       color: #00ffcc;
     }
+
+    .selected-newsletter {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      color: #ffd369;
+    }
   </style>
 </head>
 <body>
@@ -187,12 +194,38 @@
 <div class="container">
   <h1>Choose Your Plan</h1>
 
+  <div class="selected-newsletter" id="selectedNewsletterDisplay"></div>
+
   <div class="newsletter-select">
     <label for="newsletterSelect">📰 Choose Newsletter:</label>
     <select id="newsletterSelect">
+      <option value="design">🎨 Design Digest</option>
+      <option value="tech">💻 Tech Trends</option>
+      <option value="health">🏥 Health Tips</option>
+      <option value="business">💼 Business Insights</option>
+      <option value="cooking">🍳 Cooking Corner</option>
+      <option value="travel">✈️ Travel Stories</option>
+      <option value="ai">🤖 AI Breakthroughs</option>
+      <option value="xr">🕶️ Future of XR</option>
+      <option value="cloud">☁️ Cloud Computing</option>
+      <option value="digital">📱 Trends in Digital Markets</option>
+      <option value="investment">💰 Investment Strategies in 2025</option>
+      <option value="remote">🏠 Remote Work Revolution</option>
+      <option value="nutrition">🥗 Nutrition Tips</option>
+      <option value="mental">🧠 Mental Wellness</option>
+      <option value="fitness">🏋️ Fitness and Movement</option>
+      <option value="quantum">⚛️ Quantum Horizon</option>
       <option value="neural">🧠 Neural Frontiers</option>
       <option value="cosmic">🌌 Cosmic Discoveries</option>
       <option value="genome">🧬 Genome Revolution</option>
+      <option value="aifrontiers">🚀 AI Frontiers</option>
+      <option value="physics">🔭 Physics Unbound</option>
+      <option value="art">🎨 The New Wave of Abstract Expressionism</option>
+      <option value="streetart">🏙️ Urban Canvases: The Politics of Street Art</option>
+      <option value="ecosculpture">🌿 Eco-Sculpture: Art Meets Sustainability</option>
+      <option value="nft">🖼️ The NFT Revolution in Contemporary Art</option>
+      <option value="artmarkets">📈 Emerging Art Markets to Watch in 2025</option>
+      <option value="artrestoration">🖌️ Saving Masterpieces: New Techniques in Art Restoration</option>
     </select>
   </div>
 
@@ -203,6 +236,134 @@
 
 <script>
   const pricingData = {
+    design: {
+      name: "Design Digest",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly design inspiration', 'Basic tutorials'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Exclusive interviews', 'Design resources'] },
+        premium: { priceINR: 599, priceUSD: 7.99, features: ['All design trends', 'No ads', 'Premium templates'] }
+      }
+    },
+    tech: {
+      name: "Tech Trends",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly tech news', 'Basic updates'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['In-depth analysis', 'Tech reviews'] },
+        premium: { priceINR: 699, priceUSD: 9.99, features: ['All tech insights', 'No ads', 'Early access'] }
+      }
+    },
+    health: {
+      name: "Health Tips",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly health tips', 'Basic wellness advice'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Expert Q&A', 'Health guides'] },
+        premium: { priceINR: 549, priceUSD: 7.49, features: ['Personalized advice', 'No ads', 'Exclusive content'] }
+      }
+    },
+    business: {
+      name: "Business Insights",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly business news', 'Market updates'] },
+        standard: { priceINR: 349, priceUSD: 4.99, features: ['In-depth analysis', 'Case studies'] },
+        premium: { priceINR: 799, priceUSD: 10.99, features: ['All business insights', 'No ads', 'Investment tips'] }
+      }
+    },
+    cooking: {
+      name: "Cooking Corner",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly recipes', 'Basic cooking tips'] },
+        standard: { priceINR: 199, priceUSD: 2.99, features: ['Exclusive recipes', 'Cooking techniques'] },
+        premium: { priceINR: 449, priceUSD: 5.99, features: ['All recipes', 'No ads', 'Video tutorials'] }
+      }
+    },
+    travel: {
+      name: "Travel Stories",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly travel stories', 'Basic tips'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['Destination guides', 'Travel hacks'] },
+        premium: { priceINR: 649, priceUSD: 8.99, features: ['All travel content', 'No ads', 'Exclusive deals'] }
+      }
+    },
+    ai: {
+      name: "AI Breakthroughs",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly AI news', 'Basic updates'] },
+        standard: { priceINR: 349, priceUSD: 4.99, features: ['In-depth analysis', 'Tech reviews'] },
+        premium: { priceINR: 799, priceUSD: 10.99, features: ['All AI insights', 'No ads', 'Early access'] }
+      }
+    },
+    xr: {
+      name: "Future of XR",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['XR industry news', 'Basic updates'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['XR development tips', 'Case studies'] },
+        premium: { priceINR: 699, priceUSD: 9.99, features: ['All XR content', 'No ads', 'Exclusive interviews'] }
+      }
+    },
+    cloud: {
+      name: "Cloud Computing",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Cloud news', 'Basic updates'] },
+        standard: { priceINR: 349, priceUSD: 4.99, features: ['Tech deep dives', 'Tutorials'] },
+        premium: { priceINR: 749, priceUSD: 9.99, features: ['All cloud content', 'No ads', 'Exclusive guides'] }
+      }
+    },
+    digital: {
+      name: "Trends in Digital Markets",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Market updates', 'Basic trends'] },
+        standard: { priceINR: 399, priceUSD: 5.49, features: ['In-depth analysis', 'Case studies'] },
+        premium: { priceINR: 849, priceUSD: 11.99, features: ['All digital trends', 'No ads', 'Exclusive reports'] }
+      }
+    },
+    investment: {
+      name: "Investment Strategies in 2025",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly market updates', 'Basic tips'] },
+        standard: { priceINR: 499, priceUSD: 6.99, features: ['Investment strategies', 'Portfolio advice'] },
+        premium: { priceINR: 999, priceUSD: 13.99, features: ['All investment content', 'No ads', 'Personalized advice'] }
+      }
+    },
+    remote: {
+      name: "Remote Work Revolution",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Work from home tips', 'Basic advice'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Productivity hacks', 'Tool reviews'] },
+        premium: { priceINR: 549, priceUSD: 7.49, features: ['All remote work content', 'No ads', 'Exclusive guides'] }
+      }
+    },
+    nutrition: {
+      name: "Nutrition Tips",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly nutrition tips', 'Basic advice'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Meal plans', 'Diet guides'] },
+        premium: { priceINR: 549, priceUSD: 7.49, features: ['All nutrition content', 'No ads', 'Personalized advice'] }
+      }
+    },
+    mental: {
+      name: "Mental Wellness",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly wellness tips', 'Basic advice'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Mindfulness exercises', 'Expert Q&A'] },
+        premium: { priceINR: 549, priceUSD: 7.49, features: ['All wellness content', 'No ads', 'Guided sessions'] }
+      }
+    },
+    fitness: {
+      name: "Fitness and Movement",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Weekly workout tips', 'Basic routines'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['Exercise plans', 'Video tutorials'] },
+        premium: { priceINR: 599, priceUSD: 7.99, features: ['All fitness content', 'No ads', 'Personalized plans'] }
+      }
+    },
+    quantum: {
+      name: "Quantum Horizon",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Quantum computing news', 'Basic updates'] },
+        standard: { priceINR: 349, priceUSD: 4.99, features: ['In-depth articles', 'Research summaries'] },
+        premium: { priceINR: 799, priceUSD: 10.99, features: ['All quantum content', 'No ads', 'Exclusive interviews'] }
+      }
+    },
     neural: {
       name: "Neural Frontiers",
       plans: {
@@ -229,14 +390,84 @@
         premium: { priceINR: 749, priceUSD: 9.99, features: ['Full access + Interviews', 'Early access'] },
         pro: { priceINR: 1199, priceUSD: 14.99, features: ['Custom analysis', 'Member dashboard'] }
       }
+    },
+    aifrontiers: {
+      name: "AI Frontiers",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['AI research updates', 'Basic access'] },
+        standard: { priceINR: 349, priceUSD: 4.99, features: ['Technical papers', 'Case studies'] },
+        premium: { priceINR: 799, priceUSD: 10.99, features: ['All AI research', 'No ads', 'Exclusive content'] }
+      }
+    },
+    physics: {
+      name: "Physics Unbound",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Physics news', 'Basic updates'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['In-depth articles', 'Research summaries'] },
+        premium: { priceINR: 699, priceUSD: 9.99, features: ['All physics content', 'No ads', 'Exclusive interviews'] }
+      }
+    },
+    art: {
+      name: "The New Wave of Abstract Expressionism",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Art movement updates', 'Basic content'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['Artist interviews', 'Gallery reviews'] },
+        premium: { priceINR: 599, priceUSD: 7.99, features: ['All art content', 'No ads', 'Exclusive exhibits'] }
+      }
+    },
+    streetart: {
+      name: "Urban Canvases: The Politics of Street Art",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Street art news', 'Basic updates'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Artist profiles', 'City guides'] },
+        premium: { priceINR: 549, priceUSD: 7.49, features: ['All street art content', 'No ads', 'Exclusive tours'] }
+      }
+    },
+    ecosculpture: {
+      name: "Eco-Sculpture: Art Meets Sustainability",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Eco-art updates', 'Basic content'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['Artist interviews', 'Technique guides'] },
+        premium: { priceINR: 549, priceUSD: 7.49, features: ['All eco-art content', 'No ads', 'Workshop access'] }
+      }
+    },
+    nft: {
+      name: "The NFT Revolution in Contemporary Art",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['NFT art news', 'Basic updates'] },
+        standard: { priceINR: 349, priceUSD: 4.99, features: ['Artist profiles', 'Market analysis'] },
+        premium: { priceINR: 749, priceUSD: 9.99, features: ['All NFT content', 'No ads', 'Exclusive drops'] }
+      }
+    },
+    artmarkets: {
+      name: "Emerging Art Markets to Watch in 2025",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Art market news', 'Basic updates'] },
+        standard: { priceINR: 399, priceUSD: 5.49, features: ['Market analysis', 'Investment tips'] },
+        premium: { priceINR: 849, priceUSD: 11.99, features: ['All art market content', 'No ads', 'Exclusive reports'] }
+      }
+    },
+    artrestoration: {
+      name: "Saving Masterpieces: New Techniques in Art Restoration",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Restoration news', 'Basic updates'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['Technique guides', 'Case studies'] },
+        premium: { priceINR: 649, priceUSD: 8.99, features: ['All restoration content', 'No ads', 'Behind-the-scenes'] }
+      }
     }
   };
 
   function updatePlans(newsletter) {
     const container = document.getElementById('planContainer');
-    const { plans } = pricingData[newsletter];
+    const { name, plans } = pricingData[newsletter];
     container.innerHTML = '';
     document.getElementById("confirmationBox").style.display = 'none';
+    
+    // Update the selected newsletter display
+    document.getElementById('selectedNewsletterDisplay').textContent = `Selected: ${name}`;
+    
+    // Set the dropdown to show the current newsletter
+    document.getElementById('newsletterSelect').value = newsletter;
 
     for (let level in plans) {
       const plan = plans[level];
@@ -258,13 +489,13 @@
     // Store the selected plan in localStorage to access on checkout page
     const selection = {
       newsletter: pricingData[newsletterKey].name,
+      newsletterKey: newsletterKey,
       plan: level,
       priceINR: pricingData[newsletterKey].plans[level].priceINR,
-      priceUSD: pricingData[newsletterKey].plans[level].priceUSD
+      priceUSD: pricingData[newsletterKey].plans[level].priceUSD,
+      features: pricingData[newsletterKey].plans[level].features
     };
     localStorage.setItem('selectedPlan', JSON.stringify(selection));
-    
-    // Redirect to checkout page
     window.location.href = 'checkout.html';
   }
 
@@ -274,25 +505,17 @@
   document.getElementById('userName').textContent = 'Hi, ' + storedUser;
   document.getElementById('userImg').src = storedImage;
 
+  // Check if we're coming back from checkout with a selected newsletter
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedNewsletter = urlParams.get('newsletter');
+  
+  // Initialize with either the URL parameter or default to 'design'
+  const initialNewsletter = selectedNewsletter || 'design';
+  updatePlans(initialNewsletter);
+
   document.getElementById('newsletterSelect').addEventListener('change', function () {
     updatePlans(this.value);
   });
-
-  updatePlans('neural');
-</script>
-<!-- In your plan selection page, modify the redirectToCheckout function like this: -->
-<script>
-  function redirectToCheckout(newsletterKey, level) {
-    const selection = {
-      newsletter: pricingData[newsletterKey].name,
-      plan: level,
-      priceINR: pricingData[newsletterKey].plans[level].priceINR,
-      priceUSD: pricingData[newsletterKey].plans[level].priceUSD,
-      features: pricingData[newsletterKey].plans[level].features
-    };
-    localStorage.setItem('selectedPlan', JSON.stringify(selection));
-    window.location.href = 'checkout.html';
-  }
 </script>
 </body>
 </html>

@@ -913,7 +913,7 @@
                 <p>Weekly digest of the latest in technology and innovation. Stay ahead with cutting-edge insights from industry leaders.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge badge-primary">Technology</span>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <a href="payment.html" class="subscribe-btn">Subscribe</a>
                 </div>
             </div>
         </div>
@@ -927,7 +927,7 @@
                 <p>Monthly collection of design inspiration and resources. Perfect for creatives looking for fresh perspectives.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge badge-primary">Design</span>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <a href="payment.html" class="subscribe-btn">Subscribe</a>
                 </div>
             </div>
         </div>
@@ -941,7 +941,7 @@
                 <p>Daily health and wellness advice from experts. Simple, actionable tips for a healthier lifestyle.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge badge-primary">Health</span>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <a href="payment.html" class="subscribe-btn">Subscribe</a>
                 </div>
             </div>
         </div>
@@ -955,7 +955,7 @@
                 <p>Bi-weekly analysis of market trends and strategies. Essential reading for entrepreneurs and executives.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge badge-primary">Business</span>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <a href="payment.html" class="subscribe-btn">Subscribe</a>
                 </div>
             </div>
         </div>
@@ -969,8 +969,8 @@
                 <p>Weekly recipes and cooking techniques from top chefs. From quick meals to gourmet experiences.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge badge-primary">Food</span>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
-                </div>
+                          <a href="payment.html" class="subscribe-btn">Subscribe</a>
+                      </div>
             </div>
         </div>
         
@@ -983,7 +983,7 @@
                 <p>Monthly travel guides and destination highlights. Discover hidden gems and travel like a local.</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="badge badge-primary">Travel</span>
-                    <a href="subscribe.html" class="subscribe-btn">Subscribe</a>
+                    <a href="payment.html" class="subscribe-btn">Subscribe</a>
                 </div>
             </div>
         </div>
@@ -1067,6 +1067,41 @@
     }
   </script>
   <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+  const selectedNewsletter = localStorage.getItem("selectedNewsletter");
+  if (selectedNewsletter) {
+    const newsletterNames = {
+      design: "Design Digest",
+      tech: "Tech Trends",
+      health: "Health Tips",
+      business: "Business Insights",
+      cooking: "Cooking Corner",
+      travel: "Travel Stories",
+      ai: "AI Breakthroughs",
+      xr: "Future of XR",
+      cloud: "Cloud Computing",
+      digital: "Trends in Digital Markets",
+      investment: "Investment Strategies in 2025",
+      remote: "Remote Work Revolution",
+      nutrition: "Nutrition Tips",
+      mental: "Mental Wellness",
+      fitness: "Fitness and Movement",
+      quantum: "Quantum Horizon",
+      neural: "Neural Frontiers",
+      cosmic: "Cosmic Discoveries",
+      genome: "Genome Revolution",
+      aifrontiers: "AI Frontiers",
+      physics: "Physics Unbound"
+    };
+
+    const topicName = newsletterNames[selectedNewsletter] || "Unknown Topic";
+    document.getElementById('selectedTopic').textContent = `You have subscribed to: ${topicName}`;
+    document.getElementById('confirmationBox').style.display = 'block';
+  }
+});
+
+  </script>
+  <script>
         function loadProfile() {
       const profileData = JSON.parse(localStorage.getItem("profileData")) || {};
       if (profileData.name) {
@@ -1106,6 +1141,11 @@
 
 <!-- Chatbot Script -->
 <script>
+  document.getElementById("newsletterSelect").addEventListener("change", function() {
+  const selectedNewsletter = this.value; // Get the selected value
+  localStorage.setItem("selectedNewsletter", selectedNewsletter); // Store in localStorage
+});
+
   document.addEventListener('DOMContentLoaded', function() {
     // Chatbot elements
     const chatbotContainer = document.getElementById('chatbotContainer');

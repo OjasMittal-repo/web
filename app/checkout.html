@@ -1,66 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Payment - Newsletter Hub</title>
+  <title>Confirm Your Plan - Newsletter Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      background: linear-gradient(135deg, #1c1c2e, #302b63, #0f0c29);
       color: white;
       min-height: 100vh;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
       background-color: #111;
-      padding: 20px 0;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
+      padding: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
     .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
     }
 
     .logo {
-      color: #ff5c8e;
       font-size: 1.8em;
+      color: #ff5c8e;
       font-weight: 700;
     }
 
     nav ul {
       display: flex;
+      gap: 20px;
       list-style: none;
     }
 
-    nav ul li {
-      margin-left: 20px;
-    }
-
     nav ul li a {
-      color: white;
       text-decoration: none;
+      color: white;
       font-size: 1.1em;
-      transition: color 0.3s;
     }
 
     nav ul li a:hover,
@@ -72,8 +57,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      color: white;
-      font-size: 1em;
     }
 
     .user-profile img {
@@ -82,375 +65,130 @@
       border-radius: 50%;
     }
 
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(#1f1c2c, #928dab);
-      overflow: hidden;
-    }
-
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      animation: float 20s infinite ease-in-out;
-    }
-
-    .circle:nth-child(1) {
-      width: 300px;
-      height: 300px;
-      top: 10%;
-      left: 10%;
-    }
-
-    .circle:nth-child(2) {
-      width: 200px;
-      height: 200px;
-      top: 40%;
-      left: 70%;
-    }
-
-    .circle:nth-child(3) {
-      width: 250px;
-      height: 250px;
-      top: 80%;
-      left: 30%;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-50px) scale(1.05);
-      }
-    }
-
     .container {
-      max-width: 1200px;
-      margin: 140px auto 40px;
-      padding: 0 20px;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
     }
 
     h1 {
       text-align: center;
-      font-size: 2.5em;
-      margin-bottom: 30px;
       color: #ff5c8e;
+      margin-bottom: 30px;
     }
 
-    /* Payment Section Styles */
-    .payment-container {
-      display: flex;
-      gap: 30px;
-      margin-top: 40px;
+    .details {
+      text-align: center;
     }
 
-    .order-summary {
-      flex: 1;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+    .details h2 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
     }
 
-    .payment-form {
-      flex: 1;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
-    }
-
-    .summary-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .summary-total {
-      font-size: 1.2em;
-      font-weight: 500;
-      margin-top: 20px;
-    }
-
-    .form-group {
+    .price {
+      font-size: 1.3em;
+      color: #ffd369;
       margin-bottom: 20px;
     }
 
-    .form-group label {
+    .features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
+    }
+
+    .features li {
+      padding: 5px 0;
+    }
+
+    .confirm-btn {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px 15px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      color: white;
+      margin: 0 auto;
+      padding: 12px 30px;
       font-size: 1em;
-      transition: all 0.3s;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: #ff5c8e;
-      box-shadow: 0 0 0 2px rgba(255, 92, 142, 0.3);
-    }
-
-    .card-element {
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 12px 15px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .payment-btn {
-      width: 100%;
-      padding: 15px;
       background-color: #ff5c8e;
-      color: white;
       border: none;
       border-radius: 10px;
-      font-size: 1.1em;
-      font-weight: 500;
+      color: white;
       cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 20px;
+      transition: background 0.3s ease;
     }
 
-    .payment-btn:hover {
+    .confirm-btn:hover {
       background-color: #ff2c6f;
     }
 
-    .payment-methods {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .payment-method {
-      flex: 1;
+    footer {
+      margin-top: auto;
       text-align: center;
-      padding: 15px;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .payment-method.active {
-      background-color: rgba(255, 92, 142, 0.2);
-      border: 1px solid #ff5c8e;
-    }
-
-    .payment-method img {
-      height: 30px;
-      width: auto;
-    }
-
-    .secure-payment {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 20px;
-      color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      color: #ccc;
       font-size: 0.9em;
-    }
-
-    .secure-payment img {
-      margin-right: 10px;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .payment-container {
-        flex-direction: column;
-      }
-      
-      .header-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      nav ul {
-        margin: 15px 0;
-      }
     }
   </style>
 </head>
 <body>
-  <div class="animated-bg">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-  </div>
 
-  <header>
-    <div class="header-content">
-      <div class="logo">Newsletter Hub</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="popular.html">Popular</a></li>
-          <li><a href="subscriptions.html">My Subscriptions</a></li>
-        </ul>
-      </nav>
-      <div class="user-profile">
-        <span>Hi, User</span>
-        <img src="images/user.png" alt="User">
-      </div>
-    </div>
-  </header>
-
-  <div class="container">
-    <h1>Complete Your Subscription</h1>
-    
-    <div class="payment-container">
-      <div class="order-summary">
-        <h2>Order Summary</h2>
-        <div class="summary-item">
-          <span>Premium Membership</span>
-          <span>₹799/month</span>
-        </div>
-        <div class="summary-item">
-          <span>Newsletter Access</span>
-          <span>Unlimited</span>
-        </div>
-        <div class="summary-item">
-          <span>Ad-Free Experience</span>
-          <span>Included</span>
-        </div>
-        <div class="summary-item">
-          <span>Exclusive Content</span>
-          <span>Included</span>
-        </div>
-        <div class="summary-total">
-          <span>Total Due Today</span>
-          <span>₹799</span>
-        </div>
-      </div>
-      
-      <div class="payment-form">
-        <h2>Payment Details</h2>
-        
-        <div class="payment-methods">
-          <div class="payment-method active">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" alt="Visa">
-          </div>
-          <div class="payment-method">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" alt="Mastercard">
-          </div>
-          <div class="payment-method">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" alt="PayPal">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="cardName">Name on Card</label>
-          <input type="text" id="cardName" class="form-control" placeholder="John Smith">
-        </div>
-        
-        <div class="form-group">
-          <label for="cardNumber">Card Number</label>
-          <input type="text" id="cardNumber" class="form-control" placeholder="4242 4242 4242 4242">
-        </div>
-        
-        <div class="form-row" style="display: flex; gap: 15px;">
-          <div class="form-group" style="flex: 1;">
-            <label for="expiryDate">Expiry Date</label>
-            <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY">
-          </div>
-          <div class="form-group" style="flex: 1;">
-            <label for="cvv">CVV</label>
-            <input type="text" id="cvv" class="form-control" placeholder="123">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="coupon">Coupon Code (Optional)</label>
-          <input type="text" id="coupon" class="form-control" placeholder="SUMMER2023">
-        </div>
-        
-        <button class="payment-btn">Pay ₹799</button>
-        
-        <div class="secure-payment">
-          <img src="https://cdn-icons-png.flaticon.com/512/2889/2889676.png" width="20" alt="Secure">
-          <span>Secure payment processed by Stripe</span>
-        </div>
-      </div>
+<header>
+  <div class="header-content">
+    <div class="logo">Newsletter Hub</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="subscriptions.html" class="active">My Subscriptions</a></li>
+      </ul>
+    </nav>
+    <div class="user-profile">
+      <span id="userName">Hi, User</span>
+      <img id="userImg" src="images/user.png" alt="User">
     </div>
   </div>
+</header>
 
-  <script>
-    // Simple payment method selection
-    document.querySelectorAll('.payment-method').forEach(method => {
-      method.addEventListener('click', () => {
-        document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-        method.classList.add('active');
-      });
-    });
-    
-    // Basic form validation
-    document.querySelector('.payment-btn').addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      const cardName = document.getElementById('cardName').value;
-      const cardNumber = document.getElementById('cardNumber').value;
-      const expiryDate = document.getElementById('expiryDate').value;
-      const cvv = document.getElementById('cvv').value;
-      
-      if (!cardName || !cardNumber || !expiryDate || !cvv) {
-        alert('Please fill in all payment details');
-        return;
-      }
-      
-      // In a real implementation, you would process payment here
-      // This is just a simulation
-      alert('Payment processed successfully! Redirecting to your account...');
-      
-      // Redirect to success page
-      setTimeout(() => {
-        window.location.href = 'subscriptions.html';
-      }, 1500);
-    });
-    
-    // Auto-format card number
-    document.getElementById('cardNumber').addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-      let matches = value.match(/\d{4,16}/g);
-      let match = matches && matches[0] || '';
-      let parts = [];
-      
-      for (let i=0, len=match.length; i<len; i+=4) {
-        parts.push(match.substring(i, i+4));
-      }
-      
-      if (parts.length) {
-        e.target.value = parts.join(' ');
-      }
-    });
-    
-    // Auto-format expiry date
-    document.getElementById('expiryDate').addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-      if (value.length > 2) {
-        value = value.substring(0, 2) + '/' + value.substring(2, 4);
-      }
-      e.target.value = value;
-    });
-  </script>
-  <script>
-    
-  </script>
+<div class="container">
+  <h1>Confirm Your Subscription</h1>
+  <div class="details" id="planDetails"></div>
+  <button class="confirm-btn" onclick="confirmSubscription()">Confirm & Subscribe</button>
+</div>
+
+<footer>
+  &copy; 2025 Newsletter Hub. All rights reserved.
+</footer>
+
+<script>
+  // Load user data
+  const storedUser = localStorage.getItem('username') || 'User';
+  const storedImage = localStorage.getItem('userImage') || 'images/user.png';
+  document.getElementById('userName').textContent = 'Hi, ' + storedUser;
+  document.getElementById('userImg').src = storedImage;
+
+  // Load selected plan
+  const planData = JSON.parse(localStorage.getItem('selectedPlan'));
+
+  if (planData) {
+    const { newsletter, plan, priceINR, priceUSD, features } = planData;
+    document.getElementById('planDetails').innerHTML = `
+      <h2>${newsletter} - ${plan.charAt(0).toUpperCase() + plan.slice(1)} Plan</h2>
+      <div class="price">Price: ₹${priceINR} / $${priceUSD}</div>
+      <ul class="features">
+        ${features.map(f => `<li>${f}</li>`).join('')}
+      </ul>
+    `;
+  } else {
+    document.getElementById('planDetails').innerHTML = `<p>No plan selected.</p>`;
+    document.querySelector('.confirm-btn').style.display = 'none';
+  }
+
+  function confirmSubscription() {
+    alert("✅ Subscription confirmed!");
+    window.location.href = "subscriptions.html";
+  }
+</script>
+
 </body>
 </html>
