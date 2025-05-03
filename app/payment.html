@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Choose a Plan - Newsletter Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
@@ -10,7 +10,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
@@ -18,17 +17,12 @@
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: white;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
     header {
       background-color: #111;
       padding: 20px 0;
       width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
@@ -36,9 +30,9 @@
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      align-items: center;
       justify-content: space-between;
       padding: 0 20px;
+      align-items: center;
     }
 
     .logo {
@@ -60,11 +54,10 @@
       color: white;
       text-decoration: none;
       font-size: 1.1em;
-      transition: color 0.3s;
     }
 
-    nav ul li a:hover,
-    nav ul li a.active {
+    nav ul li a.active,
+    nav ul li a:hover {
       color: #ff5c8e;
     }
 
@@ -72,8 +65,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      color: white;
-      font-size: 1em;
     }
 
     .user-profile img {
@@ -82,81 +73,47 @@
       border-radius: 50%;
     }
 
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: radial-gradient(#1f1c2c, #928dab);
-      overflow: hidden;
-    }
-
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      animation: float 20s infinite ease-in-out;
-    }
-
-    .circle:nth-child(1) {
-      width: 300px;
-      height: 300px;
-      top: 10%;
-      left: 10%;
-    }
-
-    .circle:nth-child(2) {
-      width: 200px;
-      height: 200px;
-      top: 40%;
-      left: 70%;
-    }
-
-    .circle:nth-child(3) {
-      width: 250px;
-      height: 250px;
-      top: 80%;
-      left: 30%;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-50px) scale(1.05);
-      }
-    }
-
     .container {
       max-width: 1200px;
-      margin: 140px auto 40px;
+      margin: 60px auto 40px;
       padding: 0 20px;
     }
 
     h1 {
       text-align: center;
-      font-size: 2.5em;
-      margin-bottom: 30px;
       color: #ff5c8e;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .newsletter-select {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .newsletter-select select {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: 2px solid #ff5c8e;
+      border-radius: 10px;
+      background-color: #1e1e2f;
+      color: white;
+      appearance: none;
     }
 
     .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
-      margin-bottom: 40px;
     }
 
     .plan {
       background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
       padding: 25px;
+      border-radius: 20px;
       text-align: center;
-      transition: transform 0.3s ease;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+      transition: transform 0.3s ease;
     }
 
     .plan:hover {
@@ -164,20 +121,19 @@
     }
 
     .plan h2 {
-      font-size: 1.6em;
-      margin-bottom: 15px;
+      font-size: 1.4em;
+      margin-bottom: 10px;
     }
 
     .price {
-      font-size: 1.4em;
-      margin: 10px 0;
+      font-size: 1.3em;
       color: #ffd369;
+      margin: 10px 0;
     }
 
     ul.features {
       list-style: none;
       padding: 0;
-      margin: 15px 0;
     }
 
     ul.features li {
@@ -186,149 +142,138 @@
 
     .plan button {
       margin-top: 10px;
-      padding: 12px 25px;
+      padding: 10px 20px;
       background-color: #ff5c8e;
+      color: white;
       border: none;
       border-radius: 10px;
-      color: white;
-      font-size: 1em;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
 
     .plan button:hover {
       background-color: #ff2c6f;
     }
 
-    .compare-section {
+    .confirmation {
       text-align: center;
-      margin-top: 40px;
-    }
-
-    .compare-table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-    }
-
-    .compare-table th, .compare-table td {
-      border: 1px solid #555;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .compare-table th {
-      background-color: #1a1a1a;
-    }
-
-    .compare-table td {
-      background-color: rgba(255, 255, 255, 0.05);
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.2em;
+      color: #00ffcc;
     }
   </style>
 </head>
 <body>
-  <div class="animated-bg">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-  </div>
 
-  <header>
-    <div class="header-content">
-      <div class="logo">Newsletter Hub</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="popular.html" class="active">Popular</a></li>
-          <li><a href="subscriptions.html">My Subscriptions</a></li>
-        </ul>
-      </nav>
-      <div class="user-profile">
-        <span>Hi, User</span>
-        <img src="images/user.png" alt="User">
-      </div>
-    </div>
-  </header>
-
-  <div class="container">
-    <h1>Choose Your Plan</h1>
-    <div class="plans" id="planContainer">
-      <!-- JavaScript will populate plans here -->
-    </div>
-
-    <div class="compare-section">
-      <h2>Compare Plans</h2>
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Free</th>
-            <th>Standard</th>
-            <th>Premium</th>
-            <th>Pro</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Newsletter Access</td><td>Limited</td><td>Most</td><td>Unlimited</td><td>All + Archive</td></tr>
-          <tr><td>Ad-Free</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-          <tr><td>Early Access</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-          <tr><td>Exclusive Content</td><td>No</td><td>No</td><td>Yes</td><td>Yes</td></tr>
-          <tr><td>Analytics</td><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
-        </tbody>
-      </table>
+<header>
+  <div class="header-content">
+    <div class="logo">Newsletter Hub</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="popular.html">Popular</a></li>
+        <li><a href="subscriptions.html" class="active">My Subscriptions</a></li>
+      </ul>
+    </nav>
+    <div class="user-profile">
+      <span id="userName">Hi, User</span>
+      <img id="userImg" src="images/user.png" alt="User">
     </div>
   </div>
+</header>
 
-  <script>
-    const plans = {
-      free: {
-        name: 'Free Membership',
-        priceUSD: 0.00,
-        priceINR: 0,
-        features: ['Access to public newsletters', 'Limited reading features']
-      },
-      basic: {
-        name: 'Basic Membership',
-        priceUSD: 2.99,
-        priceINR: 249,
-        features: ['Selected newsletters', 'Limited access']
-      },
-      standard: {
-        name: 'Standard Membership',
-        priceUSD: 4.99,
-        priceINR: 399,
-        features: ['Most newsletters', 'Ad-supported reading']
-      },
-      premium: {
-        name: 'Premium Membership',
-        priceUSD: 9.99,
-        priceINR: 799,
-        features: ['Unlimited newsletters', 'Ad-free reading', 'Early content access', 'Exclusive member-only newsletters']
-      },
-      pro: {
-        name: 'Pro Membership',
-        priceUSD: 14.99,
-        priceINR: 1199,
-        features: ['All Premium features', 'Archive access', 'Reading analytics']
+<div class="container">
+  <h1>Choose Your Plan</h1>
+
+  <div class="newsletter-select">
+    <label for="newsletterSelect">📰 Choose Newsletter:</label>
+    <select id="newsletterSelect">
+      <option value="neural">🧠 Neural Frontiers</option>
+      <option value="cosmic">🌌 Cosmic Discoveries</option>
+      <option value="genome">🧬 Genome Revolution</option>
+    </select>
+  </div>
+
+  <div class="plans" id="planContainer"></div>
+
+  <div class="confirmation" id="confirmationBox" style="display: none;"></div>
+</div>
+
+<script>
+  const pricingData = {
+    neural: {
+      name: "Neural Frontiers",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Basic AI news', 'Community forum access'] },
+        standard: { priceINR: 299, priceUSD: 3.99, features: ['Weekly summaries', 'Limited analytics'] },
+        premium: { priceINR: 699, priceUSD: 8.99, features: ['All AI updates', 'Deep-dive reports', 'No ads'] },
+        pro: { priceINR: 999, priceUSD: 13.99, features: ['All features + beta access', 'Priority Q&A'] }
       }
-    };
+    },
+    cosmic: {
+      name: "Cosmic Discoveries",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Latest astronomy updates', '1 article/month'] },
+        standard: { priceINR: 249, priceUSD: 3.49, features: ['3 articles/week', 'Astronomy tools'] },
+        premium: { priceINR: 599, priceUSD: 7.49, features: ['Daily discoveries', 'No ads', 'HD space photos'] },
+        pro: { priceINR: 899, priceUSD: 11.99, features: ['Pro articles + exclusive Q&A'] }
+      }
+    },
+    genome: {
+      name: "Genome Revolution",
+      plans: {
+        free: { priceINR: 0, priceUSD: 0, features: ['Genetic news feed', 'Basic access'] },
+        standard: { priceINR: 299, priceUSD: 4.49, features: ['Research articles', 'Science journals'] },
+        premium: { priceINR: 749, priceUSD: 9.99, features: ['Full access + Interviews', 'Early access'] },
+        pro: { priceINR: 1199, priceUSD: 14.99, features: ['Custom analysis', 'Member dashboard'] }
+      }
+    }
+  };
 
+  function updatePlans(newsletter) {
     const container = document.getElementById('planContainer');
+    const { plans } = pricingData[newsletter];
+    container.innerHTML = '';
+    document.getElementById("confirmationBox").style.display = 'none';
 
-    Object.keys(plans).forEach(key => {
-      const plan = plans[key];
+    for (let level in plans) {
+      const plan = plans[level];
       const div = document.createElement('div');
       div.className = 'plan';
       div.innerHTML = `
-        <h2>${plan.name}</h2>
+        <h2>${level.charAt(0).toUpperCase() + level.slice(1)} Plan</h2>
         <div class="price">₹${plan.priceINR} / $${plan.priceUSD}</div>
         <ul class="features">
           ${plan.features.map(f => `<li>${f}</li>`).join('')}
         </ul>
-        <button onclick="window.location.href='checkout.html'">Choose</button>
+        <button onclick="selectPlan('${newsletter}', '${level}')">Choose</button>
       `;
       container.appendChild(div);
-    });
-  </script>
+    }
+  }
+
+  function selectPlan(newsletterKey, level) {
+    const newsletter = pricingData[newsletterKey];
+    const plan = newsletter.plans[level];
+    const box = document.getElementById('confirmationBox');
+    box.innerHTML = `✅ You selected <strong>${newsletter.name}</strong> - <em>${level.toUpperCase()}</em> Plan<br>Price: ₹${plan.priceINR} / $${plan.priceUSD}`;
+    box.style.display = 'block';
+  }
+
+  // Load user data from localStorage
+  const storedUser = localStorage.getItem('username') || 'User';
+  const storedImage = localStorage.getItem('userImage') || 'images/user.png';
+  document.getElementById('userName').textContent = 'Hi, ' + storedUser;
+  document.getElementById('userImg').src = storedImage;
+
+  document.getElementById('newsletterSelect').addEventListener('change', function () {
+    updatePlans(this.value);
+  });
+
+  updatePlans('neural');
+</script>
+
 </body>
 </html>

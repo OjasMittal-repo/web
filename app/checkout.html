@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout - Newsletter Hub</title>
+  <title>Payment - Newsletter Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
   <style>
     * {
@@ -82,68 +82,6 @@
       border-radius: 50%;
     }
 
-    .container {
-      padding-top: 120px;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2.5em;
-      color: #ff5c8e;
-    }
-
-    .checkout-box {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .checkout-box:hover {
-      transform: scale(1.02);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      font-size: 1em;
-    }
-
-    button {
-      background-color: #ff5c8e;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.1em;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 100%;
-    }
-
-    button:hover {
-      background-color: #ff2c6f;
-    }
-
-    /* Background animation */
     .animated-bg {
       position: fixed;
       top: 0;
@@ -191,6 +129,163 @@
         transform: translateY(-50px) scale(1.05);
       }
     }
+
+    .container {
+      max-width: 1200px;
+      margin: 140px auto 40px;
+      padding: 0 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #ff5c8e;
+    }
+
+    /* Payment Section Styles */
+    .payment-container {
+      display: flex;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .order-summary {
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+    }
+
+    .payment-form {
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-total {
+      font-size: 1.2em;
+      font-weight: 500;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      color: white;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #ff5c8e;
+      box-shadow: 0 0 0 2px rgba(255, 92, 142, 0.3);
+    }
+
+    .card-element {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .payment-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff5c8e;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+
+    .payment-btn:hover {
+      background-color: #ff2c6f;
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .payment-method {
+      flex: 1;
+      text-align: center;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .payment-method.active {
+      background-color: rgba(255, 92, 142, 0.2);
+      border: 1px solid #ff5c8e;
+    }
+
+    .payment-method img {
+      height: 30px;
+      width: auto;
+    }
+
+    .secure-payment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9em;
+    }
+
+    .secure-payment img {
+      margin-right: 10px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .payment-container {
+        flex-direction: column;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      nav ul {
+        margin: 15px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -206,7 +301,7 @@
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="popular.html" class="active">Popular</a></li>
+          <li><a href="popular.html">Popular</a></li>
           <li><a href="subscriptions.html">My Subscriptions</a></li>
         </ul>
       </nav>
@@ -218,49 +313,140 @@
   </header>
 
   <div class="container">
-    <h1>Checkout</h1>
-    <div class="checkout-box">
-      <form id="checkoutForm">
-        <div class="form-group">
-          <label for="plan">Selected Plan</label>
-          <select id="plan" name="plan" required>
-            <option value="">Choose a plan</option>
-            <option value="basic">Basic</option>
-            <option value="standard">Standard</option>
-            <option value="premium">Premium</option>
-            <option value="pro">Pro</option>
-          </select>
+    <h1>Complete Your Subscription</h1>
+    
+    <div class="payment-container">
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-item">
+          <span>Premium Membership</span>
+          <span>₹799/month</span>
         </div>
-
-        <div class="form-group">
-          <label for="name">Cardholder Name</label>
-          <input type="text" id="name" name="name" placeholder="John Doe" required />
+        <div class="summary-item">
+          <span>Newsletter Access</span>
+          <span>Unlimited</span>
         </div>
-
-        <div class="form-group">
-          <label for="card">Card Number</label>
-          <input type="text" id="card" name="card" placeholder="xxxx-xxxx-xxxx-xxxx" required />
+        <div class="summary-item">
+          <span>Ad-Free Experience</span>
+          <span>Included</span>
         </div>
-
-        <div class="form-group">
-          <label for="expiry">Expiry Date</label>
-          <input type="text" id="expiry" name="expiry" placeholder="MM/YY" required />
+        <div class="summary-item">
+          <span>Exclusive Content</span>
+          <span>Included</span>
         </div>
-
-        <div class="form-group">
-          <label for="cvv">CVV</label>
-          <input type="password" id="cvv" name="cvv" placeholder="123" required />
+        <div class="summary-total">
+          <span>Total Due Today</span>
+          <span>₹799</span>
         </div>
-
-        <button type="submit">Complete Payment</button>
-      </form>
+      </div>
+      
+      <div class="payment-form">
+        <h2>Payment Details</h2>
+        
+        <div class="payment-methods">
+          <div class="payment-method active">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" alt="Visa">
+          </div>
+          <div class="payment-method">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" alt="Mastercard">
+          </div>
+          <div class="payment-method">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" alt="PayPal">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="cardName">Name on Card</label>
+          <input type="text" id="cardName" class="form-control" placeholder="John Smith">
+        </div>
+        
+        <div class="form-group">
+          <label for="cardNumber">Card Number</label>
+          <input type="text" id="cardNumber" class="form-control" placeholder="4242 4242 4242 4242">
+        </div>
+        
+        <div class="form-row" style="display: flex; gap: 15px;">
+          <div class="form-group" style="flex: 1;">
+            <label for="expiryDate">Expiry Date</label>
+            <input type="text" id="expiryDate" class="form-control" placeholder="MM/YY">
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" class="form-control" placeholder="123">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="coupon">Coupon Code (Optional)</label>
+          <input type="text" id="coupon" class="form-control" placeholder="SUMMER2023">
+        </div>
+        
+        <button class="payment-btn">Pay ₹799</button>
+        
+        <div class="secure-payment">
+          <img src="https://cdn-icons-png.flaticon.com/512/2889/2889676.png" width="20" alt="Secure">
+          <span>Secure payment processed by Stripe</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+    // Simple payment method selection
+    document.querySelectorAll('.payment-method').forEach(method => {
+      method.addEventListener('click', () => {
+        document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+        method.classList.add('active');
+      });
+    });
+    
+    // Basic form validation
+    document.querySelector('.payment-btn').addEventListener('click', (e) => {
       e.preventDefault();
-      alert("Payment completed successfully!");
+      
+      const cardName = document.getElementById('cardName').value;
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const cvv = document.getElementById('cvv').value;
+      
+      if (!cardName || !cardNumber || !expiryDate || !cvv) {
+        alert('Please fill in all payment details');
+        return;
+      }
+      
+      // In a real implementation, you would process payment here
+      // This is just a simulation
+      alert('Payment processed successfully! Redirecting to your account...');
+      
+      // Redirect to success page
+      setTimeout(() => {
+        window.location.href = 'subscriptions.html';
+      }, 1500);
+    });
+    
+    // Auto-format card number
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      let matches = value.match(/\d{4,16}/g);
+      let match = matches && matches[0] || '';
+      let parts = [];
+      
+      for (let i=0, len=match.length; i<len; i+=4) {
+        parts.push(match.substring(i, i+4));
+      }
+      
+      if (parts.length) {
+        e.target.value = parts.join(' ');
+      }
+    });
+    
+    // Auto-format expiry date
+    document.getElementById('expiryDate').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      if (value.length > 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+      }
+      e.target.value = value;
     });
   </script>
 </body>
