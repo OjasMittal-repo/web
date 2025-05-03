@@ -7,7 +7,8 @@
  
     "build:azure": "echo 'No Azure-specific build step' && exit 0", 
     "start": "node authConfig.js" ,    
-  "build": "react-scripts build"
+  "build": "echo 'No build step' && exit 0",
+    "dev": "nodemon authConfig.js"
   },
   "keywords": [],
   "author": "",
