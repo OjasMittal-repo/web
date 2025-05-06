@@ -8,6 +8,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.18.2",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "build:azure": "echo 'Building for Azure...'"
   }
 }
