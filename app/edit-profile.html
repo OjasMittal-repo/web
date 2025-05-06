@@ -64,6 +64,14 @@
     .form-group {
       margin-bottom: 20px;
     }
+    .avatar-section img {
+  border: 2px solid #ccc;
+  transition: 0.3s;
+}
+.avatar-section img:hover {
+  border-color: #007BFF;
+  transform: scale(1.05);
+}
 
     .form-group label {
       display: block;
@@ -193,7 +201,13 @@
       </div>
 
       <button type="button" id="generate-bio" class="btn btn-ai">Generate Bio with AI</button>
-
+      <div class="avatar-section">
+        <label for="avatarInput">
+          <img id="userImg" src="images/user.png" alt="User Avatar" style="cursor: pointer; border-radius: 50%; width: 60px; height: 60px;">
+        </label>
+        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+      </div>
+      
       <div class="form-actions">
         <button type="submit" class="btn btn-save">Save Changes</button>
         <button type="reset" class="btn btn-cancel">Cancel</button>
@@ -205,7 +219,32 @@
 <footer>
   <p>© 2025 NewsLegend. All rights reserved.</p>
 </footer>
+<script>
+  const avatarInput = document.getElementById('avatarInput');
+  const userImg = document.getElementById('userImg');
 
+  // Load saved avatar on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedAvatar = localStorage.getItem('userAvatar');
+    if (savedAvatar) {
+      userImg.src = savedAvatar;
+    }
+  });
+
+  // Save new avatar when user selects a file
+  avatarInput.addEventListener('change', function () {
+    const file = avatarInput.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const imageData = e.target.result;
+        userImg.src = imageData;
+        localStorage.setItem('userAvatar', imageData);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
 <script>
   const form = document.getElementById('edit-profile-form');
   const generateBioButton = document.getElementById('generate-bio');

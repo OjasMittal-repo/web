@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
+</head>
+<body>
+
+
+  <!-- Modal for Manage/Upgrade -->
+  <div class="modal" id="manageModal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Manage Subscription</h3>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-tabs">
+        <div class="modal-tab active" data-tab="upgrade">Upgrade Plan</div>
+        <div class="modal-tab" data-tab="frequency">Delivery Settings</div>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Tab content will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Pricing data (should match your choose-plan.html data)
+   
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Subscriptions | Newsletter Hub</title>
@@ -447,7 +479,6 @@
   </style>
 </head>
 <body>
-
   <!-- Header -->
   <header>
     <div class="logo">Newsletter Hub</div>
@@ -472,7 +503,7 @@
     </div>
   </section>
 
-  <!-- Modal for Manage/Upgrade -->
+  <!-- Modal for Manage/Upgrade - Simplified structure -->
   <div class="modal" id="manageModal">
     <div class="modal-content glass">
       <div class="modal-header">
@@ -483,15 +514,62 @@
         <div class="modal-tab active" data-tab="upgrade">Upgrade Plan</div>
         <div class="modal-tab" data-tab="frequency">Delivery Settings</div>
       </div>
-      <div id="modalBody">
-        <!-- Content will be dynamically inserted here -->
+      <div class="tab-content active" id="upgradeTab">
+        <!-- Upgrade content will be inserted here -->
+      </div>
+      <div class="tab-content" id="frequencyTab">
+        <!-- Frequency content will be inserted here -->
       </div>
     </div>
   </div>
 
-
   <script>
-    // Pricing data (should match your choose-plan.html data)
+    // Pricing data remains the same
+    // ...
+
+    // Global variables to track current subscription being managed
+    let currentNewsletterKey = null;
+    let currentSubscriptionIndex = null;
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Previous initialization code remains the same
+      // ...
+
+      // Modal close handlers
+      document.getElementById('closeModal').addEventListener('click', closeModal);
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') closeModal();
+      });
+      document.getElementById('manageModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+
+      // Tab switching
+      document.querySelectorAll('.modal-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+          });
+          document.getElementById(`${this.dataset.tab}Tab`).classList.add('active');
+        });
+      });
+    });
+
+    function renderSubscriptions() {
+      // Previous render code remains the same until the manage button event listener
+      document.querySelectorAll('.manage-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          currentNewsletterKey = this.getAttribute('data-key');
+          currentSubscriptionIndex = parseInt(this.getAttribute('data-index'));
+          openManageModal(currentNewsletterKey, currentSubscriptionIndex);
+        });
+      });
+      // ...
+    }
     const pricingData = {
       design: {
         name: "Design Digest",
@@ -668,11 +746,8 @@
         
         modalTitle.textContent = `Manage ${newsletterData.name}`;
         
+        // Generate modal content
         let modalContent = `
-          <div class="modal-tabs">
-            <div class="modal-tab active" data-tab="upgrade">Upgrade Plan</div>
-            <div class="modal-tab" data-tab="frequency">Delivery Settings</div>
-          </div>
           <div class="tab-content active" id="upgradeTab">
             <h4>Current Plan: ${currentSub.plan.charAt(0).toUpperCase() + currentSub.plan.slice(1)}</h4>
             <p>₹${currentSub.priceINR} / $${currentSub.priceUSD} per month</p>
@@ -933,7 +1008,247 @@
       ];
       return times[Math.floor(Math.random() * times.length)];
     }
-  </script>
+    function openManageModal(newsletterKey, subscriptionIndex) {
+      try {
+        const modal = document.getElementById('manageModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const upgradeTab = document.getElementById('upgradeTab');
+        const frequencyTab = document.getElementById('frequencyTab');
+        
+        const subscriptions = JSON.parse(localStorage.getItem('userSubscriptions') || '{"subscriptions": []}');
+        const currentSub = subscriptions.subscriptions[subscriptionIndex];
+        const newsletterData = pricingData[newsletterKey];
+        
+        if (!currentSub || !newsletterData) {
+          throw new Error("Subscription data not found");
+        }
+        
+        modalTitle.textContent = `Manage ${newsletterData.name}`;
+        
+        // Generate upgrade tab content
+        let upgradeContent = `
+          <h4>Current Plan: ${currentSub.plan.charAt(0).toUpperCase() + currentSub.plan.slice(1)}</h4>
+          <p>₹${currentSub.priceINR} / $${currentSub.priceUSD} per month</p>
+          <div class="features" style="margin-bottom: 20px;">
+            <ul>
+              ${currentSub.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+          </div>
+          <h4>Upgrade Options:</h4>
+          <div id="upgradeOptions">
+        `;
+        
+        // Add available plans
+        for (const [planKey, planData] of Object.entries(newsletterData.plans)) {
+          if (planKey === currentSub.plan) continue;
+          
+          upgradeContent += `
+            <div class="plan-option" data-plan-key="${planKey}">
+              <div class="plan-name">${planKey.charAt(0).toUpperCase() + planKey.slice(1)} Plan</div>
+              <div class="plan-price">₹${planData.priceINR} / $${planData.priceUSD} per month</div>
+              <div class="plan-features">
+                <ul>
+                  ${planData.features.map(f => `<li>${f}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          `;
+        }
+        
+        upgradeContent += `
+          </div>
+          <button class="btn btn-success" id="upgradeButton" style="margin-top: 20px; width: 100%;" disabled>
+            Upgrade Plan
+          </button>
+        `;
+        
+        upgradeTab.innerHTML = upgradeContent;
+        
+        // Generate frequency tab content
+        let frequencyContent = `
+          <h4>Delivery Frequency</h4>
+          <p>Adjust how often you receive this newsletter</p>
+          
+          <div class="frequency-options">
+            <div class="frequency-option ${(!currentSub.frequency || currentSub.frequency.type === 'daily') ? 'selected' : ''}" data-frequency="daily">
+              <input type="radio" name="frequency" ${(!currentSub.frequency || currentSub.frequency.type === 'daily') ? 'checked' : ''}> 
+              <div>
+                <strong>Daily</strong>
+                <div class="time-picker">
+                  <span>At:</span>
+                  <select id="dailyTime">
+                    <option ${currentSub.frequency?.time === '6:00 AM' ? 'selected' : ''}>6:00 AM</option>
+                    <option ${currentSub.frequency?.time === '7:00 AM' ? 'selected' : ''}>7:00 AM</option>
+                    <option ${currentSub.frequency?.time === '8:00 AM' ? 'selected' : ''}>8:00 AM</option>
+                    <option ${(!currentSub.frequency || currentSub.frequency.time === '9:00 AM') ? 'selected' : ''}>9:00 AM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="frequency-option ${currentSub.frequency?.type === 'weekly' ? 'selected' : ''}" data-frequency="weekly">
+              <input type="radio" name="frequency" ${currentSub.frequency?.type === 'weekly' ? 'checked' : ''}> 
+              <div>
+                <strong>Weekly</strong>
+                <div class="time-picker">
+                  <span>Every</span>
+                  <select id="weeklyDay">
+                    <option ${currentSub.frequency?.day === 'Monday' ? 'selected' : ''}>Monday</option>
+                    <option ${currentSub.frequency?.day === 'Tuesday' ? 'selected' : ''}>Tuesday</option>
+                    <option ${currentSub.frequency?.day === 'Wednesday' ? 'selected' : ''}>Wednesday</option>
+                    <option ${currentSub.frequency?.day === 'Thursday' ? 'selected' : ''}>Thursday</option>
+                    <option ${(!currentSub.frequency || currentSub.frequency.day === 'Friday') ? 'selected' : ''}>Friday</option>
+                  </select>
+                  <span>at</span>
+                  <select id="weeklyTime">
+                    <option ${currentSub.frequency?.time === '6:00 AM' ? 'selected' : ''}>6:00 AM</option>
+                    <option ${currentSub.frequency?.time === '7:00 AM' ? 'selected' : ''}>7:00 AM</option>
+                    <option ${(!currentSub.frequency || currentSub.frequency.time === '8:00 AM') ? 'selected' : ''}>8:00 AM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="frequency-option ${currentSub.frequency?.type === 'monthly' ? 'selected' : ''}" data-frequency="monthly">
+              <input type="radio" name="frequency" ${currentSub.frequency?.type === 'monthly' ? 'checked' : ''}> 
+              <div>
+                <strong>Monthly</strong>
+                <div class="time-picker">
+                  <span>On the</span>
+                  <select id="monthlyDay">
+                    <option ${currentSub.frequency?.day === '1st' ? 'selected' : ''}>1st</option>
+                    <option ${currentSub.frequency?.day === '5th' ? 'selected' : ''}>5th</option>
+                    <option ${(!currentSub.frequency || currentSub.frequency.day === '15th') ? 'selected' : ''}>15th</option>
+                    <option ${currentSub.frequency?.day === 'Last day' ? 'selected' : ''}>Last day</option>
+                  </select>
+                  <span>at</span>
+                  <select id="monthlyTime">
+                    <option ${currentSub.frequency?.time === '6:00 AM' ? 'selected' : ''}>6:00 AM</option>
+                    <option ${(!currentSub.frequency || currentSub.frequency.time === '9:00 AM') ? 'selected' : ''}>9:00 AM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn btn-primary" id="saveFrequencyBtn" style="margin-top: 20px; width: 100%;">
+            Save Delivery Settings
+          </button>
+        `;
+        
+        frequencyTab.innerHTML = frequencyContent;
+        
+        // Initialize plan selection
+        document.querySelectorAll('.plan-option').forEach(option => {
+          option.addEventListener('click', function() {
+            document.querySelectorAll('.plan-option').forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            document.getElementById('upgradeButton').disabled = false;
+          });
+        });
 
+        // Initialize frequency selection
+        document.querySelectorAll('.frequency-option').forEach(option => {
+          option.addEventListener('click', function() {
+            document.querySelectorAll('.frequency-option').forEach(opt => {
+              opt.classList.remove('selected');
+              opt.querySelector('input').checked = false;
+            });
+            this.classList.add('selected');
+            this.querySelector('input').checked = true;
+          });
+        });
+
+        // Set up upgrade button
+        document.getElementById('upgradeButton').addEventListener('click', () => {
+          upgradePlan();
+        });
+
+        // Set up save frequency button
+        document.getElementById('saveFrequencyBtn').addEventListener('click', () => {
+          saveFrequency();
+        });
+
+        // Show the modal
+        modal.style.display = 'flex';
+        document.getElementById('upgradeTab').classList.add('active');
+        document.getElementById('frequencyTab').classList.remove('active');
+
+      } catch (e) {
+        console.error("Error opening manage modal:", e);
+        alert("An error occurred while opening the management panel. Please try again.");
+        closeModal();
+      }
+    }
+
+    function upgradePlan() {
+      try {
+        const selectedOption = document.querySelector('.plan-option.selected');
+        if (!selectedOption) {
+          alert("Please select a plan to upgrade to");
+          return;
+        }
+        
+        const planKey = selectedOption.dataset.planKey;
+        const subscriptions = JSON.parse(localStorage.getItem('userSubscriptions') || '{"subscriptions": []}');
+        const newsletterData = pricingData[currentNewsletterKey];
+        const newPlan = newsletterData.plans[planKey];
+        
+        // Update the subscription
+        subscriptions.subscriptions[currentSubscriptionIndex] = {
+          ...subscriptions.subscriptions[currentSubscriptionIndex],
+          plan: planKey,
+          priceINR: newPlan.priceINR,
+          priceUSD: newPlan.priceUSD,
+          features: newPlan.features
+        };
+        
+        localStorage.setItem('userSubscriptions', JSON.stringify(subscriptions));
+        closeModal();
+        renderSubscriptions();
+        alert(`Successfully upgraded to ${planKey.charAt(0).toUpperCase() + planKey.slice(1)} plan!`);
+      } catch (e) {
+        console.error("Error upgrading plan:", e);
+        alert("An error occurred during the upgrade. Please try again.");
+      }
+    }
+
+    function saveFrequency() {
+      try {
+        const subscriptions = JSON.parse(localStorage.getItem('userSubscriptions') || '{"subscriptions": []}');
+        const selectedOption = document.querySelector('.frequency-option.selected');
+        
+        if (!selectedOption) {
+          alert("Please select a delivery frequency");
+          return;
+        }
+        
+        const frequencyType = selectedOption.dataset.frequency;
+        let frequencySettings = { type: frequencyType };
+        
+        if (frequencyType === 'daily') {
+          frequencySettings.time = document.getElementById('dailyTime').value;
+        } else if (frequencyType === 'weekly') {
+          frequencySettings.day = document.getElementById('weeklyDay').value;
+          frequencySettings.time = document.getElementById('weeklyTime').value;
+        } else if (frequencyType === 'monthly') {
+          frequencySettings.day = document.getElementById('monthlyDay').value;
+          frequencySettings.time = document.getElementById('monthlyTime').value;
+        }
+        
+        subscriptions.subscriptions[currentSubscriptionIndex].frequency = frequencySettings;
+        localStorage.setItem('userSubscriptions', JSON.stringify(subscriptions));
+        closeModal();
+        renderSubscriptions();
+        alert('Delivery settings updated successfully!');
+      } catch (e) {
+        console.error("Error saving frequency:", e);
+        alert("An error occurred while saving your settings. Please try again.");
+      }
+    }
+
+    // Rest of the functions remain the same
+    // ...
+  </script>
 </body>
 </html>
