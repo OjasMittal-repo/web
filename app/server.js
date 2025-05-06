@@ -1,6 +1,8 @@
 const express = require('express');
-const path = require('path');
+const path = require('path'); // Keep this import
 const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 const app = express();
 
@@ -26,7 +28,7 @@ app.post('/api/forgot-password', async (req, res) => {
     from: 'ojasmittal08@gmail.com',
     to: email,
     subject: 'Reset Your Password',
-    html: `<p>Click <a href="http://localhost:3000/reset-password">here</a> to reset your password.</p>`
+    html: `<p>Click <a href="http://localhost:3000/reset-password.html">here</a> to reset your password.</p>`
   };
 
   try {
@@ -42,14 +44,6 @@ app.post('/api/forgot-password', async (req, res) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'forgot-password.html'));
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
-const bcrypt = require('bcrypt');
-const fs = require('fs');
-const path = require('path');
 
 app.post('/api/reset-password', async (req, res) => {
   const { password } = req.body;
@@ -73,4 +67,9 @@ app.post('/api/reset-password', async (req, res) => {
     console.error('Error hashing password:', err);
     res.json({ success: false, message: 'Error processing password.' });
   }
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
 });

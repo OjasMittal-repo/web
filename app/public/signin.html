@@ -155,7 +155,7 @@
       </div>
       <button type="submit" class="submit-btn">Sign In</button>
       <div class="links">
-        <a href="forgot.html">Forgot Password?</a>
+        <a href="forgot-password.html">Forgot Password?</a>
         <a href="create-account.html">Create Account</a>
       </div>
       <div class="fade-message" id="statusMsg"></div>
@@ -165,25 +165,24 @@
   <script>
     const loginForm = document.getElementById("loginForm");
     const statusMsg = document.getElementById("statusMsg");
-  
+
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value;
-  
+
       try {
         const res = await fetch("/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
-  
+
         const data = await res.json();
-  
+
         if (res.ok) {
           statusMsg.textContent = "✅ Login successful. Redirecting...";
           statusMsg.classList.add("visible");
-          localStorage.setItem("currentUser", JSON.stringify(data.user));
           setTimeout(() => (window.location.href = "index.html"), 1200);
         } else {
           statusMsg.textContent = "❌ " + data.error;
