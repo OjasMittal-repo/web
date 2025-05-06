@@ -81,6 +81,13 @@
       display: none;
       margin-top: 10px;
     }
+
+    .success {
+      text-align: center;
+      color: #5eead4;
+      display: none;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -93,51 +100,62 @@
       <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
       <button type="submit" class="submit-btn">Sign Up</button>
     </form>
-    <p class="error" id="errorMessage">Please fill all fields correctly.</p>
+    <p class="error" id="errorMessage"></p>
+    <p class="success" id="successMessage">Account created successfully! Redirecting...</p>
     <div class="bottom-text">
       Already have an account? <a href="signin.html">Login</a>
     </div>
   </div>
 
   <script>
-    document.getElementById('createAccountForm').addEventListener('submit', function(event) {
+    document.getElementById('createAccountForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-  
+
       const username = document.getElementById('username').value.trim();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const confirmPassword = document.getElementById('confirmPassword').value;
       const errorMessage = document.getElementById('errorMessage');
-  
+      const successMessage = document.getElementById('successMessage');
+
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+
       if (!username || !email || !password || !confirmPassword) {
         errorMessage.textContent = "Please fill all fields correctly.";
         errorMessage.style.display = 'block';
         return;
       }
-  
+
       if (password !== confirmPassword) {
         errorMessage.textContent = "Passwords do not match!";
         errorMessage.style.display = 'block';
         return;
       }
-  
-      const accounts = JSON.parse(localStorage.getItem('accounts') || '[]');
-      const emailExists = accounts.some(account => account.email === email);
-  
-      if (emailExists) {
-        errorMessage.textContent = "An account with this email already exists.";
+
+      try {
+        const res = await fetch("/api/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: username, email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          successMessage.style.display = 'block';
+          setTimeout(() => {
+            window.location.href = "signin.html";
+          }, 1500);
+        } else {
+          errorMessage.textContent = data.error || "Signup failed.";
+          errorMessage.style.display = 'block';
+        }
+      } catch (err) {
+        errorMessage.textContent = "Server error.";
         errorMessage.style.display = 'block';
-        return;
       }
-  
-      accounts.push({ username, email, password });
-      localStorage.setItem('accounts', JSON.stringify(accounts));
-  
-      errorMessage.style.display = 'none';
-      alert('Account created successfully!');
-      window.location.href = 'signin.html';
     });
   </script>
-  
 </body>
 </html>

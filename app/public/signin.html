@@ -165,28 +165,37 @@
   <script>
     const loginForm = document.getElementById("loginForm");
     const statusMsg = document.getElementById("statusMsg");
-
-    loginForm.addEventListener("submit", (e) => {
+  
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value;
-
-      const users = JSON.parse(localStorage.getItem("accounts") || "[]");
-      const match = users.find(user => user.email === email && user.password === password);
-
-      if (match) {
-        statusMsg.textContent = "✅ Login successful. Redirecting...";
+  
+      try {
+        const res = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+  
+        const data = await res.json();
+  
+        if (res.ok) {
+          statusMsg.textContent = "✅ Login successful. Redirecting...";
+          statusMsg.classList.add("visible");
+          localStorage.setItem("currentUser", JSON.stringify(data.user));
+          setTimeout(() => (window.location.href = "index.html"), 1200);
+        } else {
+          statusMsg.textContent = "❌ " + data.error;
+          statusMsg.classList.add("visible");
+          setTimeout(() => statusMsg.classList.remove("visible"), 3000);
+        }
+      } catch (err) {
+        statusMsg.textContent = "❌ Network error.";
         statusMsg.classList.add("visible");
-        localStorage.setItem("currentUser", JSON.stringify(match));
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 1200);
-      } else {
-        statusMsg.textContent = "❌ Invalid email or password.";
-        statusMsg.classList.add("visible");
-        setTimeout(() => statusMsg.classList.remove("visible"), 3000);
       }
     });
   </script>
+  
 </body>
 </html>
