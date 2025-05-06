@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo 'No build step needed. Skipping...'",
+    "build:azure": "echo 'Building for Azure...'"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "express": "^4.18.2",
-    "fs": "^0.0.1-security",
-    "build:azure": "echo 'Building for Azure...'"
+    "express": "^4.18.2"
   }
 }
