@@ -1,44 +1,26 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
-app.use(bodyParser.json());
+app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'ojasmittal08@gmail.com',
-    pass: 'khdr teux jiqi lxji'
-  }
-});
-
+// Mock forgot password endpoint
 app.post('/api/forgot-password', (req, res) => {
   const { email } = req.body;
-
   if (!email) {
-    return res.status(400).json({ success: false, message: 'Email is required.' });
+    return res.json({ success: false, message: 'Email is required.' });
   }
 
-  const resetLink = `http://localhost:3000/reset-password?token=dummy-token`;
+  console.log(`Simulated: Sent reset link to ${email}`);
+  res.json({ success: true, message: 'Reset link sent to your email.' });
+});
 
-  const mailOptions = {
-    from: 'ojasmittal08@gmail.com',
-    to: email,
-    subject: 'Reset Your Password',
-    text: `Click here to reset your password: ${resetLink}`,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Error sending email:', error);
-      return res.status(500).json({ success: false, message: 'Failed to send reset link. Please try again.' });
-    }
-
-    res.json({ success: true, message: 'Reset link sent successfully.' });
-  });
+// Serve frontend
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'forgot-password.html'));
 });
 
 app.listen(3000, () => {

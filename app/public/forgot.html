@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(120deg, #1d4350, #a43931);
+      color: white;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      max-width: 400px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border: none;
+      background: rgba(255, 255, 255, 0.8);
+    }
+    button {
+      padding: 12px;
+      width: 100%;
+      background: #ff512f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e04628;
+    }
+    #status {
+      margin-top: 1rem;
+      min-height: 20px;
+    }
+    .back-link {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .back-link:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Forgot Your Password?</h2>
+    <p>Enter your email and we'll send you a reset link.</p>
+    <form id="forgotForm">
+      <input type="email" id="user_email" name="user_email" placeholder="Enter your email" required />
+      <button type="submit" id="submitBtn">
+        <span id="btnText">Send Reset Link</span>
+        <span id="btnLoader" class="loading" style="display: none;"></span>
+      </button>
+    </form>
+    <p id="status"></p>
+    <a class="back-link" href="signin.html">Back to Login</a>
+  </div>
+
+  <script>
+    document.getElementById("forgotForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const email = document.getElementById("user_email").value;
+      const submitBtn = document.getElementById("submitBtn");
+      const btnText = document.getElementById("btnText");
+      const btnLoader = document.getElementById("btnLoader");
+      const status = document.getElementById("status");
+
+      // Show loading state
+      submitBtn.disabled = true;
+      btnText.textContent = "Sending...";
+      btnLoader.style.display = "inline-block";
+      status.textContent = "";
+      status.style.color = "";
+
+      try {
+        const response = await fetch('/forgot-password', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const result = await response.json();
+        
+        if (response.ok) {
+          status.textContent = result.message || "Password reset link sent successfully!";
+          status.style.color = "#4CAF50";
+          document.getElementById("forgotForm").reset();
+        } else {
+          status.textContent = result.message || "Failed to send reset link. Please try again.";
+          status.style.color = "#F44336";
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        status.textContent = "Network error. Please check your connection and try again.";
+        status.style.color = "#F44336";
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        btnText.textContent = "Send Reset Link";
+        btnLoader.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
