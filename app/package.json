@@ -6,6 +6,7 @@
     "start": "node server.js",
     "build": "echo 'No build step needed. Skipping...'",
     "build:azure": "echo 'Building for Azure...'"
+    
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
