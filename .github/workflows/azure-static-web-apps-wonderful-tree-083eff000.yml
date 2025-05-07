@@ -22,8 +22,10 @@ jobs:
         with:
           submodules: true
           lfs: false
+
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
+
       - name: Get Id Token
         uses: actions/github-script@v6
         id: idtoken
@@ -32,16 +34,16 @@ jobs:
             const coredemo = require('@actions/core')
             return await coredemo.getIDToken()
           result-encoding: string
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WONDERFUL_TREE_083EFF000 }}
           action: "upload"
-          ###### Updated path to your app files ######
-          app_location: "app/public"  # << your actual folder path
-          api_location: ""            # optional if you don't use an API
-          output_location: "."        # not needed for static HTML
+          app_location: "app/public"        # path to your static content
+          api_location: ""                  # no API
+          output_location: ""               # no build output; it's already static
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
@@ -56,5 +58,5 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WONDERFUL_TREE_083EFF000 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "close"
-          app_location: "app/public"  # also update this
+          app_location: "app/public"
           api_location: ""
