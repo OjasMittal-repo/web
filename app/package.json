@@ -8,8 +8,13 @@
     "build:azure": "echo 'Building for Azure...'"
     
   },
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "express": "^4.18.2"
-  }
+  
+    "dependencies": {
+      "express": "^4.21.2",
+      "morgan": "^1.10.0",
+      "nodemailer": "^6.10.1",
+      "uuid": "^11.1.0",
+      "body-parser": "^1.20.3"
+    }
+  
 }
