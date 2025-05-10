@@ -1419,6 +1419,48 @@
     });
   });
 </script>
-
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const continueForm = document.getElementById('continueForm');
+      const continueFormContainer = document.getElementById('continueFormContainer');
+      const homeContainer = document.getElementById('homeContainer');
+      
+      if (continueForm) {
+        continueForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const email = document.getElementById('email').value;
+          
+          // Simple validation
+          if (!email || !email.includes('@')) {
+            alert('Please enter a valid email address');
+            return;
+          }
+          
+          // Store email in localStorage
+          localStorage.setItem('userEmail', email);
+          localStorage.setItem('hasAccess', 'true');
+          
+          // Hide form and show home content with animation
+          continueFormContainer.classList.add('hide-form');
+          
+          setTimeout(() => {
+            homeContainer.classList.add('show-home');
+            
+            // Smooth scroll to top
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }, 500);
+        });
+      }
+      
+      // Check if user already has access
+      if (localStorage.getItem('hasAccess') === 'true') {
+        continueFormContainer.style.display = 'none';
+        homeContainer.classList.add('show-home');
+      }
+    });
+</script>
 </body>
 </html>
