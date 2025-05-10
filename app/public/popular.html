@@ -56,92 +56,67 @@
 
         /* Header Styles */
         header {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
+      background-color: #11a3e2;
+      padding: 10px 20px; /* reduced from 20px 40px */
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
+    header h1 {
+      font-size: 20px; /* reduced from 26px */
+    }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo::before {
-            content: "✉️";
-            margin-right: 10px;
-            font-size: 24px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .user-profile img {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary);
-            transition: transform 0.3s ease;
-        }
-
-        .user-profile:hover img {
-            transform: scale(1.1);
-        }
-
+    
+    .logo a {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .logo a:hover {
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    
+    .nav-link {
+      color: var(--dark-color) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem !important;
+      margin: 0 0.2rem;
+      position: relative;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+    /* Username display style */
+    #usernameDisplay {
+        color: var(--dark-color);
+        font-size: 0.95rem;
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 600;
+        margin-left: 12px;
+    }
         /* Main Content */
         main {
             padding: 60px 0 100px;
@@ -512,38 +487,57 @@
     <div id="particles-js"></div>
 
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">Newsletter Hub</div>
-                <nav>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="new.html">New</a></li>
-                        <li><a href="subscriptions.html">My Subscriptions</a></li>
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <div class="logo">
+                    <a href="index.html" class="text-decoration-none">NewsLetter_Hub</a>
+                </div>
+                <nav class="d-none d-md-block">
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="new.html">New</a></li>
+                        <li class="nav-item"><a class="nav-link" href="subscriptions.html">My Subscriptions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="subscribe.html">Subscribe</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
                     </ul>
                 </nav>
                 <div class="d-flex align-items-center">
-                    <!-- User Greeting -->
-                    <span id="greeting" class="me-3 fw-bold">Hi, Guest</span>
-                  
-                    <!-- User Profile Image as Dropdown Trigger -->
-                    <div class="dropdown">
-                        <img id="profileImageDisplay" src="images/user.png" alt="User Profile" class="rounded-circle"
-                        style="width: 42px; height: 42px; cursor: pointer;"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                      <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="edit-profile.html"><i class="fas fa-edit me-2"></i>Edit Profile</a></li>
-                        <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="signin.html" id="signOutBtn"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
-                      </ul>
-                    </div>
-                </div>
+                  <!-- User Greeting -->
+                  <span id="greeting" class="mr-3 font-weight-bold text-dark">Hi, Guest</span>
+                
+                  <!-- User Profile Image as Dropdown Trigger -->
+    <!-- Change this -->
+    <div class="dropdown">
+      <img id="profileImageDisplay" src="images/user.png" alt="User Profile" class="rounded-circle"
+      style="width: 42px; height: 42px; cursor: pointer;"
+      data-toggle="dropdown" aria-expanded="false"> <!-- Changed data-bs-toggle to data-toggle -->
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileImage">
+        <a class="dropdown-item" href="profile.html"><i class="fas fa-user mr-2"></i>Profile</a>
+        <a class="dropdown-item" href="edit-profile.html"><i class="fas fa-edit mr-2"></i>Edit Profile</a>
+        <a class="dropdown-item" href="settings.html"><i class="fas fa-cog mr-2"></i>Settings</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="signin.html" id="signOutBtn"><i class="fas fa-sign-out-alt mr-2"></i>Sign Out</a>
+      </div>
+    </div>
+                
+                        </section>
+                        
             </div>
+            <nav class="navbar navbar-expand-md navbar-light bg-light d-md-none">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="popular.html">Popular</a></li>
+                        <li class="nav-item"><a class="nav-link" href="new.html">New</a></li>
+                        <li class="nav-item"><a class="nav-link" href="subscriptions.html">My Subscriptions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signin.html">Subscribe</a></li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     </header>
-
     <main class="container">
         <h1>Most Popular Newsletters</h1>
         <p class="subtitle">Trending legendary newsletters our community loves</p>
